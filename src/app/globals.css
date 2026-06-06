@@ -109,3 +109,8 @@ body {
 .bottom-safe {
   bottom: calc(env(safe-area-inset-bottom, 0px));
 }
+
+/* Safe area padding for iOS top (Dynamic Island / status bar in PWA standalone) */
+.pt-safe {
+  padding-top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
+}

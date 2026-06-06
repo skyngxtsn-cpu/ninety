@@ -9,7 +9,7 @@ type Props = {
 
 export function AppHeader({ title, back, subtitle, rightSlot }: Props) {
   return (
-    <header className="sticky top-0 z-40 flex items-center justify-between px-4 pt-3 pb-3 backdrop-blur-xl bg-[rgba(7,8,12,0.6)] border-b border-[var(--border)]">
+    <header className="sticky top-0 z-40 flex items-center justify-between px-4 pt-safe pb-3 backdrop-blur-xl bg-[rgba(7,8,12,0.6)] border-b border-[var(--border)]">
       <div className="flex items-center gap-2 min-w-0">
         {back ? (
           <Link
