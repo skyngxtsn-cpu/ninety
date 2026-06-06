@@ -34,7 +34,7 @@ const data: Record<string, Augmentation> = {
       "勝てば前回大会の「ドイツ撃破」級のインパクト",
     ],
     keyPlayerIds: ["kubo", "endo", "tomiyasu"],
-    broadcasts: ["NHK_G", "ABEMA"],
+    broadcasts: [],
   },
   [pairKey("jpn", "tun")]: {
     hook: "勝てば突破がぐっと近づく一戦。",
@@ -49,7 +49,7 @@ const data: Record<string, Augmentation> = {
       "上田・前田の前線が決定機を仕留められるか",
     ],
     keyPlayerIds: ["ueda", "doan", "kubo"],
-    broadcasts: ["NHK_G", "ABEMA"],
+    broadcasts: [],
   },
   [pairKey("jpn", "swe")]: {
     hook: "突破がかかる、運命の最終戦。",
@@ -64,7 +64,7 @@ const data: Record<string, Augmentation> = {
       "前回大会の英雄・堂安が再びドラマを作れるか",
     ],
     keyPlayerIds: ["tomiyasu", "doan", "zsuzuki"],
-    broadcasts: ["NHK_G", "ABEMA"],
+    broadcasts: [],
   },
 
   // 注目カード
@@ -81,7 +81,7 @@ const data: Record<string, Augmentation> = {
       "勝った方がグループ首位通過にぐっと近づく",
     ],
     keyPlayerIds: ["messi", "vinicius"],
-    broadcasts: ["NHK_G", "ABEMA", "DAZN"],
+    broadcasts: [],
   },
   [pairKey("esp", "por")]: {
     hook: "イベリア半島の隣国対決。",
@@ -96,7 +96,7 @@ const data: Record<string, Augmentation> = {
       "Euro 2024王者スペインの真価が問われる",
     ],
     keyPlayerIds: ["yamal", "rodri", "pedri"],
-    broadcasts: ["NHK_G", "ABEMA"],
+    broadcasts: [],
   },
   [pairKey("eng", "fra")]: {
     hook: "優勝候補同士の頂上対決。",
@@ -111,7 +111,7 @@ const data: Record<string, Augmentation> = {
       "勝った方が決勝Tの楽な山を引く",
     ],
     keyPlayerIds: [],
-    broadcasts: ["NHK_G", "ABEMA"],
+    broadcasts: [],
   },
 };
 
