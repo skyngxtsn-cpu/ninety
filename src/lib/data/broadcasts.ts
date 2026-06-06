@@ -1,12 +1,18 @@
 /**
  * W杯2026 日本での放送・配信情報。
  *
- * - ABEMA は全 104 試合の無料配信が決定済み（2022カタール大会と同様の確認済モデル）
- * - DAZN は全試合のサブスク配信
- * - NHK 総合 / NHK BS / 民放 4社（TBS / テレ朝 / フジ / 日テレ）が地上波/BSで一部試合を放送
+ * 出典: JFA 公式 https://www.jfa.jp/samuraiblue/worldcup_2026/tv.html
+ *  - 日本代表戦の放送・配信局はこのページに準拠。
+ *  - 日本代表以外の試合の放送情報は2026-06-07時点では公式発表なし。
+ *    そのため、デフォルトは「DAZN（全104試合配信予定）」のみ。
  *
- * 実際の正式な放送スケジュールは大会開幕約1ヶ月前にFIFA / 放送局から発表される。
- * このファイルは「推定」を含むので、発表され次第更新する。
+ * 重要: 過去のデータで ABEMA を全試合無料配信としていたが、
+ *  W杯2026 についての ABEMA の配信権は公式発表で確認できないため削除。
+ *
+ * 日本代表トーナメント進出時：
+ *  - R32 (6/28〜7/3): フジテレビ + NHK BS + DAZN
+ *  - R16以降 (7/4〜7/19): NHK総合 + DAZN
+ *  → Japan の進出が確定した時点で MATCH_OVERRIDES に追加する。
  */
 
 export type BroadcastChannelId =
@@ -171,31 +177,34 @@ export const CHANNELS: Record<BroadcastChannelId, BroadcastChannel> = {
 
 /**
  * W杯2026 デフォルトの放送セット。
- * ABEMA は全試合無料配信、DAZN は全試合サブスク配信。
- * NHK系・民放は match-augment.ts や下記 override から個別に追加。
+ * DAZN が全104試合配信予定。
+ * 地上波・BS の個別放送は MATCH_OVERRIDES から追加する。
+ *
+ * 注: 過去のデータに ABEMA が含まれていたが、JFA公式の放送情報に
+ *  ABEMA の記載が無いため除外。確定情報が出れば追加する。
  */
-export const DEFAULT_BROADCASTS: BroadcastChannelId[] = ["ABEMA", "DAZN"];
+export const DEFAULT_BROADCASTS: BroadcastChannelId[] = ["DAZN"];
 
 /**
- * 「この試合だけ NHK 総合放送」というような上書き。
- * キーは Match.id（OpenFootball 由来）。
+ * 試合ごとの放送局上書き。
+ * キーは Match.id（OpenFootball 由来、kickoff の UTC 日付ベース）。
  *
- * 注: 正式発表前なので推定。発表され次第更新。
+ * 日本代表戦は JFA 公式 (https://www.jfa.jp/samuraiblue/worldcup_2026/tv.html) 準拠。
+ * 日本以外の試合は確定情報が出るまで DEFAULT_BROADCASTS のまま。
  */
 export const MATCH_OVERRIDES: Record<string, BroadcastChannelId[]> = {
-  // 日本戦（全てNHK系で確実に放送される慣例）
-  "2026-06-14-ned-jpn": ["NHK_G", "ABEMA", "DAZN"],
-  "2026-06-20-tun-jpn": ["NHK_BS", "TBS", "ABEMA", "DAZN"],
-  "2026-06-25-jpn-swe": ["NHK_G", "ABEMA", "DAZN"],
+  // 日本戦（JFA公式準拠、2026-06-07 時点）
+  // 6/15(月) 5:00 JST 日本 vs オランダ — グループF 第1節
+  "2026-06-14-ned-jpn": ["NHK_G", "DAZN"],
+  // 6/21(日) 13:00 JST 日本 vs チュニジア — グループF 第2節
+  "2026-06-20-tun-jpn": ["NTV", "NHK_BS", "DAZN"],
+  // 6/26(金) 8:00 JST 日本 vs スウェーデン — グループF 第3節
+  "2026-06-25-jpn-swe": ["NHK_G", "DAZN"],
 
-  // 開幕戦
-  "2026-06-11-mex-rsa": ["NHK_G", "ABEMA", "DAZN"],
-
-  // 注目カード
-  "2026-06-13-bra-mar": ["NHK_BS", "ABEMA", "DAZN"],
-  "2026-06-13-hai-sco": ["ABEMA", "DAZN"],
-
-  // 決勝関連は擬似 ID、書き換え予定
+  // 日本進出時のトーナメント:
+  //   R32 (6/28〜7/3): フジ + NHK BS + DAZN
+  //   R16以降 (7/4〜7/19): NHK総合 + DAZN
+  // → 進出が決まった時点で具体の Match.id に対して上書きを追加する。
 };
 
 /** Match.id から放送リストを返す */
