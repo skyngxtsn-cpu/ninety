@@ -9,6 +9,7 @@ import {
 } from "../lib/data/matches";
 import { ReminderButton } from "./ReminderButton";
 import { CompactMatchCardClient } from "./CompactMatchCardClient";
+import { BroadcastIcons } from "./BroadcastChip";
 
 type Props = {
   match: Match;
@@ -116,10 +117,15 @@ export async function CompactMatchCard({ match, favoriteTeamIds }: Props) {
         </div>
       </div>
 
-      {/* 下部: ステージ＋会場 */}
-      <div className="mt-2 flex items-center justify-between text-[10px] text-white/45">
-        <span className="truncate">{match.stage}</span>
-        <span className="truncate ml-2">📍 {match.venue}</span>
+      {/* 下部: ステージ＋放送局アイコン＋会場 */}
+      <div className="mt-2 flex items-center justify-between gap-2 text-[10px] text-white/45">
+        <span className="truncate shrink-0">{match.stage}</span>
+        {match.broadcasts.length > 0 && (
+          <div className="shrink-0">
+            <BroadcastIcons ids={match.broadcasts} size="xs" />
+          </div>
+        )}
+        <span className="truncate ml-auto">📍 {match.venue}</span>
       </div>
     </>
   );

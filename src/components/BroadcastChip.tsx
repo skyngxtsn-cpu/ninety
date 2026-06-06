@@ -116,3 +116,75 @@ export function BroadcastChipList({
     </div>
   );
 }
+
+/**
+ * アイコンのみのコンパクト表示。一覧の試合カードなど狭いスペース用。
+ * 文字なしで、配色された小さな glyph 四角だけが並ぶ。
+ */
+export function BroadcastIcons({
+  ids,
+  size = "sm",
+}: {
+  ids: (BroadcastChannelId | string)[];
+  size?: "xs" | "sm";
+}) {
+  const dim = size === "xs" ? "w-4 h-4 text-[8px]" : "w-[18px] h-[18px] text-[9px]";
+  return (
+    <div className="flex items-center gap-1">
+      {ids.map((id) => {
+        const ch = CHANNELS[id as BroadcastChannelId];
+        if (!ch) {
+          return (
+            <span
+              key={id}
+              className={`inline-flex items-center justify-center rounded font-bold ${dim} bg-white/15 text-white/85`}
+              aria-label={String(id)}
+              title={String(id)}
+            >
+              ?
+            </span>
+          );
+        }
+        // 短い表示用ラベル：NHK_G→N、NHK_BS→BS、NTV→日、FUJI→フ、TBS→T、ABEMA→ア、DAZN→D
+        const label =
+          ch.id === "NHK_G"
+            ? "N"
+            : ch.id === "NHK_BS"
+              ? "BS"
+              : ch.id === "NTV"
+                ? "日"
+                : ch.id === "FUJI"
+                  ? "フ"
+                  : ch.id === "TBS"
+                    ? "T"
+                    : ch.id === "TEREASA"
+                      ? "EX"
+                      : ch.id === "ABEMA"
+                        ? "A"
+                        : ch.id === "DAZN"
+                          ? "D"
+                          : ch.id === "U-NEXT"
+                            ? "U"
+                            : ch.id === "NHK_PLUS"
+                              ? "N+"
+                              : ch.id === "TVER"
+                                ? "Tv"
+                                : ch.glyph;
+        return (
+          <span
+            key={id}
+            className={`inline-flex items-center justify-center rounded font-bold leading-none ${dim}`}
+            style={{
+              backgroundColor: ch.brand,
+              color: ch.text === "white" ? "#fff" : "#000",
+            }}
+            aria-label={ch.name}
+            title={ch.name}
+          >
+            {label}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
