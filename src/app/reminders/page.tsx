@@ -3,6 +3,7 @@ import {
   RemindersListClient,
   type ReminderMatchSnapshot,
 } from "../../components/RemindersListClient";
+import { PushNotificationToggle } from "../../components/PushNotificationToggle";
 import { getAllMatches, getAllTeams } from "../../lib/data";
 
 export default async function RemindersPage() {
@@ -34,6 +35,7 @@ export default async function RemindersPage() {
   return (
     <>
       <AppHeader title="リマインダー" subtitle="ベルでマークした試合" back="/" />
+      <PushNotificationToggle />
       <RemindersListClient matches={snapshots} />
     </>
   );

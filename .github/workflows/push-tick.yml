@@ -1,0 +1,35 @@
+name: Push Notification Tick
+
+on:
+  schedule:
+    # 5 分ごとに /api/push/tick を叩く
+    - cron: "*/5 * * * *"
+  workflow_dispatch: # 手動実行用
+
+concurrency:
+  group: push-tick
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Call push tick endpoint
+        env:
+          TICK_SECRET: ${{ secrets.TICK_SECRET }}
+          TICK_URL: ${{ vars.TICK_URL }}
+        run: |
+          if [ -z "$TICK_URL" ]; then
+            TICK_URL="https://ninety-sand.vercel.app/api/push/tick"
+          fi
+          echo "Calling $TICK_URL ..."
+          HTTP_CODE=$(curl -s -o /tmp/resp.json -w "%{http_code}" \
+            -X POST "$TICK_URL" \
+            -H "Authorization: Bearer $TICK_SECRET" \
+            -H "Content-Type: application/json")
+          echo "HTTP $HTTP_CODE"
+          cat /tmp/resp.json | head -c 4000
+          if [ "$HTTP_CODE" != "200" ]; then
+            exit 1
+          fi
