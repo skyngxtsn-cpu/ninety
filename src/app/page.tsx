@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppHeader } from "../components/AppHeader";
 import { SectionHeader } from "../components/SectionHeader";
 import { TournamentProgress } from "../components/TournamentProgress";
@@ -26,8 +27,9 @@ export default async function HomePage() {
     <>
       <AppHeader
         rightSlot={
-          <button
-            aria-label="通知"
+          <Link
+            href="/reminders"
+            aria-label="リマインダー"
             className="w-9 h-9 rounded-full bg-white/5 border border-white/8 flex items-center justify-center text-white/85 hover:bg-white/10 transition"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -43,7 +45,7 @@ export default async function HomePage() {
                 strokeWidth="1.6"
               />
             </svg>
-          </button>
+          </Link>
         }
       />
 
