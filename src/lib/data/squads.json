@@ -1,0 +1,2162 @@
+{
+  "CZE": {
+    "coach": "Miroslav Koubek",
+    "players": [
+      {
+        "no": "7",
+        "pos": "DF",
+        "name": "Ladislav Krejčí",
+        "club": "Wolverhampton Wanderers",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/koz6bp1772026272.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Patrik Schick",
+        "club": "Bayer Leverkusen",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/zfxtjv1756316702.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Matěj Kovář",
+        "club": "PSV Eindhoven",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/t9xanl1764594932.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Adam Hložek",
+        "club": "TSG Hoffenheim",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/kh9la81763494337.png"
+      },
+      {
+        "no": "8",
+        "pos": "MF",
+        "name": "Vladimír Darida",
+        "club": "Hradec Králové",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/jajll01578080716.png"
+      }
+    ]
+  },
+  "MEX": {
+    "coach": "Javier Aguirre",
+    "players": [
+      {
+        "no": "4",
+        "pos": "DF",
+        "name": "Edson Álvarez",
+        "club": "Fenerbahçe",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/nt933u1769179587.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Alexis Vega",
+        "club": "Toluca",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/0mmqo91776412620.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Raúl Rangel",
+        "club": "Guadalajara",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/b3xv161780401837.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Raúl Jiménez",
+        "club": "Fulham",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/w4chsd1757070949.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Érik Lira",
+        "club": "Cruz Azul",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/qflanz1780401683.png"
+      }
+    ]
+  },
+  "RSA": {
+    "coach": null,
+    "players": [
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Ronwen Williams",
+        "club": "Mamelodi Sundowns",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/kd7edx1750875629.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Relebohile Mofokeng",
+        "club": "Orlando Pirates",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/mw8id81779972149.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Oswin Appollis",
+        "club": "Orlando Pirates",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/51f8ha1779969554.png"
+      },
+      {
+        "no": "4",
+        "pos": "MF",
+        "name": "Teboho Mokoena",
+        "club": "Mamelodi Sundowns",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/3dq0ds1750874921.png"
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Thalente Mbatha",
+        "club": "Orlando Pirates",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/471uwy1779971985.png"
+      }
+    ]
+  },
+  "KOR": {
+    "coach": "Hong Myung-bo",
+    "players": [
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Son Heung-min",
+        "club": "Los Angeles FC",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/a5cqf81766425262.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Lee Jae-sung",
+        "club": "Mainz 05",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/p0i9wg1763554091.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Kim Seung-gyu",
+        "club": "FC Tokyo",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/32ktx81668684378.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Cho Gue-sung",
+        "club": "Midtjylland",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/32w5vj1765385403.png"
+      },
+      {
+        "no": "3",
+        "pos": "MF",
+        "name": "Lee Gi-hyuk",
+        "club": "Gangwon FC",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/rsfjpa1779015844.png"
+      }
+    ]
+  },
+  "BIH": {
+    "coach": "Sergej Barbarez",
+    "players": [
+      {
+        "no": "11",
+        "pos": "FW",
+        "name": "Edin Džeko",
+        "club": "Schalke 04",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/0jo14d1773611434.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Ermedin Demirović",
+        "club": "VfB Stuttgart",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/hvuj8v1763586169.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Nikola Vasilj",
+        "club": "FC St. Pauli",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/85qp2e1763567779.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Samed Baždar",
+        "club": "Jagiellonia Białystok",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/o3tqwz1779017584.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Benjamin Tahirović",
+        "club": "Brøndby",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/wrr6m21765376681.png"
+      }
+    ]
+  },
+  "CAN": {
+    "coach": null,
+    "players": [
+      {
+        "no": "19",
+        "pos": "DF",
+        "name": "Alphonso Davies",
+        "club": "Bayern Munich",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/11afh31756409066.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Jonathan David",
+        "club": "Juventus",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/nyd9d91759225738.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Dayne St. Clair",
+        "club": "Inter Miami CF",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/at1um91776499323.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Cyle Larin",
+        "club": "Southampton",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/bgse2n1777485421.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Mathieu Choinière",
+        "club": "Los Angeles FC",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/6mihaf1759501166.png"
+      }
+    ]
+  },
+  "QAT": {
+    "coach": null,
+    "players": [
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Hassan Al-Haydos",
+        "club": "Al-Sadd",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/3xhwao1707597905.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Mahmud Abunada",
+        "club": "Al-Rayyan",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/wuu1r21780432415.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Ahmed Alaaeldin",
+        "club": "Al-Rayyan",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/0vj7zr1668609076.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Abdulaziz Hatem",
+        "club": "Al-Rayyan",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/zsl75o1668609309.png"
+      },
+      {
+        "no": "12",
+        "pos": "MF",
+        "name": "Karim Boudiaf",
+        "club": "Al-Duhail",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/oozrq51668609711.png"
+      }
+    ]
+  },
+  "SUI": {
+    "coach": "Murat Yakin",
+    "players": [
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Granit Xhaka",
+        "club": "Sunderland",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/2xa5dp1756903726.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Gregor Kobel",
+        "club": "Borussia Dortmund",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/vri4zw1756326279.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Breel Embolo",
+        "club": "Rennes",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/k5xqvx1766136320.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Denis Zakaria",
+        "club": "Monaco",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/xh4nwr1766238364.png"
+      },
+      {
+        "no": "8",
+        "pos": "MF",
+        "name": "Remo Freuler",
+        "club": "Bologna",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/gwqmdw1758896917.png"
+      }
+    ]
+  },
+  "BRA": {
+    "coach": null,
+    "players": [
+      {
+        "no": "4",
+        "pos": "DF",
+        "name": "Marquinhos",
+        "club": "Paris Saint-Germain",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/7x9gtl1766335348.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Neymar",
+        "club": "Santos",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/av4ar01767782947.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Alisson",
+        "club": "Liverpool",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/8amq961757087569.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Vinícius Júnior",
+        "club": "Real Madrid",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ejuxsh1750271859.png"
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Casemiro",
+        "club": "Manchester United",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ydr3j41766826524.png"
+      }
+    ]
+  },
+  "HAI": {
+    "coach": null,
+    "players": [
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Johny Placide",
+        "club": "Bastia",
+        "captain": true,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/v6gt5k1779018079.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Jean-Ricner Bellegarde",
+        "club": "Wolverhampton Wanderers",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/i0niw51756975825.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Derrick Etienne Jr.",
+        "club": "Toronto FC",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/9kwou81766575620.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Carl Sainté",
+        "club": "El Paso Locomotive FC",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/o82wng1779134186.png"
+      },
+      {
+        "no": "14",
+        "pos": "MF",
+        "name": "Leverton Pierre",
+        "club": "Vizela",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/b30mqe1779132281.png"
+      }
+    ]
+  },
+  "MAR": {
+    "coach": null,
+    "players": [
+      {
+        "no": "2",
+        "pos": "DF",
+        "name": "Achraf Hakimi",
+        "club": "Paris Saint-Germain",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/oqu69c1766335243.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Brahim Díaz",
+        "club": "Real Madrid",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/civrzg1733653256.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Yassine Bounou",
+        "club": "Al-Hilal",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/u0pjgc1658436080.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Soufiane Rahimi",
+        "club": "Al Ain",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/wekute1750753090.png"
+      },
+      {
+        "no": "4",
+        "pos": "MF",
+        "name": "Sofyan Amrabat",
+        "club": "Real Betis",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/coyzox1762602846.png"
+      }
+    ]
+  },
+  "SCO": {
+    "coach": "Steve Clarke",
+    "players": [
+      {
+        "no": "3",
+        "pos": "DF",
+        "name": "Andy Robertson",
+        "club": "Liverpool",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/t0yil51757088652.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Ché Adams",
+        "club": "Torino",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/fiwc2j1758813462.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Angus Gunn",
+        "club": "Nottingham Forest",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/7mdhk31757163014.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Lyndon Dykes",
+        "club": "Charlton Athletic",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/xbpw0n1778011987.png"
+      },
+      {
+        "no": "4",
+        "pos": "MF",
+        "name": "Scott McTominay",
+        "club": "Napoli",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/b7truo1762288079.png"
+      }
+    ]
+  },
+  "AUS": {
+    "coach": "Tony Popovic",
+    "players": [
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Mathew Ryan",
+        "club": "Levante",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/l3xyhq1732915878.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Ajdin Hrustic",
+        "club": "Heracles Almelo",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/kqi6wn1759840572.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Mathew Leckie",
+        "club": "Melbourne City",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ujzu6w1684838424.png"
+      },
+      {
+        "no": "8",
+        "pos": "MF",
+        "name": "Connor Metcalfe",
+        "club": "FC St. Pauli",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/8xb0sq1756311214.png"
+      },
+      {
+        "no": "13",
+        "pos": "MF",
+        "name": "Aiden O'Neill",
+        "club": "New York City FC",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/28x1kl1778529144.png"
+      }
+    ]
+  },
+  "PAR": {
+    "coach": null,
+    "players": [
+      {
+        "no": "15",
+        "pos": "DF",
+        "name": "Gustavo Gómez",
+        "club": "Palmeiras",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ytrnlp1750412203.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Miguel Almirón",
+        "club": "Atlanta United FC",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/35lxqh1757447624.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Gatito Fernández",
+        "club": "Cerro Porteño",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/w9i0ss1749546987.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Antonio Sanabria",
+        "club": "Cremonese",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/3vkhoo1758886470.png"
+      },
+      {
+        "no": "7",
+        "pos": "MF",
+        "name": "Ramón Sosa",
+        "club": "Palmeiras",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/8x4cso1767691390.png"
+      }
+    ]
+  },
+  "TUR": {
+    "coach": null,
+    "players": [
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Hakan Çalhanoğlu",
+        "club": "Inter Milan",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/hw8uxm1759408821.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Mert Günok",
+        "club": "Fenerbahçe",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/nmg1ye1725038024.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Kerem Aktürkoğlu",
+        "club": "Fenerbahçe",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ix8aeh1769179066.png"
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Salih Özcan",
+        "club": "Borussia Dortmund",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/8dw4231756326486.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Orkun Kökçü",
+        "club": "Beşiktaş",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/zrp45u1769170024.png"
+      }
+    ]
+  },
+  "USA": {
+    "coach": null,
+    "players": [
+      {
+        "no": "13",
+        "pos": "DF",
+        "name": "Tim Ream",
+        "club": "Charlotte FC",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/lbav9r1771754456.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Christian Pulisic",
+        "club": "Milan",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/qwii9r1758893548.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Matt Turner",
+        "club": "New England Revolution",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/hyxs351778269585.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Ricardo Pepi",
+        "club": "PSV Eindhoven",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/xmhafw1764595238.png"
+      },
+      {
+        "no": "4",
+        "pos": "MF",
+        "name": "Tyler Adams",
+        "club": "Bournemouth",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/utnaxk1756989024.png"
+      }
+    ]
+  },
+  "CUW": {
+    "coach": null,
+    "players": [
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Leandro Bacuna",
+        "club": "Iğdır",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/13dolh1726605947.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Eloy Room",
+        "club": "Miami FC",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/fjxh0b1701724194.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Jürgen Locadia",
+        "club": "Miami FC",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/bs893t1779193862.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Godfried Roemeratoe",
+        "club": "RKC Waalwijk",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/tkhrrb1728848806.png"
+      },
+      {
+        "no": "7",
+        "pos": "MF",
+        "name": "Juninho Bacuna",
+        "club": "Volendam",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/j801h91694549422.png"
+      }
+    ]
+  },
+  "ECU": {
+    "coach": null,
+    "players": [
+      {
+        "no": "13",
+        "pos": "FW",
+        "name": "Enner Valencia",
+        "club": "Pachuca",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/gplbd81668544491.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Kendry Páez",
+        "club": "River Plate",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/tf06hr1766053963.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Hernán Galíndez",
+        "club": "Huracán",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/i7jwvi1763739794.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "John Yeboah",
+        "club": "Venezia",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/2qvbyn1780328386.png"
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Jordy Alcívar",
+        "club": "Independiente del Valle",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/fsndo51647078998.png"
+      }
+    ]
+  },
+  "GER": {
+    "coach": "Julian Nagelsmann",
+    "players": [
+      {
+        "no": "6",
+        "pos": "DF",
+        "name": "Joshua Kimmich",
+        "club": "Bayern Munich",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/oqb7rg1756408859.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Jamal Musiala",
+        "club": "Bayern Munich",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/vbkv611756416067.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Manuel Neuer",
+        "club": "Bayern Munich",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/udq0so1756416089.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Kai Havertz",
+        "club": "Arsenal",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/hem4r91694204364.png"
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Aleksandar Pavlović",
+        "club": "Bayern Munich",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/22ti3z1756408943.png"
+      }
+    ]
+  },
+  "CIV": {
+    "coach": "Emerse Faé",
+    "players": [
+      {
+        "no": "8",
+        "pos": "MF",
+        "name": "Franck Kessié",
+        "club": "Al-Ahli",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/wcmpma1771663848.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Simon Adingra",
+        "club": "Monaco",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/rxw49v1762198657.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Yahia Fofana",
+        "club": "Çaykur Rizespor",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/np4wf61765835758.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Ange-Yoan Bonny",
+        "club": "Inter Milan",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/d7uly91759408116.png"
+      },
+      {
+        "no": "4",
+        "pos": "MF",
+        "name": "Jean Michaël Seri",
+        "club": "Maribor",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/hlszmt1694794523.png"
+      }
+    ]
+  },
+  "JPN": {
+    "coach": "Hajime Moriyasu",
+    "players": [
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Wataru Endo",
+        "club": "Liverpool",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/eawsfp1757087920.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Ritsu Dōan",
+        "club": "Eintracht Frankfurt",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/6526j01762287692.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Zion Suzuki",
+        "club": "Parma",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/24eahn1759780929.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Keisuke Gotō",
+        "club": "Sint-Truiden",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ek0h0b1767196386.png"
+      },
+      {
+        "no": "7",
+        "pos": "MF",
+        "name": "Ao Tanaka",
+        "club": "Leeds United",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/xptxxr1424975941.png"
+      }
+    ]
+  },
+  "NED": {
+    "coach": "Ronald Koeman",
+    "players": [
+      {
+        "no": "4",
+        "pos": "DF",
+        "name": "Virgil van Dijk",
+        "club": "Liverpool",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/9cxf2q1757087742.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Memphis Depay",
+        "club": "Corinthians",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/b91tiy1767278210.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Bart Verbruggen",
+        "club": "Brighton & Hove Albion",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/5ak40b1756999759.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Wout Weghorst",
+        "club": "Ajax",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/i58a2q1726603016.png"
+      },
+      {
+        "no": "3",
+        "pos": "MF",
+        "name": "Marten de Roon",
+        "club": "Atalanta",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/vd6v6q1695157451.png"
+      }
+    ]
+  },
+  "SWE": {
+    "coach": null,
+    "players": [
+      {
+        "no": "3",
+        "pos": "DF",
+        "name": "Victor Lindelöf",
+        "club": "Aston Villa",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/07mdel1756984093.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Benjamin Nygren",
+        "club": "Celtic",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/ircami1777019328.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Jacob Widell Zetterström",
+        "club": "Derby County",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/4nj3w31761924491.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Alexander Isak",
+        "club": "Liverpool",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/3qj7z41757088281.png"
+      },
+      {
+        "no": "7",
+        "pos": "MF",
+        "name": "Lucas Bergvall",
+        "club": "Tottenham Hotspur",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/6hbkx51757016291.png"
+      }
+    ]
+  },
+  "TUN": {
+    "coach": null,
+    "players": [
+      {
+        "no": "17",
+        "pos": "MF",
+        "name": "Ellyes Skhiri",
+        "club": "Eintracht Frankfurt",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Hannibal Mejbri",
+        "club": "Burnley",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Mouhib Chamakh",
+        "club": "Club Africain",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Elias Achouri",
+        "club": "Copenhagen",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "11",
+        "pos": "MF",
+        "name": "Ismaël Gharbi",
+        "club": "FC Augsburg",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "BEL": {
+    "coach": null,
+    "players": [
+      {
+        "no": "8",
+        "pos": "MF",
+        "name": "Youri Tielemans",
+        "club": "Aston Villa",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Leandro Trossard",
+        "club": "Arsenal",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Thibaut Courtois",
+        "club": "Real Madrid",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Romelu Lukaku",
+        "club": "Napoli",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Axel Witsel",
+        "club": "Girona",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "EGY": {
+    "coach": "Hossam Hassan",
+    "players": [
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Mohamed Salah",
+        "club": "Liverpool",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Mohamed El Shenawy",
+        "club": "Al Ahly",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Trézéguet",
+        "club": "Al Ahly",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "8",
+        "pos": "MF",
+        "name": "Emam Ashour",
+        "club": "Al Ahly",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "11",
+        "pos": "MF",
+        "name": "Mostafa Ziko",
+        "club": "Pyramids",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "IRN": {
+    "coach": "Amir Ghalenoei",
+    "players": [
+      {
+        "no": "3",
+        "pos": "DF",
+        "name": "Ehsan Hajsafi",
+        "club": "Sepahan",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Mehdi Ghayedi",
+        "club": "Al Nasr",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Alireza Beiranvand",
+        "club": "Tractor",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Mehdi Taremi",
+        "club": "Olympiacos",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Saeid Ezatolahi",
+        "club": "Shabab Al Ahli",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "NZL": {
+    "coach": null,
+    "players": [
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Chris Wood",
+        "club": "Nottingham Forest",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Sarpreet Singh",
+        "club": "Wellington Phoenix",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Max Crocombe",
+        "club": "Millwall",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "17",
+        "pos": "FW",
+        "name": "Kosta Barbarouses",
+        "club": "Western Sydney Wanderers",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Joe Bell",
+        "club": "Viking",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "CPV": {
+    "coach": "Bubista",
+    "players": [
+      {
+        "no": "20",
+        "pos": "FW",
+        "name": "Ryan Mendes",
+        "club": "Iğdır",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Jamiro Monteiro",
+        "club": "PEC Zwolle",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Vozinha",
+        "club": "Chaves",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Gilson Benchimol",
+        "club": "Akron Tolyatti",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Kevin Pina",
+        "club": "Krasnodar",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "KSA": {
+    "coach": null,
+    "players": [
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Salem Al-Dawsari",
+        "club": "Al-Hilal",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Nawaf Al-Aqidi",
+        "club": "Al-Nassr",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "8",
+        "pos": "FW",
+        "name": "Ayman Yahya",
+        "club": "Al-Nassr",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Nasser Al-Dawsari",
+        "club": "Al-Hilal",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "MF",
+        "name": "Musab Al-Juwayr",
+        "club": "Al-Qadsiah",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "ESP": {
+    "coach": "Luis de la Fuente (footballer, born 1961)",
+    "players": [
+      {
+        "no": "16",
+        "pos": "MF",
+        "name": "Rodri",
+        "club": "Manchester City",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Dani Olmo",
+        "club": "Barcelona",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "David Raya",
+        "club": "Arsenal",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/21rp2q1769331784.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Ferran Torres",
+        "club": "Barcelona",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/feey201726510461.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Mikel Merino",
+        "club": "Arsenal",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/07opk31769330730.png"
+      }
+    ]
+  },
+  "URU": {
+    "coach": null,
+    "players": [
+      {
+        "no": "2",
+        "pos": "DF",
+        "name": "José Giménez",
+        "club": "Atlético Madrid",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/j2c2gn1762287634.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Giorgian de Arrascaeta",
+        "club": "Flamengo",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/2p9j0d1750919894.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Sergio Rochet",
+        "club": "Internacional",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/02lxaa1767604928.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Darwin Núñez",
+        "club": "Al-Hilal",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/i78juc1693941560.png"
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Manuel Ugarte",
+        "club": "Manchester United",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/35xg041766826974.png"
+      }
+    ]
+  },
+  "FRA": {
+    "coach": "Didier Deschamps",
+    "players": [
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Kylian Mbappé",
+        "club": "Real Madrid",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/h9u9vz1733653583.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Brice Samba",
+        "club": "Rennes",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/nkfugp1766137864.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Ousmane Dembélé",
+        "club": "Paris Saint-Germain",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/pstgy21766335175.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Manu Koné",
+        "club": "Roma",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/s4wyo21758815461.png"
+      },
+      {
+        "no": "8",
+        "pos": "MF",
+        "name": "Aurélien Tchouaméni",
+        "club": "Real Madrid",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/4o417k1733653668.png"
+      }
+    ]
+  },
+  "IRQ": {
+    "coach": null,
+    "players": [
+      {
+        "no": "12",
+        "pos": "GK",
+        "name": "Jalal Hassan",
+        "club": "Al-Zawraa",
+        "captain": true,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/qa7id21780581126.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Mohanad Ali",
+        "club": "Dibba",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/t43zpw1780580661.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Fahad Talib",
+        "club": "Al-Talaba",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/4v2ozk1780589189.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Ali Al-Hamadi",
+        "club": "Luton Town",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/c2vni01766070789.png"
+      },
+      {
+        "no": "7",
+        "pos": "MF",
+        "name": "Youssef Amyn",
+        "club": "AEK Larnaca",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/qnou301780580815.png"
+      }
+    ]
+  },
+  "NOR": {
+    "coach": "Ståle Solbakken",
+    "players": [
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Martin Ødegaard",
+        "club": "Arsenal",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/5g6vww1769331695.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Ørjan Nyland",
+        "club": "Sevilla",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/wqnwbe1762860279.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Alexander Sørloth",
+        "club": "Atlético Madrid",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/v3of4b1762288730.png"
+      },
+      {
+        "no": "2",
+        "pos": "MF",
+        "name": "Morten Thorsby",
+        "club": "Cremonese",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/n3xi251776936734.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Patrick Berg",
+        "club": "Bodø/Glimt",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/s8sr041769181767.png"
+      }
+    ]
+  },
+  "SEN": {
+    "coach": "Pape Thiaw",
+    "players": [
+      {
+        "no": "3",
+        "pos": "DF",
+        "name": "Kalidou Koulibaly",
+        "club": "Al-Hilal",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/nirqe51750672288.png"
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Sadio Mané",
+        "club": "Al-Nassr",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/cify0u1678370417.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Yehvann Diouf",
+        "club": "Nice",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/3iat8f1766319747.png"
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Assane Diao",
+        "club": "Como",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/bt2ue81764278241.png"
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Idrissa Gueye",
+        "club": "Everton",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/ag9fm11756976825.png"
+      }
+    ]
+  },
+  "ALG": {
+    "coach": null,
+    "players": [
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Riyad Mahrez",
+        "club": "Al-Ahli",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/g0ay2p1771662753.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Farès Chaïbi",
+        "club": "Eintracht Frankfurt",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/736ole1762287487.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Melvin Mastil",
+        "club": "Stade Nyonnais",
+        "captain": false,
+        "photo": "https://www.thesportsdb.com/images/media/player/cutout/zz809b1780303370.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Amine Gouiri",
+        "club": "Marseille",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/74eam91766152411.png"
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Ramiz Zerrouki",
+        "club": "Twente",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/22jlww1759840799.png"
+      }
+    ]
+  },
+  "ARG": {
+    "coach": "Lionel Scaloni",
+    "players": [
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Lionel Messi",
+        "club": "Inter Miami CF",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/e0i2051750317027.png"
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Juan Musso",
+        "club": "Atlético Madrid",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/401mle1762287491.png"
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Julián Alvarez",
+        "club": "Atlético Madrid",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/91pla41762288186.png"
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Leandro Paredes",
+        "club": "Boca Juniors",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/chsspk1763384490.png"
+      },
+      {
+        "no": "7",
+        "pos": "MF",
+        "name": "Rodrigo De Paul",
+        "club": "Inter Miami CF",
+        "captain": false,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/n7z5lr1773999437.png"
+      }
+    ]
+  },
+  "AUT": {
+    "coach": null,
+    "players": [
+      {
+        "no": "8",
+        "pos": "DF",
+        "name": "David Alaba",
+        "club": "Real Madrid",
+        "captain": true,
+        "photo": "https://r2.thesportsdb.com/images/media/player/cutout/zxblp31733653341.png"
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Florian Grillitsch",
+        "club": "Braga",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Alexander Schlager",
+        "club": "Red Bull Salzburg",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Marko Arnautović",
+        "club": "Red Star Belgrade",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "4",
+        "pos": "MF",
+        "name": "Xaver Schlager",
+        "club": "RB Leipzig",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "JOR": {
+    "coach": null,
+    "players": [
+      {
+        "no": "23",
+        "pos": "DF",
+        "name": "Ihsan Haddad",
+        "club": "Al-Hussein",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Musa Al-Taamari",
+        "club": "Rennes",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Yazeed Abulaila",
+        "club": "Al-Hussein",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Mohammad Abu Zrayq",
+        "club": "Raja Casablanca",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Amer Jamous",
+        "club": "Al-Zawraa",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "COL": {
+    "coach": null,
+    "players": [
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "James Rodríguez",
+        "club": "Minnesota United FC",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "David Ospina",
+        "club": "Atlético Nacional",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Luis Díaz",
+        "club": "Bayern Munich",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "5",
+        "pos": "MF",
+        "name": "Kevin Castaño",
+        "club": "River Plate",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Richard Ríos",
+        "club": "Benfica",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "COD": {
+    "coach": null,
+    "players": [
+      {
+        "no": "22",
+        "pos": "DF",
+        "name": "Chancel Mbemba",
+        "club": "Lille",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Théo Bongonda",
+        "club": "Spartak Moscow",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Lionel Mpasi",
+        "club": "Le Havre",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Brian Cipenga",
+        "club": "Castellón",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Ngal'ayel Mukau",
+        "club": "Lille",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "POR": {
+    "coach": null,
+    "players": [
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Cristiano Ronaldo",
+        "club": "Al-Nassr",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Bernardo Silva",
+        "club": "Manchester City",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Diogo Costa",
+        "club": "Porto",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Gonçalo Ramos",
+        "club": "Paris Saint-Germain",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Matheus Nunes",
+        "club": "Manchester City",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "UZB": {
+    "coach": null,
+    "players": [
+      {
+        "no": "14",
+        "pos": "FW",
+        "name": "Eldor Shomurodov",
+        "club": "İstanbul Başakşehir",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Jaloliddin Masharipov",
+        "club": "Esteghlal",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Utkir Yusupov",
+        "club": "Navbahor Namangan",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "20",
+        "pos": "FW",
+        "name": "Azizbek Amonov",
+        "club": "Dinamo Samarqand",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Akmal Mozgovoy",
+        "club": "Pakhtakor",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "CRO": {
+    "coach": "Zlatko Dalić",
+    "players": [
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Luka Modrić",
+        "club": "Milan",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Dominik Livaković",
+        "club": "Dinamo Zagreb",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Andrej Kramarić",
+        "club": "TSG Hoffenheim",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "MF",
+        "name": "Nikola Moro",
+        "club": "Bologna",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "8",
+        "pos": "MF",
+        "name": "Mateo Kovačić",
+        "club": "Manchester City",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "ENG": {
+    "coach": null,
+    "players": [
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Harry Kane",
+        "club": "Bayern Munich",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Jude Bellingham",
+        "club": "Real Madrid",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Jordan Pickford",
+        "club": "Everton",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Bukayo Saka",
+        "club": "Arsenal",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "4",
+        "pos": "MF",
+        "name": "Declan Rice",
+        "club": "Arsenal",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "GHA": {
+    "coach": null,
+    "players": [
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Jordan Ayew",
+        "club": "Leicester City",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "FW",
+        "name": "Brandon Thomas-Asante",
+        "club": "Coventry City",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Lawrence Ati-Zigi",
+        "club": "St. Gallen",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "7",
+        "pos": "FW",
+        "name": "Abdul Fatawu",
+        "club": "Leicester City",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "3",
+        "pos": "MF",
+        "name": "Caleb Yirenkyi",
+        "club": "Nordsjælland",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  },
+  "PAN": {
+    "coach": null,
+    "players": [
+      {
+        "no": "20",
+        "pos": "MF",
+        "name": "Aníbal Godoy",
+        "club": "San Diego FC",
+        "captain": true,
+        "photo": null
+      },
+      {
+        "no": "10",
+        "pos": "MF",
+        "name": "Ismael Díaz",
+        "club": "León",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "1",
+        "pos": "GK",
+        "name": "Luis Mejía",
+        "club": "Nacional",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "9",
+        "pos": "FW",
+        "name": "Tomás Rodríguez",
+        "club": "Saprissa",
+        "captain": false,
+        "photo": null
+      },
+      {
+        "no": "6",
+        "pos": "MF",
+        "name": "Cristian Martínez",
+        "club": "Ironi Kiryat Shmona",
+        "captain": false,
+        "photo": null
+      }
+    ]
+  }
+}
