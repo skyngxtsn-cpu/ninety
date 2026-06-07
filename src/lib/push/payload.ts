@@ -35,53 +35,53 @@ export function buildPayload(
   const matchup = `${flag(home)} ${hn} × ${an} ${flag(away)}`.trim();
   const hh = timeJST(match.kickoffJST);
   const url = `/matches/${match.id}`;
-  const hook = match.hook ? `— ${match.hook}` : "";
+  // 「見どころ」は match.hook（match-augment.ts の手書きフック）
+  const hookLine = match.hook ? `\n👁 ${match.hook}` : "";
 
   let title = "";
   let body = "";
 
   switch (type) {
     case "pre-3h":
-      title = `あと3時間：${matchup}`;
-      body = `${hh} JST キックオフ ${hook}`.trim();
+      title = `⏳ あと3時間 — ${matchup}`;
+      body = `${hh} JST にキックオフ。心の準備、はじめよう。${hookLine}`;
       break;
     case "pre-1h":
-      title = `あと1時間：${matchup}`;
-      body = `${hh} JST キックオフ。準備はじめよう ${hook}`.trim();
+      title = `🔔 1時間後にKO — ${matchup}`;
+      body = `${hh} JST 開戦。テレビ・配信スタンバイ。${hookLine}`;
       break;
     case "pre-15m":
-      title = `まもなく：${matchup}`;
-      body = `${hh} JST キックオフ ${hook}`.trim();
+      title = `⚡ まもなく — ${matchup}`;
+      body = `あと15分で ${hh} JST キックオフ。さあ、始まる。${hookLine}`;
       break;
     case "kickoff":
-      title = `🟢 始まりました：${matchup}`;
-      body = "ライブ開始、いまから見ても間に合う";
+      title = `🔴 LIVE 開幕！ ${matchup}`;
+      body = `90分の物語が、いま動き出した。\nいまから滑り込みでも間に合う。`;
       break;
     case "halftime":
-      title = `⏸ ハーフタイム：${matchup}`;
-      body = "後半45分、いまから参戦してもまだまだ間に合う";
+      title = `⏸ ハーフタイム — ${matchup}`;
+      body = `前半終了。ここまでの45分、どうだった？\n後半が本番。途中参戦も大歓迎。`;
       break;
     case "fulltime":
-      title = `🏁 終了：${matchup}`;
-      body = "試合終了。録画派の方は記事や順位表にご注意";
+      title = `🏁 試合終了 — ${matchup}`;
+      body = `90分が終わりました。\n録画派の方は記事・SNS・順位表にご注意。`;
       break;
     case "result":
       // result は呼び出し側で score 入りタイトルを上書きする
-      title = `📊 結果：${matchup}`;
-      body = "試合終了、スコアはアプリで確認";
+      title = `📊 結果 — ${matchup}`;
+      body = `試合終了。スコアと流れはアプリで。`;
       break;
     case "lineup":
-      title = `📋 スタメン発表：${matchup}`;
-      body = `${hh} JST キックオフ${hook}`.trim();
+      title = `📋 スタメン発表 — ${matchup}`;
+      body = `先発11人がアプリで見られます。\n${hh} JST キックオフまで読み込み。${hookLine}`;
       break;
     case "tournament":
-      title = "🏆 推しの次の相手が決まりました";
-      body = "決勝トーナメントの次戦カードが確定";
+      title = `🏆 推しの次戦カード確定`;
+      body = `決勝トーナメントの対戦相手が決まりました。`;
       break;
     case "digest":
-      // digest はサマリで複数試合なので呼び出し側で組み立て
-      title = "🌙 1日お疲れさま。明日の試合";
-      body = matchup;
+      title = `🌙 今日もお疲れさま`;
+      body = `明日の試合をチェックしよう。\n${matchup}`;
       break;
   }
 
@@ -193,13 +193,19 @@ export function buildResultPayload(
   const flag = (t: Team | undefined): string => t?.flag ?? "";
   const sh = match.result?.home ?? 0;
   const sa = match.result?.away ?? 0;
-  const title = `📊 ${flag(home)} ${hn} ${sh} - ${sa} ${an} ${flag(away)}`.trim();
+  const emoji = sh === sa ? "🤝" : sh > sa ? "🏆" : "🏆";
+  const title = `${emoji} ${flag(home)} ${hn} ${sh} - ${sa} ${an} ${flag(away)}`.trim();
+  const winner = sh === sa ? null : sh > sa ? hn : an;
+  const winFlag =
+    sh === sa
+      ? null
+      : sh > sa
+        ? flag(home)
+        : flag(away);
   const body =
     sh === sa
-      ? "引き分け"
-      : sh > sa
-        ? `${hn}勝利`
-        : `${an}勝利`;
+      ? `両者譲らず、痛み分け。\n試合の流れはアプリで。`
+      : `${winFlag} ${winner} の勝利！\n試合の流れと得点者はアプリで。`;
   return {
     title,
     body,
