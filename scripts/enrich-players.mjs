@@ -46,10 +46,9 @@ if (!apiKey) {
 }
 
 const ai = new GoogleGenAI({ apiKey });
-// gemini-2.5-flash-lite: 無料枠 15 RPM / 1000 RPD（240 人なら 5sec 間隔で問題なし）
-// gemini-2.0-flash: 無料枠 0 (このAPIキーでは未利用可)
-// gemini-2.5-flash: 5 RPM で厳しすぎる、503 多発
-const MODEL = "gemini-2.5-flash-lite";
+// gemini-2.5-flash-lite: 1日 20件くらいで枯渇（新API keyは制限低い）
+// gemini-2.5-flash: 5 RPM、別カウンタ持ち、こっちが今日使えそう
+const MODEL = "gemini-2.5-flash";
 
 const POS_LABEL = { GK: "ゴールキーパー", DF: "DF", MF: "MF", FW: "FW" };
 
@@ -160,10 +159,10 @@ async function callGemini(prompt, attempt = 0) {
     const msg = String(err?.message ?? err);
     // 429: rate limit、503: 過負荷 → 指数バックオフでリトライ
     const isRetryable = /429|RESOURCE_EXHAUSTED|503|UNAVAILABLE|overloaded/.test(msg);
-    if (isRetryable && attempt < 4) {
-      // 5, 15, 45, 90 秒
-      const waitSec = [5, 15, 45, 90][attempt] ?? 90;
-      process.stdout.write(`(${attempt + 1}/4 retry in ${waitSec}s)`);
+    if (isRetryable && attempt < 5) {
+      // 30, 60, 90, 120, 180 秒（429 は分単位で quota がリセットされるので長めに）
+      const waitSec = [30, 60, 90, 120, 180][attempt] ?? 180;
+      process.stdout.write(`(${attempt + 1}/5 retry in ${waitSec}s)`);
       await sleep(waitSec * 1000);
       return callGemini(prompt, attempt + 1);
     }
@@ -243,13 +242,12 @@ async function main() {
         if (processed % 5 === 0) {
           await fs.writeFile(OUT_PATH, JSON.stringify(existing, null, 2));
         }
-
-        // RPM制限対策（gemini-1.5-flash 15RPM → 5sec ごとで 12 RPM）
-        await sleep(5000);
       } catch (err) {
         failed += 1;
-        console.error(`✗ ${err.message}`);
+        console.error(`✗ ${err.message?.slice(0, 100)}`);
       }
+      // gemini-2.5-flash は 5 RPM 上限。安全圏で 15 秒間隔 = 4 RPM
+      await sleep(15000);
     }
   }
 

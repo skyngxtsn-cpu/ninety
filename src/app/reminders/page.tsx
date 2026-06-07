@@ -4,6 +4,7 @@ import {
   type ReminderMatchSnapshot,
 } from "../../components/RemindersListClient";
 import { NotificationCard } from "../../components/NotificationCard";
+import { SpoilerToggle } from "../../components/SpoilerToggle";
 import { getAllMatches, getAllTeams } from "../../lib/data";
 
 export default async function RemindersPage() {
@@ -35,6 +36,7 @@ export default async function RemindersPage() {
   return (
     <>
       <AppHeader title="お気に入り" subtitle="観たい試合の一覧" back="/" />
+      <SpoilerToggle />
       <NotificationCard />
       <RemindersListClient matches={snapshots} />
     </>
