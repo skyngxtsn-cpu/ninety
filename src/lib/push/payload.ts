@@ -91,6 +91,47 @@ export function buildPayload(
   };
 }
 
+/**
+ * トーナメント通知。ネタバレ防止モードに応じて文言を変える。
+ * - block: チーム名を出さず「次の相手が決まりました」のみ
+ * - block無し: 「日本の次は 🇧🇷 ブラジル」のように具体的に
+ */
+export function buildTournamentPayload(opts: {
+  bracketMatchId: string;
+  favTeam: Team | undefined;
+  opponent: Team | undefined;
+  stage: string;
+  kickoffJST: string;
+  spoilerBlock: boolean;
+}): NotificationPayload {
+  const fav = opts.favTeam;
+  const opp = opts.opponent;
+  const favName = fav?.shortName ?? "推しチーム";
+  const oppName = opp?.shortName ?? "相手";
+  const oppFlag = opp?.flag ?? "";
+  const hh = timeJST(opts.kickoffJST);
+  const tag = `tournament-${opts.bracketMatchId}-${fav?.id ?? "x"}`;
+  const url = `/matches/${opts.bracketMatchId}`;
+  if (opts.spoilerBlock) {
+    return {
+      title: "🏆 推しの次の相手が決まりました",
+      body: `${favName} の次戦カードが確定`,
+      url,
+      matchId: opts.bracketMatchId,
+      tag,
+      type: "tournament",
+    };
+  }
+  return {
+    title: `🏆 ${favName} の次の相手 ${oppFlag} ${oppName}`,
+    body: `${opts.stage}・${hh} JST キックオフ`,
+    url,
+    matchId: opts.bracketMatchId,
+    tag,
+    type: "tournament",
+  };
+}
+
 export function buildResultPayload(
   match: Match,
   home: Team | undefined,

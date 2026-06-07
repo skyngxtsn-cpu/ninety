@@ -15,9 +15,11 @@ import {
   buildPayload,
   buildResultPayload,
   buildDigestPayload,
+  buildTournamentPayload,
   type NotificationPayload,
 } from "../../../../lib/push/payload";
 import { getAllMatches, getAllTeams } from "../../../../lib/data";
+import { getBracketMatches } from "../../../../lib/data/bracket";
 import type { Match, Team } from "../../../../lib/types";
 
 export const runtime = "nodejs";
@@ -67,6 +69,9 @@ export async function POST(req: Request) {
 
   // 2. 1日の終わりダイジェスト：今日の最終試合終了から30分後 ±2.5分
   results["digest"] = await processDigest(matches, teamById, now);
+
+  // 3. トーナメント次戦カード確定通知
+  results["tournament"] = await processTournament(teamById, now);
 
   return NextResponse.json({
     ok: true,
@@ -296,6 +301,91 @@ async function sendToSub(
       await cleanupSub(h);
     }
     return "failed";
+  }
+}
+
+/**
+ * トーナメント次戦カード確定通知。
+ * 両 slot がチーム解決済みになっている KO 試合について、
+ * その試合に推しチームが入っている購読者にプッシュ。
+ * (matchId, favTeamId) ごとに重複排除。
+ */
+async function processTournament(
+  teamById: Map<string, Team>,
+  now: Date,
+): Promise<{ processed: number; pushed: number; skipped: number }> {
+  const bracket = await getBracketMatches();
+  let processed = 0;
+  let pushed = 0;
+  let skipped = 0;
+
+  for (const bm of bracket) {
+    // 両側がチーム解決済みでないとカードは「確定」していない
+    if (bm.home.kind !== "team" || bm.away.kind !== "team") continue;
+    const homeId = bm.home.teamId;
+    const awayId = bm.away.teamId;
+    processed += 1;
+
+    // 各チームの推し購読者 → 相手の情報付きで通知
+    for (const [favId, oppId] of [
+      [homeId, awayId],
+      [awayId, homeId],
+    ] as const) {
+      const subHashes =
+        (await redis.smembers<string[]>(K.favSubs(favId))) ?? [];
+      if (subHashes.length === 0) continue;
+
+      for (const h of subHashes) {
+        // 二重発火防止：マッチ+推しチーム単位
+        const firedKey = K.matchFiredType(`${bm.id}_${favId}`, "tournament");
+        const already = await redis.get(firedKey);
+        if (already) {
+          skipped += 1;
+          continue;
+        }
+
+        // 購読者のネタバレ防止モード状態を取得
+        const spoiler = await redis.get<string>(K.subSpoiler(h));
+        const spoilerBlock = spoiler === "1";
+
+        const payload = buildTournamentPayload({
+          bracketMatchId: bm.id,
+          favTeam: teamById.get(favId),
+          opponent: teamById.get(oppId),
+          stage: roundLabel(bm.round),
+          kickoffJST: bm.kickoffJST,
+          spoilerBlock,
+        });
+
+        const r = await sendToSub(h, "tournament", payload, now);
+        if (r === "pushed") {
+          pushed += 1;
+          // 30日 TTL（W杯全期間カバー）
+          await redis.set(firedKey, "1", { ex: 30 * 24 * 60 * 60 });
+        }
+      }
+    }
+  }
+
+  return { processed, pushed, skipped };
+}
+
+function roundLabel(r: string): string {
+  switch (r) {
+    case "R32":
+      return "ラウンド32";
+    case "R16":
+      return "ラウンド16";
+    case "QF":
+      return "準々決勝";
+    case "SF":
+      return "準決勝";
+    case "FINAL":
+      return "決勝";
+    case "THIRD":
+      return "3位決定戦";
+    default:
+      return r;
   }
 }
 
