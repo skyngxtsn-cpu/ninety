@@ -4,7 +4,16 @@ on:
   schedule:
     # 5 分ごとに実行（W杯 期間中は試合直前にスタメンが乗るのを拾う）
     - cron: "*/5 * * * *"
-  workflow_dispatch: # 手動実行用
+  workflow_dispatch:
+    inputs:
+      from:
+        description: "テスト用 dateFrom (YYYY-MM-DD)"
+        required: false
+        default: ""
+      to:
+        description: "テスト用 dateTo (YYYY-MM-DD)"
+        required: false
+        default: ""
 
 concurrency:
   group: fetch-lineups
@@ -28,6 +37,8 @@ jobs:
       - name: Fetch lineups from football-data.org
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+          LINEUP_FROM: ${{ inputs.from }}
+          LINEUP_TO: ${{ inputs.to }}
         run: node scripts/fetch-lineups.mjs
 
       - name: Commit and push if changed

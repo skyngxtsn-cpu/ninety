@@ -302,13 +302,13 @@ async function main() {
     existing = {};
   }
 
-  // スコープ: 今 ± 6 時間以内の試合
-  const dateFrom = new Date(Date.now() - 6 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 10);
-  const dateTo = new Date(Date.now() + 18 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 10);
+  // スコープ: 今 ± 6 時間以内の試合（env で範囲上書き可）
+  const dateFrom =
+    process.env.LINEUP_FROM ??
+    new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const dateTo =
+    process.env.LINEUP_TO ??
+    new Date(Date.now() + 18 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
   console.log(`Fetching W杯 fixtures for ${dateFrom} 〜 ${dateTo}`);
 
