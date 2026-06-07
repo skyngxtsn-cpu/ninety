@@ -15,14 +15,26 @@ import {
 import { useSpoilerBlock } from "../lib/preferences";
 import { SpoilerWrap } from "./SpoilerWrap";
 
+type TeamFlag = { id: string; flag: string; shortName: string };
+
 type Props = {
   matchId: string;
   status: "scheduled" | "live" | "finished";
   defaultFlag?: string;
+  teamFlags?: TeamFlag[];
 };
 
-export function CommentBoardClient({ matchId, status, defaultFlag }: Props) {
-  const { userId, nick, ensureIdentity, setNick } = useUserIdentity(defaultFlag);
+/** ニュートラルな旗（国に縛られたくない人向け） */
+const NEUTRAL_FLAGS = ["⚽", "🔥", "✨", "🌍", "🎌", "👤", "🎉", "💪"];
+
+export function CommentBoardClient({
+  matchId,
+  status,
+  defaultFlag,
+  teamFlags = [],
+}: Props) {
+  const { userId, nick, flag, ensureIdentity, setNick, setFlag } =
+    useUserIdentity(defaultFlag);
   const { blocked: spoilerBlock } = useSpoilerBlock();
   const [comments, setComments] = useState<Comment[]>([]);
   const [reactions, setReactions] = useState<ReactionCounts>(
@@ -78,7 +90,8 @@ export function CommentBoardClient({ matchId, status, defaultFlag }: Props) {
         body: JSON.stringify({
           userId: ident.userId,
           nick: ident.nick,
-          flag: defaultFlag,
+          // ユーザー選択 > 試合のホーム国旗 にフォールバック
+          flag: flag ?? defaultFlag,
           text: t,
         }),
       });
@@ -116,23 +129,26 @@ export function CommentBoardClient({ matchId, status, defaultFlag }: Props) {
 
   return (
     <>
-      {/* ニック編集 */}
+      {/* ニック・旗編集 */}
       <div className="mx-4 mt-3 flex items-center justify-between text-[11px]">
-        <span className="text-white/55">
+        <span className="text-white/55 flex items-center gap-1.5 min-w-0">
+          <span className="text-[16px] leading-none">
+            {flag ?? defaultFlag ?? "👤"}
+          </span>
           {nick ? (
             <>
               <span className="text-white/40">as</span>{" "}
-              <span className="text-white">{nick}</span>
+              <span className="text-white truncate">{nick}</span>
             </>
           ) : (
-            "ニック未設定"
+            <span className="text-white/55">ニック未設定</span>
           )}
         </span>
         <button
           onClick={() => setShowNickEdit((v) => !v)}
-          className="text-white/55 hover:text-white/85 underline-offset-2 hover:underline"
+          className="shrink-0 text-white/55 hover:text-white/85 underline-offset-2 hover:underline"
         >
-          {showNickEdit ? "閉じる" : "ニック変更"}
+          {showNickEdit ? "閉じる" : "ニック・旗を変更"}
         </button>
       </div>
 
@@ -140,10 +156,13 @@ export function CommentBoardClient({ matchId, status, defaultFlag }: Props) {
         <div className="mx-4 mt-2">
           <NickEditor
             currentNick={nick}
+            currentFlag={flag}
             defaultFlag={defaultFlag}
-            onSave={(n) => {
-              ensureIdentity(n);
-              setNick(n);
+            teamFlags={teamFlags}
+            onSave={(nextNick, nextFlag) => {
+              ensureIdentity(nextNick, nextFlag);
+              setNick(nextNick);
+              setFlag(nextFlag);
               setShowNickEdit(false);
             }}
           />
@@ -324,33 +343,119 @@ function CommentItem({
 
 function NickEditor({
   currentNick,
+  currentFlag,
   defaultFlag,
+  teamFlags,
   onSave,
 }: {
   currentNick: string | null;
+  currentFlag: string | null;
   defaultFlag?: string;
-  onSave: (next: string) => void;
+  teamFlags: TeamFlag[];
+  onSave: (nextNick: string, nextFlag: string) => void;
 }) {
-  const [value, setValue] = useState(currentNick ?? "");
+  const [nickValue, setNickValue] = useState(currentNick ?? "");
+  const [flagValue, setFlagValue] = useState(currentFlag ?? defaultFlag ?? "⚽");
+
   return (
-    <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-      <p className="text-[11px] text-white/65 mb-1.5">ニックネーム（24文字以内）</p>
-      <div className="flex gap-2">
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          maxLength={24}
-          placeholder={generateDefaultNick(defaultFlag)}
-          className="flex-1 bg-white/5 border border-white/15 rounded-lg px-2.5 py-1.5 text-[16px] text-white"
-        />
-        <button
-          onClick={() => onSave(value.trim() || generateDefaultNick(defaultFlag))}
-          className="px-3 py-1.5 rounded-lg bg-blue-500 text-[12px] font-semibold text-white hover:bg-blue-400"
-        >
-          保存
-        </button>
+    <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-3">
+      {/* プレビュー */}
+      <div className="flex items-center gap-2 px-2 py-2 rounded-lg bg-white/[0.04]">
+        <span className="text-[22px] leading-none">{flagValue}</span>
+        <span className="text-[13px] font-semibold text-white truncate">
+          {nickValue.trim() || generateDefaultNick(flagValue)}
+        </span>
+      </div>
+
+      {/* 旗ピッカー */}
+      <div>
+        <p className="text-[11px] text-white/65 mb-1.5">アイコン</p>
+        {/* ニュートラル */}
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {NEUTRAL_FLAGS.map((f) => (
+            <FlagOption
+              key={f}
+              flag={f}
+              active={flagValue === f}
+              onClick={() => setFlagValue(f)}
+            />
+          ))}
+        </div>
+        {/* W杯 48ヶ国（横スクロール） */}
+        {teamFlags.length > 0 && (
+          <>
+            <p className="text-[10px] uppercase tracking-wider text-white/45 mb-1.5">
+              W杯出場国
+            </p>
+            <div className="grid grid-cols-8 gap-1.5 max-h-[156px] overflow-y-auto pr-1">
+              {teamFlags.map((t) => (
+                <FlagOption
+                  key={t.id}
+                  flag={t.flag}
+                  title={t.shortName}
+                  active={flagValue === t.flag}
+                  onClick={() => setFlagValue(t.flag)}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* ニックネーム */}
+      <div>
+        <p className="text-[11px] text-white/65 mb-1.5">
+          ニックネーム（24文字以内）
+        </p>
+        <div className="flex gap-2">
+          <input
+            value={nickValue}
+            onChange={(e) => setNickValue(e.target.value)}
+            maxLength={24}
+            placeholder={generateDefaultNick(flagValue)}
+            className="flex-1 bg-white/5 border border-white/15 rounded-lg px-2.5 py-1.5 text-[16px] text-white"
+          />
+          <button
+            onClick={() =>
+              onSave(
+                nickValue.trim() || generateDefaultNick(flagValue),
+                flagValue,
+              )
+            }
+            className="px-3 py-1.5 rounded-lg bg-blue-500 text-[12px] font-semibold text-white hover:bg-blue-400"
+          >
+            保存
+          </button>
+        </div>
       </div>
     </div>
+  );
+}
+
+function FlagOption({
+  flag,
+  title,
+  active,
+  onClick,
+}: {
+  flag: string;
+  title?: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      title={title}
+      aria-label={title ?? flag}
+      className={`shrink-0 w-9 h-9 rounded-lg text-[20px] flex items-center justify-center transition border ${
+        active
+          ? "bg-blue-500/25 border-blue-400/60 ring-2 ring-blue-400/40"
+          : "bg-white/5 border-white/10 hover:bg-white/10"
+      }`}
+    >
+      {flag}
+    </button>
   );
 }
 
