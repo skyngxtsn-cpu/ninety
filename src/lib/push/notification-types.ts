@@ -100,6 +100,14 @@ export function isTypeEnabled(
   if (spoilerBlock && (type === "result" || type === "tournament")) {
     return false;
   }
+
+  // ネタバレ防止モード OFF + 試合結果通知 ON のユーザーは、
+  // fulltime (スコア無し) と result (スコア付き) が重複する。
+  // この場合 result を優先し、fulltime をスキップ
+  if (type === "fulltime" && !spoilerBlock && pref.result === true) {
+    return false;
+  }
+
   const group = TYPE_TO_GROUP[type];
   return pref[group] === true;
 }

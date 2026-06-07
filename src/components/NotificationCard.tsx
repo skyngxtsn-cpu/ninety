@@ -242,7 +242,7 @@ export function NotificationCard() {
           hint={
             spoilerBlock
               ? "❌ ネタバレ防止モード ON のため無効中"
-              : "「日本 2-1 オランダ」など試合結果を含む通知"
+              : "「日本 2-1 オランダ」など試合結果を含む通知。ONの時は「試合終了（スコア無し）」は届きません"
           }
           checked={!spoilerBlock && prefs.result}
           onToggle={togglePref("result")}
