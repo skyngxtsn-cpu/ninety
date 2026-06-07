@@ -4,6 +4,7 @@ import "./globals.css";
 import { BottomNav } from "../components/BottomNav";
 import { ServiceWorkerRegistrar } from "../components/ServiceWorkerRegistrar";
 import { SpoilerOnboarding } from "../components/SpoilerOnboarding";
+import { ClientErrorReporter } from "../components/ClientErrorReporter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -82,6 +83,7 @@ export default function RootLayout({
         <BottomNav />
         <ServiceWorkerRegistrar />
         <SpoilerOnboarding />
+        <ClientErrorReporter />
       </body>
     </html>
   );

@@ -37,17 +37,46 @@ export async function POST(
   const n = await redis.incr(CK.reports(id));
   // 7日 TTL
   await redis.expire(CK.reports(id), 7 * 24 * 60 * 60);
+
+  // コメント本文を取得（Discord 通知用 + 削除判定）
+  const raw = await redis.get<string>(CK.comment(id));
+  const c: Comment | null = raw
+    ? typeof raw === "string"
+      ? JSON.parse(raw)
+      : (raw as unknown as Comment)
+    : null;
+
   // 5回以上通報されたらコメント自動削除（粗いが MVP として）
-  if ((n ?? 0) >= 5) {
-    const raw = await redis.get<string>(CK.comment(id));
-    if (raw) {
-      const c: Comment =
-        typeof raw === "string" ? JSON.parse(raw) : (raw as unknown as Comment);
-      const pipe = redis.pipeline();
-      pipe.del(CK.comment(id));
-      pipe.zrem(CK.matchComments(c.matchId), id);
-      await pipe.exec();
-    }
+  let autoDeleted = false;
+  if ((n ?? 0) >= 5 && c) {
+    const pipe = redis.pipeline();
+    pipe.del(CK.comment(id));
+    pipe.zrem(CK.matchComments(c.matchId), id);
+    await pipe.exec();
+    autoDeleted = true;
   }
-  return NextResponse.json({ ok: true, reportCount: n });
+
+  // Discord webhook（通報の即時把握、フィードバックと共用）
+  const webhookUrl = process.env.FEEDBACK_DISCORD_WEBHOOK;
+  if (webhookUrl && c) {
+    const header = autoDeleted
+      ? `🚨 **コメント自動削除**（通報 ${n} 件）`
+      : `⚠️ **コメント通報**（${n} 件目）`;
+    const snippet = c.text.length > 300 ? c.text.slice(0, 300) + "…" : c.text;
+    const content = [
+      header,
+      `🏟 試合: \`${c.matchId}\``,
+      `👤 ${c.nick}（\`${c.userId}\`）`,
+      `💬 ${snippet}`,
+    ].join("\n");
+    void fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: content.slice(0, 1900) }),
+    }).catch(() => {
+      // best effort
+    });
+  }
+
+  return NextResponse.json({ ok: true, reportCount: n, autoDeleted });
 }
