@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { redis } from "../../../lib/push/redis";
+import { sendMail } from "../../../lib/email";
 
 export const runtime = "nodejs";
 
@@ -74,31 +75,31 @@ export async function POST(req: Request) {
   await redis.zadd(`feedback:index`, { score: now, member: id });
   await redis.set(rateKey, "1", { ex: RATE_LIMIT_SEC });
 
-  // Discord webhook（オプション）
-  const webhookUrl = process.env.FEEDBACK_DISCORD_WEBHOOK;
-  if (webhookUrl) {
-    const cat: Record<string, string> = {
-      bug: "🐛 バグ報告",
-      feature: "💡 改善提案",
-      question: "❓ 質問",
-      thanks: "❤️ ありがとう",
-      other: "📝 その他",
-    };
-    const content = [
-      `**${cat[body.category]}** ［\`${id}\`］`,
-      text.length > 500 ? text.slice(0, 500) + "…" : text,
-      entry.email ? `📧 ${entry.email}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    void fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: content.slice(0, 1900) }),
-    }).catch(() => {
-      // ignore — Discord 通知は best effort
-    });
-  }
+  // Email 通知（Resend）
+  const cat: Record<string, string> = {
+    bug: "🐛 バグ報告",
+    feature: "💡 改善提案",
+    question: "❓ 質問",
+    thanks: "❤️ ありがとう",
+    other: "📝 その他",
+  };
+  const subject = `💌 フィードバック (${body.category})`;
+  const mailText = [
+    `カテゴリ: ${cat[body.category] ?? body.category}`,
+    `ID: ${id}`,
+    `受信時刻: ${entry.createdAt}`,
+    "",
+    "── 本文 ──",
+    text,
+    "",
+    entry.email ? `📧 返信先メール: ${entry.email}` : "（返信先メールなし）",
+    `👤 userId: ${entry.userId ?? "(なし)"}`,
+    `🌐 IP: ${ip}`,
+    `📱 UA: ${userAgent.slice(0, 200)}`,
+  ].join("\n");
+  void sendMail({ subject, text: mailText }).catch(() => {
+    // best effort
+  });
 
   return NextResponse.json({ ok: true, id });
 }

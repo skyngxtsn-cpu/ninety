@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { redis } from "../../../../lib/push/redis";
 import { CK } from "../../../../lib/comments/redis-keys";
 import type { Comment } from "../../../../lib/comments/types";
+import { sendMail } from "../../../../lib/email";
 
 export const runtime = "nodejs";
 
@@ -56,24 +57,26 @@ export async function POST(
     autoDeleted = true;
   }
 
-  // Discord webhook（通報の即時把握、フィードバックと共用）
-  const webhookUrl = process.env.FEEDBACK_DISCORD_WEBHOOK;
-  if (webhookUrl && c) {
-    const header = autoDeleted
-      ? `🚨 **コメント自動削除**（通報 ${n} 件）`
-      : `⚠️ **コメント通報**（${n} 件目）`;
-    const snippet = c.text.length > 300 ? c.text.slice(0, 300) + "…" : c.text;
-    const content = [
-      header,
-      `🏟 試合: \`${c.matchId}\``,
-      `👤 ${c.nick}（\`${c.userId}\`）`,
-      `💬 ${snippet}`,
+  // Email 通知（Resend）
+  if (c) {
+    const subject = autoDeleted
+      ? `🚨 コメント自動削除 (通報 ${n} 件)`
+      : `⚠️ コメント通報 (${n} 件目)`;
+    const snippet = c.text.length > 500 ? c.text.slice(0, 500) + "…" : c.text;
+    const mailText = [
+      autoDeleted
+        ? `通報が ${n} 件に達したため自動削除しました。`
+        : `通報数: ${n} 件目`,
+      "",
+      `コメントID: ${id}`,
+      `試合ID: ${c.matchId}`,
+      `投稿者: ${c.nick} (userId: ${c.userId})`,
+      `投稿時刻: ${new Date(c.createdAt).toISOString()}`,
+      "",
+      "── コメント本文 ──",
+      snippet,
     ].join("\n");
-    void fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: content.slice(0, 1900) }),
-    }).catch(() => {
+    void sendMail({ subject, text: mailText }).catch(() => {
       // best effort
     });
   }
