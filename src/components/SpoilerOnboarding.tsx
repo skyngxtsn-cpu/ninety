@@ -26,7 +26,7 @@ export function SpoilerOnboarding() {
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div className="w-full max-w-[420px] glass rounded-3xl p-6 space-y-4 border border-white/15">
         <div className="text-center">
-          <div className="text-[44px] mb-1">🙈</div>
+          <div className="text-[44px] mb-1">👀</div>
           <h2 className="text-[20px] font-bold tracking-tight">
             ネタバレ防止モード
           </h2>
@@ -55,7 +55,7 @@ export function SpoilerOnboarding() {
             }}
             className="flex-1 py-2.5 rounded-xl bg-gradient-to-br from-blue-500 to-blue-400 text-[13px] font-semibold text-white shadow-lg"
           >
-            🙈 ONにする
+            👀 ONにする
           </button>
         </div>
       </div>

@@ -24,7 +24,7 @@ export function SpoilerToggle() {
       <div className="flex items-start gap-3">
         <div className="flex-1">
           <p className="text-[14px] font-bold text-white mb-1">
-            🙈 ネタバレ防止モード
+            👀 ネタバレ防止モード
           </p>
           <p className="text-[11px] text-white/65 leading-relaxed">
             ONにすると、スコア・勝敗の表示が「●●●」で隠れます。
