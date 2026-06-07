@@ -26,13 +26,43 @@ type Props = {
  * - リマインド済み: 青リング + 🔔（推しと両立なら金が優先）
  * - LIVE中: 赤 LIVE バッジ + 経過分表示
  */
+/** placeholder（"1E", "W74", "3A/B/C/D/F" 等）の表示ラベルを日本語化 */
+function placeholderLabel(raw: string | undefined): string {
+  if (!raw) return "未定";
+  // "1E" → "E組1位"、 "2A" → "A組2位"
+  const rank = raw.match(/^([12])([A-L])$/);
+  if (rank) return `${rank[2]}組${rank[1]}位`;
+  // "3A/B/C/D/F" → "ABCDF組3位"
+  const triRank = raw.match(/^3([A-L\/]+)$/);
+  if (triRank) {
+    const groups = triRank[1].replace(/\//g, "");
+    return `${groups}組3位`;
+  }
+  // "W74" → "#74勝者"、"L101" → "#101敗者"
+  const wl = raw.match(/^([WL])(\d+)$/);
+  if (wl) return `#${wl[2]}${wl[1] === "W" ? "勝者" : "敗者"}`;
+  return raw;
+}
+
 export async function CompactMatchCard({ match, favoriteTeamIds }: Props) {
   const [home, away, now] = await Promise.all([
     getTeam(match.homeTeamId),
     getTeam(match.awayTeamId),
     nowReference(),
   ]);
-  if (!home || !away) return null;
+  // placeholder の場合は仮チーム情報で描画
+  const homeForRender = home ?? {
+    id: match.homeTeamId,
+    name: placeholderLabel(match.homeRaw),
+    shortName: placeholderLabel(match.homeRaw),
+    flag: "·",
+  };
+  const awayForRender = away ?? {
+    id: match.awayTeamId,
+    name: placeholderLabel(match.awayRaw),
+    shortName: placeholderLabel(match.awayRaw),
+    flag: "·",
+  };
 
   const live = isLiveMatch(match, now);
   const minute = live ? liveMinute(match, now) : null;
@@ -73,8 +103,8 @@ export async function CompactMatchCard({ match, favoriteTeamIds }: Props) {
         {/* 中央: チーム一覧 */}
         <div className="min-w-0 flex-1 space-y-0.5">
           <TeamLine
-            flag={home.flag}
-            name={home.name}
+            flag={homeForRender.flag}
+            name={homeForRender.name}
             score={live || finished ? match.result?.home : undefined}
             isWinner={
               !!(
@@ -92,8 +122,8 @@ export async function CompactMatchCard({ match, favoriteTeamIds }: Props) {
             }
           />
           <TeamLine
-            flag={away.flag}
-            name={away.name}
+            flag={awayForRender.flag}
+            name={awayForRender.name}
             score={live || finished ? match.result?.away : undefined}
             isWinner={
               !!(

@@ -68,6 +68,12 @@ export type Match = {
   id: MatchId;
   homeTeamId: TeamId;
   awayTeamId: TeamId;
+  /** KO 試合で teamId が未確定 (slug 化された "2a", "w74" など) のとき真 */
+  homeIsPlaceholder?: boolean;
+  awayIsPlaceholder?: boolean;
+  /** placeholder の元文字列 ("1E", "W74", "3A/B/C/D/F" 等) */
+  homeRaw?: string;
+  awayRaw?: string;
   /** JST ISO string */
   kickoffJST: string;
   stage: string;
