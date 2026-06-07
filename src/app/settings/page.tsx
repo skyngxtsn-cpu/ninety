@@ -3,6 +3,7 @@ import { getAllTeams } from "../../lib/data/teams";
 import { SettingsClient } from "./SettingsClient";
 import { SpoilerToggle } from "../../components/SpoilerToggle";
 import { NotificationSettings } from "../../components/NotificationSettings";
+import { PushNotificationToggle } from "../../components/PushNotificationToggle";
 
 export default async function SettingsPage() {
   const teams = await getAllTeams();
@@ -32,6 +33,7 @@ export default async function SettingsPage() {
       <SettingsClient allTeams={allTeams} />
 
       <SpoilerToggle />
+      <PushNotificationToggle />
       <NotificationSettings />
     </>
   );

@@ -28,10 +28,9 @@ export function NotificationSettings() {
 
   return (
     <section className="mx-4 mt-4 glass rounded-2xl p-4 space-y-3">
-      <h2 className="text-[14px] font-bold mb-1">通知</h2>
+      <h2 className="text-[14px] font-bold mb-1">通知の内訳</h2>
       <p className="text-[11px] text-white/55 leading-relaxed">
         Webプッシュ通知の中身を細かく調整できます。
-        通知の有効化自体は<strong className="text-white">「リマインダー」</strong>ページから。
       </p>
 
       <ToggleRow
