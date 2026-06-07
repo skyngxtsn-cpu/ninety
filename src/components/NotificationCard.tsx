@@ -184,7 +184,7 @@ export function NotificationCard() {
         />
         <ToggleRow
           label="1日の終わりダイジェスト"
-          hint="その日の最終試合終了後に、推しチームの「明日の試合」をまとめてお知らせ"
+          hint="その日の最終試合終了後に、📜 今日の振り返り（推し + 注目国）＋ 🔜 明日の推し試合を 1 通でお届け"
           checked={prefs.digest}
           onToggle={togglePref("digest")}
         />

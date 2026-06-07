@@ -159,24 +159,75 @@ export function buildResultPayload(
   };
 }
 
-export function buildDigestPayload(
-  matches: Array<{ match: Match; home?: Team; away?: Team }>,
-  forJSTDate: string,
-): NotificationPayload {
-  const lines = matches.slice(0, 5).map(({ match, home, away }) => {
-    const flag = (t: Team | undefined): string => t?.flag ?? "";
-    const hn = shortName(home, match.homeTeamId);
-    const an = shortName(away, match.awayTeamId);
+/**
+ * 1日の終わりダイジェスト。
+ * 「📜 今日の振り返り」セクション + 「🔜 明日のプレビュー」セクションを
+ * 1 通にまとめる。
+ *
+ * spoilerBlock の挙動:
+ *  - ON: 振り返りはスコア無し（「終了」表示のみ）
+ *  - OFF: 振り返りはスコア付き
+ */
+export function buildDigestPayload(opts: {
+  todayRecap: Array<{ match: Match; home?: Team; away?: Team }>;
+  tomorrowPreview: Array<{ match: Match; home?: Team; away?: Team }>;
+  forTomorrowJSTDate: string;
+  spoilerBlock: boolean;
+}): NotificationPayload {
+  const { todayRecap, tomorrowPreview, forTomorrowJSTDate, spoilerBlock } =
+    opts;
+
+  const flag = (t: Team | undefined): string => t?.flag ?? "";
+  const sn = (t: Team | undefined, fallback: string): string =>
+    shortName(t, fallback);
+
+  const recapLines = todayRecap.slice(0, 5).map(({ match, home, away }) => {
+    const hn = sn(home, match.homeTeamId);
+    const an = sn(away, match.awayTeamId);
+    if (spoilerBlock || !match.result) {
+      return `${flag(home)}${hn} vs ${an}${flag(away)} 終了`;
+    }
+    return `${flag(home)}${hn} ${match.result.home}-${match.result.away} ${an}${flag(away)}`;
+  });
+  const recapExtra =
+    todayRecap.length > 5 ? `\n…他 ${todayRecap.length - 5}試合` : "";
+
+  const previewLines = tomorrowPreview.slice(0, 5).map(({ match, home, away }) => {
+    const hn = sn(home, match.homeTeamId);
+    const an = sn(away, match.awayTeamId);
     return `${timeJST(match.kickoffJST)} ${flag(home)}${hn} × ${an}${flag(away)}`;
   });
-  const extra = matches.length > 5 ? `\n…他 ${matches.length - 5}試合` : "";
-  const dayLabel = forJSTDate.slice(5).replace("-", "/"); // "06-13" → "06/13"
+  const previewExtra =
+    tomorrowPreview.length > 5
+      ? `\n…他 ${tomorrowPreview.length - 5}試合`
+      : "";
+
+  const sections: string[] = [];
+  if (recapLines.length > 0) {
+    sections.push(`📜 今日の振り返り\n${recapLines.join("\n")}${recapExtra}`);
+  }
+  if (previewLines.length > 0) {
+    sections.push(`🔜 明日の試合\n${previewLines.join("\n")}${previewExtra}`);
+  }
+
+  const dayLabel = forTomorrowJSTDate.slice(5).replace("-", "/");
+  const recapCount = todayRecap.length;
+  const previewCount = tomorrowPreview.length;
+  let title = "🌙 1日のまとめ";
+  if (recapCount > 0 && previewCount > 0) {
+    title = `🌙 今日${recapCount}試合 / 明日 ${dayLabel} ${previewCount}試合`;
+  } else if (recapCount > 0) {
+    title = `🌙 今日の振り返り（${recapCount}試合）`;
+  } else if (previewCount > 0) {
+    title = `🌙 明日 ${dayLabel} ${previewCount}試合`;
+  }
+
   return {
-    title: `🌙 明日 ${dayLabel} 推しチーム ${matches.length}試合`,
-    body: lines.join("\n") + extra,
+    title,
+    body: sections.join("\n\n"),
     url: "/",
     matchId: "digest",
-    tag: `digest-${forJSTDate}`,
+    tag: `digest-${forTomorrowJSTDate}`,
     type: "digest",
   };
 }

@@ -20,6 +20,7 @@ import {
 } from "../../../../lib/push/payload";
 import { getAllMatches, getAllTeams } from "../../../../lib/data";
 import { getBracketMatches } from "../../../../lib/data/bracket";
+import { TIER1_TEAM_IDS } from "../../../../lib/push/tier1";
 import type { Match, Team } from "../../../../lib/types";
 
 export const runtime = "nodejs";
@@ -200,42 +201,83 @@ async function processDigest(
     return jk.toISOString().slice(0, 10) === tomorrowJST;
   });
 
-  // 明日試合をしうる全チームの fav 購読者を集める
-  const favHashesByTeam = new Map<string, string[]>();
+  // 候補対象の購読者を集める：
+  //   - 今日 / 明日 のいずれかにチームの試合がある fav 購読者
+  //   - 今日終了 OR 明日キックオフ の試合いずれにも該当しなければスキップ
+  const candidateTeamIds = new Set<string>();
+  for (const t of todays) {
+    candidateTeamIds.add(t.homeTeamId);
+    candidateTeamIds.add(t.awayTeamId);
+  }
   for (const t of tomorrows) {
-    for (const teamId of [t.homeTeamId, t.awayTeamId]) {
-      if (!favHashesByTeam.has(teamId)) {
-        const arr = (await redis.smembers<string[]>(K.favSubs(teamId))) ?? [];
-        favHashesByTeam.set(teamId, arr);
-      }
-    }
+    candidateTeamIds.add(t.homeTeamId);
+    candidateTeamIds.add(t.awayTeamId);
   }
   const allHashes = new Set<string>();
-  for (const arr of favHashesByTeam.values()) {
+  for (const teamId of candidateTeamIds) {
+    const arr = (await redis.smembers<string[]>(K.favSubs(teamId))) ?? [];
     for (const h of arr) allHashes.add(h);
   }
 
+  // 今日終了した「試合」一覧（後で振り返り材料に使う）
+  const todayFinished = todays.filter(
+    (m) => m.status === "finished" && m.result,
+  );
+
   let sent = 0;
   for (const h of allHashes) {
-    const firedKey = K.morningFired(todayJST, h); // key名は流用（YYYY-MM-DD単位の重複防止）
+    const firedKey = K.morningFired(todayJST, h);
     const already = await redis.get(firedKey);
     if (already) continue;
 
     const favs = (await redis.smembers<string[]>(K.subFavs(h))) ?? [];
     const favSet = new Set(favs);
-    const myTomorrows = tomorrows.filter(
-      (m) => favSet.has(m.homeTeamId) || favSet.has(m.awayTeamId),
-    );
-    if (myTomorrows.length === 0) continue;
 
-    const payload = buildDigestPayload(
-      myTomorrows.map((m) => ({
+    // 振り返り = 推しチームの今日試合 + Tier-1 国の今日試合
+    const recap = todayFinished
+      .filter(
+        (m) =>
+          favSet.has(m.homeTeamId) ||
+          favSet.has(m.awayTeamId) ||
+          TIER1_TEAM_IDS.has(m.homeTeamId) ||
+          TIER1_TEAM_IDS.has(m.awayTeamId),
+      )
+      .sort(
+        (a, b) =>
+          new Date(a.kickoffJST).getTime() - new Date(b.kickoffJST).getTime(),
+      );
+
+    // 明日のプレビュー = 推しチームの明日試合
+    const preview = tomorrows
+      .filter(
+        (m) => favSet.has(m.homeTeamId) || favSet.has(m.awayTeamId),
+      )
+      .sort(
+        (a, b) =>
+          new Date(a.kickoffJST).getTime() - new Date(b.kickoffJST).getTime(),
+      );
+
+    // どちらも空ならスキップ
+    if (recap.length === 0 && preview.length === 0) continue;
+
+    // 購読者のネタバレ防止モード状態
+    const spoiler = await redis.get<string>(K.subSpoiler(h));
+    const spoilerBlock = spoiler === "1";
+
+    const payload = buildDigestPayload({
+      todayRecap: recap.map((m) => ({
         match: m,
         home: teamById.get(m.homeTeamId),
         away: teamById.get(m.awayTeamId),
       })),
-      tomorrowJST,
-    );
+      tomorrowPreview: preview.map((m) => ({
+        match: m,
+        home: teamById.get(m.homeTeamId),
+        away: teamById.get(m.awayTeamId),
+      })),
+      forTomorrowJSTDate: tomorrowJST,
+      spoilerBlock,
+    });
     const r = await sendToSub(h, "digest", payload, now);
     if (r === "pushed") {
       sent += 1;
