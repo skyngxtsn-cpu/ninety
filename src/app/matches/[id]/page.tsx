@@ -20,6 +20,7 @@ import { TBDMatchHero } from "../../../components/TBDMatchHero";
 import { ReminderButton } from "../../../components/ReminderButton";
 import { BroadcastChipList } from "../../../components/BroadcastChip";
 import { SpoilerWrap } from "../../../components/SpoilerWrap";
+import { CommentSection } from "../../../components/CommentSection";
 import { CHANNELS, type BroadcastChannelId } from "../../../lib/data/broadcasts";
 
 export default async function MatchPage(props: PageProps<"/matches/[id]">) {
@@ -340,6 +341,12 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
           </>
         );
       })()}
+
+      <CommentSection
+        matchId={match.id}
+        status={match.status}
+        defaultFlag={home.flag}
+      />
 
       <div className="h-12" />
     </>
