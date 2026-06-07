@@ -34,7 +34,7 @@ export default async function RemindersPage() {
 
   return (
     <>
-      <AppHeader title="リマインダー" subtitle="ベルでマークした試合" back="/" />
+      <AppHeader title="お気に入り" subtitle="観たい試合の一覧" back="/" />
       <NotificationCard />
       <RemindersListClient matches={snapshots} />
     </>

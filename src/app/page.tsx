@@ -29,20 +29,15 @@ export default async function HomePage() {
         rightSlot={
           <Link
             href="/reminders"
-            aria-label="リマインダー"
-            className="w-9 h-9 rounded-full bg-white/5 border border-white/8 flex items-center justify-center text-white/85 hover:bg-white/10 transition"
+            aria-label="お気に入り"
+            className="w-9 h-9 rounded-full bg-white/5 border border-white/8 flex items-center justify-center text-[var(--accent-2)] hover:bg-white/10 transition"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path
-                d="M6 9a6 6 0 1 1 12 0c0 4 2 5 2 7H4c0-2 2-3 2-7Z"
+                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
                 stroke="currentColor"
                 strokeWidth="1.6"
                 strokeLinejoin="round"
-              />
-              <path
-                d="M10 19a2 2 0 0 0 4 0"
-                stroke="currentColor"
-                strokeWidth="1.6"
               />
             </svg>
           </Link>

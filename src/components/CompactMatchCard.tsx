@@ -12,6 +12,7 @@ import { CompactMatchCardClient } from "./CompactMatchCardClient";
 import { BroadcastIcons } from "./BroadcastChip";
 import { SpoilerWrap } from "./SpoilerWrap";
 import { CommentBadge } from "./CommentBadge";
+import { HotMatchBadge } from "./HotMatchBadge";
 
 type Props = {
   match: Match;
@@ -66,6 +67,7 @@ export async function CompactMatchCard({ match, favoriteTeamIds }: Props) {
               {timeLabel}
             </span>
           )}
+          <HotMatchBadge matchId={match.id} threshold={10} />
         </div>
 
         {/* 中央: チーム一覧 */}
@@ -119,17 +121,16 @@ export async function CompactMatchCard({ match, favoriteTeamIds }: Props) {
         </div>
       </div>
 
-      {/* 下部: ステージ＋放送局アイコン＋会場/コメント */}
-      <div className="mt-2 flex items-center justify-between gap-2 text-[10px] text-white/45">
-        <span className="truncate shrink-0">{match.stage}</span>
+      {/* 下部: 📍会場 / 放送局アイコン / 💬コメント */}
+      <div className="mt-2 flex items-center gap-2 text-[10px] text-white/45">
+        <span className="truncate shrink min-w-0">📍 {match.venue}</span>
         {match.broadcasts.length > 0 && (
           <div className="shrink-0">
             <BroadcastIcons ids={match.broadcasts} size="xs" />
           </div>
         )}
-        <span className="ml-auto flex items-center gap-2 min-w-0">
+        <span className="ml-auto shrink-0">
           <CommentBadge matchId={match.id} variant="inline" threshold={3} />
-          <span className="truncate">📍 {match.venue}</span>
         </span>
       </div>
     </>

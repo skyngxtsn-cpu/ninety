@@ -80,7 +80,7 @@ export function NotificationCard() {
       <section className="mx-4 mt-4 glass rounded-2xl p-4">
         <h2 className="text-[14px] font-bold mb-1">🔔 通知</h2>
         <p className="text-[12px] text-white/65 mb-3 leading-relaxed">
-          推しチーム・ベルマーク試合の通知が iPhone に届きます。
+          推しチーム・お気に入り試合の通知が iPhone に届きます。
           詳しい通知タイミングはONにした後で調整できます。
         </p>
         <button
@@ -139,7 +139,7 @@ export function NotificationCard() {
         <div className="flex-1">
           <p className="text-[14px] font-bold text-white">通知 ON</p>
           <p className="text-[11px] text-white/65 mt-0.5">
-            推しチーム・ベルマーク試合の通知が届きます
+            推しチーム・お気に入り試合の通知が届きます
           </p>
         </div>
         <button

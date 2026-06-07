@@ -11,8 +11,8 @@ type Props = {
 
 /**
  * CompactMatchCard をリンクでラップしつつ、
- * リマインド状態をクライアント側で読んで青リングを当てる。
- * 推しチーム参戦時は金リング優先（リマインドでも金）。
+ * 「お気に入り（観たい）」状態をクライアント側で読んでリングを当てる。
+ * 推しチーム参戦・お気に入りどちらもゴールド系で統一する。
  */
 export function CompactMatchCardClient({
   matchId,
@@ -20,12 +20,12 @@ export function CompactMatchCardClient({
   children,
 }: Props) {
   const { isReminded, hydrated } = useReminderMatches();
-  const reminded = hydrated && isReminded(matchId);
+  const favorited = hydrated && isReminded(matchId);
 
   const className = involvesFavorite
-    ? "border-[var(--accent-2)]/50 bg-[var(--accent-2)]/[0.04] hover:bg-[var(--accent-2)]/[0.08]"
-    : reminded
-      ? "border-sky-400/50 bg-sky-500/[0.06] hover:bg-sky-500/[0.10]"
+    ? "border-[var(--accent-2)]/55 bg-[var(--accent-2)]/[0.06] hover:bg-[var(--accent-2)]/[0.10]"
+    : favorited
+      ? "border-[var(--accent-2)]/45 bg-[var(--accent-2)]/[0.035] hover:bg-[var(--accent-2)]/[0.07]"
       : "border-white/8 bg-white/[0.03] hover:bg-white/[0.06]";
 
   return (

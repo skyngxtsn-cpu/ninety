@@ -35,17 +35,17 @@ export function RemindersListClient({ matches }: Props) {
   if (list.length === 0) {
     return (
       <div className="mx-4 mt-6 glass rounded-2xl p-6 text-center">
-        <p className="text-[36px] mb-2">🔔</p>
+        <p className="text-[36px] mb-2">⭐</p>
         <p className="text-[14px] font-semibold mb-1">
-          リマインドした試合はまだありません
+          お気に入りに入れた試合はまだありません
         </p>
         <p className="text-[12px] text-white/55 leading-relaxed mb-4">
-          試合カードの🔔ボタンを押すと、ここに集まります。
-          推しチームと別に、観たい試合を覚えておけます。
+          試合カードの⭐ボタンを押すと、ここに集まります。
+          推しチームと別に、観たい試合をピン留めできます。
         </p>
         <Link
           href="/"
-          className="inline-block px-5 py-2 rounded-full bg-gradient-to-br from-[#3b82f6] to-[#60a5fa] text-[13px] font-semibold"
+          className="inline-block px-5 py-2 rounded-full bg-gradient-to-br from-[#ff3b30] to-[#ffb020] text-[13px] font-semibold text-white"
         >
           試合を探す
         </Link>
@@ -92,7 +92,7 @@ function ReminderRow({
   onToggle: () => void;
 }) {
   return (
-    <div className="glass rounded-2xl p-3 ring-1 ring-blue-400/30 flex items-center gap-3">
+    <div className="glass rounded-2xl p-3 ring-1 ring-[var(--accent-2)]/35 flex items-center gap-3">
       <Link
         href={`/matches/${match.id}`}
         className="flex-1 min-w-0 flex items-center gap-3"
@@ -116,22 +116,17 @@ function ReminderRow({
       </Link>
       <button
         onClick={onToggle}
-        aria-label="リマインダー解除"
-        className="w-9 h-9 rounded-full bg-blue-400/15 border border-blue-400/40 text-blue-300 flex items-center justify-center shrink-0 hover:bg-blue-400/25 transition"
+        aria-label="お気に入りから外す"
+        className="w-9 h-9 rounded-full bg-[var(--accent-2)]/18 border border-[var(--accent-2)]/45 text-[var(--accent-2)] flex items-center justify-center shrink-0 hover:bg-[var(--accent-2)]/30 transition"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
           <path
-            d="M6 9a6 6 0 1 1 12 0c0 4 2 5 2 7H4c0-2 2-3 2-7Z"
+            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
             stroke="currentColor"
             strokeWidth="1.6"
             fill="currentColor"
             fillOpacity="0.3"
             strokeLinejoin="round"
-          />
-          <path
-            d="M10 19a2 2 0 0 0 4 0"
-            stroke="currentColor"
-            strokeWidth="1.6"
           />
         </svg>
       </button>

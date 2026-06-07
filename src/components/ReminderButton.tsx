@@ -8,20 +8,21 @@ type Props = {
 };
 
 /**
- * ベルアイコンの「リマインド・保存」トグル。
- * 試合カード（小サイズ）と試合詳細ページ（中サイズ）で共用。
+ * 「お気に入り（観たい）」⭐ トグル。
+ * 旧称 ReminderButton。互換のため名前は維持しているが、メタファーは星。
+ * 押すと localStorage に保存 + サーバーに匿名集計を送る。
  */
 export function ReminderButton({ matchId, size = "md" }: Props) {
   const { isReminded, toggle, hydrated } = useReminderMatches();
   const active = isReminded(matchId);
   const dim =
     size === "sm" ? "w-7 h-7" : size === "lg" ? "w-10 h-10" : "w-8 h-8";
-  const iconSize = size === "sm" ? 13 : size === "lg" ? 20 : 16;
+  const iconSize = size === "sm" ? 14 : size === "lg" ? 22 : 17;
 
   return (
     <button
       type="button"
-      aria-label={active ? "リマインドを解除" : "リマインドに追加"}
+      aria-label={active ? "お気に入りから外す" : "お気に入りに追加"}
       aria-pressed={active}
       onClick={(e) => {
         e.preventDefault();
@@ -30,7 +31,7 @@ export function ReminderButton({ matchId, size = "md" }: Props) {
       }}
       className={`${dim} flex items-center justify-center rounded-full bg-black/45 backdrop-blur-md border transition active:scale-90 ${
         hydrated && active
-          ? "border-sky-400/60 bg-sky-500/25"
+          ? "border-[var(--accent-2)]/70 bg-[var(--accent-2)]/25"
           : "border-white/15 hover:bg-black/60"
       }`}
     >
@@ -38,8 +39,8 @@ export function ReminderButton({ matchId, size = "md" }: Props) {
         width={iconSize}
         height={iconSize}
         viewBox="0 0 24 24"
-        fill={hydrated && active ? "#7dd3fc" : "none"}
-        stroke={hydrated && active ? "#7dd3fc" : "#ffffff"}
+        fill={hydrated && active ? "var(--accent-2)" : "none"}
+        stroke={hydrated && active ? "var(--accent-2)" : "#ffffff"}
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -49,8 +50,7 @@ export function ReminderButton({ matchId, size = "md" }: Props) {
           transform: hydrated && active ? "scale(1.05)" : "scale(1)",
         }}
       >
-        <path d="M6 9a6 6 0 1 1 12 0c0 4 2 5 2 7H4c0-2 2-3 2-7Z" />
-        <path d="M10 19a2 2 0 0 0 4 0" />
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
       </svg>
     </button>
   );
