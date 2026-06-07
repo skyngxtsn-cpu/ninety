@@ -74,9 +74,9 @@ export function buildPayload(
       title = "🏆 トーナメント：次の相手が決まりました";
       body = "推しチームの次戦カードが確定しました";
       break;
-    case "morning":
-      // morning はサマリで複数試合なので呼び出し側で組み立て
-      title = "☀️ おはよう。今日の試合";
+    case "digest":
+      // digest はサマリで複数試合なので呼び出し側で組み立て
+      title = "🌙 1日お疲れさま。明日の試合";
       body = matchup;
       break;
   }
@@ -118,8 +118,9 @@ export function buildResultPayload(
   };
 }
 
-export function buildMorningPayload(
+export function buildDigestPayload(
   matches: Array<{ match: Match; home?: Team; away?: Team }>,
+  forJSTDate: string,
 ): NotificationPayload {
   const lines = matches.slice(0, 5).map(({ match, home, away }) => {
     const flag = (t: Team | undefined): string => t?.flag ?? "";
@@ -128,12 +129,13 @@ export function buildMorningPayload(
     return `${timeJST(match.kickoffJST)} ${flag(home)}${hn} × ${an}${flag(away)}`;
   });
   const extra = matches.length > 5 ? `\n…他 ${matches.length - 5}試合` : "";
+  const dayLabel = forJSTDate.slice(5).replace("-", "/"); // "06-13" → "06/13"
   return {
-    title: `☀️ 今日 推しチームの試合 ${matches.length}件`,
+    title: `🌙 明日 ${dayLabel} 推しチーム ${matches.length}試合`,
     body: lines.join("\n") + extra,
     url: "/",
-    matchId: "morning",
-    tag: `morning-${new Date().toISOString().slice(0, 10)}`,
-    type: "morning",
+    matchId: "digest",
+    tag: `digest-${forJSTDate}`,
+    type: "digest",
   };
 }

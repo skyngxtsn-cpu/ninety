@@ -14,7 +14,7 @@ import { isInQuietHours } from "../../../../lib/push/quiet-hours";
 import {
   buildPayload,
   buildResultPayload,
-  buildMorningPayload,
+  buildDigestPayload,
   type NotificationPayload,
 } from "../../../../lib/push/payload";
 import { getAllMatches, getAllTeams } from "../../../../lib/data";
@@ -65,8 +65,8 @@ export async function POST(req: Request) {
     results[type] = await processOffsetType(type, matches, teamById, now);
   }
 
-  // 2. 朝のダイジェスト（JST 8:00 ±2.5分）
-  results["morning"] = await processMorning(matches, teamById, now);
+  // 2. 1日の終わりダイジェスト：今日の最終試合終了から30分後 ±2.5分
+  results["digest"] = await processDigest(matches, teamById, now);
 
   return NextResponse.json({
     ok: true,
@@ -145,37 +145,59 @@ async function processOffsetType(
   return { candidates: filtered.length, pushed, failed, skipped };
 }
 
-/** 朝 8:00 (JST) ±2.5分に、各購読者の推しチームの今日の試合をまとめて送る */
-async function processMorning(
+/**
+ * 1日の最終試合終了 + 30分後 ±2.5分 に、各購読者の推しチームの
+ * 「明日の試合」をまとめてプレビュー送信する。
+ *
+ * - 「今日」と「明日」は JST 基準。
+ * - 最終キックオフ + 110分（標準試合長）+ 30分 = 最後の試合終了から30分後を発火時刻とする。
+ * - その時刻が来たら、各購読者の推しチームが明日プレイする試合をまとめて送信。
+ * - 明日試合が無い人にはスキップ。
+ */
+async function processDigest(
   matches: Match[],
   teamById: Map<string, Team>,
   now: Date,
-): Promise<{ runs: boolean; sent: number }> {
-  // JST の時:分
-  const jstMin = (now.getUTCHours() * 60 + now.getUTCMinutes() + 9 * 60) % (24 * 60);
-  const targetMin = 8 * 60;
-  if (Math.abs(jstMin - targetMin) > TICK_WINDOW_MINUTES) {
-    return { runs: false, sent: 0 };
-  }
-
-  // JST の本日の年月日（YYYY-MM-DD）
+): Promise<{ runs: boolean; sent: number; reason?: string }> {
+  // JST の本日（now の現在 JST 年月日）
   const jstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
-  const jstDate = jstNow.toISOString().slice(0, 10);
+  const todayJST = jstNow.toISOString().slice(0, 10);
 
-  // 本日キックオフがある試合
+  // 今日キックオフがある試合
   const todays = matches.filter((m) => {
     const k = new Date(m.kickoffJST);
     const jk = new Date(k.getTime() + 9 * 60 * 60 * 1000);
-    return jk.toISOString().slice(0, 10) === jstDate;
+    return jk.toISOString().slice(0, 10) === todayJST;
   });
 
-  // 各購読者の推しチーム一覧を取得し、今日その試合があれば送る
-  // 全 sub のリストを取る→大規模化したら index を追加すべきだが現状の規模では問題なし
-  // 簡略化: 全ての fav:{teamId}:subs から各 sub の hash を集めて、その sub の推しチーム一覧を取り、今日試合があるかで判定
-  // ここでは、今日試合がある推しチーム集合を作って、それらの sub をユニオン
+  if (todays.length === 0) {
+    return { runs: false, sent: 0, reason: "no matches today" };
+  }
 
+  // 今日の最終キックオフ時刻 + 110min(試合終了) + 30min(余裕) = 発火時刻
+  const lastKickoff = Math.max(
+    ...todays.map((m) => new Date(m.kickoffJST).getTime()),
+  );
+  const triggerMs = lastKickoff + 110 * 60 * 1000 + 30 * 60 * 1000;
+  const windowMs = TICK_WINDOW_MINUTES * 60 * 1000;
+  const diff = triggerMs - now.getTime();
+  if (Math.abs(diff) > windowMs) {
+    return { runs: false, sent: 0, reason: "not yet (or already past window)" };
+  }
+
+  // 明日 JST の年月日
+  const tomorrowJST = new Date(jstNow.getTime() + 24 * 60 * 60 * 1000)
+    .toISOString()
+    .slice(0, 10);
+  const tomorrows = matches.filter((m) => {
+    const k = new Date(m.kickoffJST);
+    const jk = new Date(k.getTime() + 9 * 60 * 60 * 1000);
+    return jk.toISOString().slice(0, 10) === tomorrowJST;
+  });
+
+  // 明日試合をしうる全チームの fav 購読者を集める
   const favHashesByTeam = new Map<string, string[]>();
-  for (const t of todays) {
+  for (const t of tomorrows) {
     for (const teamId of [t.homeTeamId, t.awayTeamId]) {
       if (!favHashesByTeam.has(teamId)) {
         const arr = (await redis.smembers<string[]>(K.favSubs(teamId))) ?? [];
@@ -183,7 +205,6 @@ async function processMorning(
       }
     }
   }
-  // 候補 sub hash 集合
   const allHashes = new Set<string>();
   for (const arr of favHashesByTeam.values()) {
     for (const h of arr) allHashes.add(h);
@@ -191,27 +212,26 @@ async function processMorning(
 
   let sent = 0;
   for (const h of allHashes) {
-    // 重複送信防止
-    const firedKey = K.morningFired(jstDate, h);
+    const firedKey = K.morningFired(todayJST, h); // key名は流用（YYYY-MM-DD単位の重複防止）
     const already = await redis.get(firedKey);
     if (already) continue;
 
-    // この sub の推しチーム一覧
     const favs = (await redis.smembers<string[]>(K.subFavs(h))) ?? [];
     const favSet = new Set(favs);
-    const myTodays = todays.filter(
+    const myTomorrows = tomorrows.filter(
       (m) => favSet.has(m.homeTeamId) || favSet.has(m.awayTeamId),
     );
-    if (myTodays.length === 0) continue;
+    if (myTomorrows.length === 0) continue;
 
-    const payload = buildMorningPayload(
-      myTodays.map((m) => ({
+    const payload = buildDigestPayload(
+      myTomorrows.map((m) => ({
         match: m,
         home: teamById.get(m.homeTeamId),
         away: teamById.get(m.awayTeamId),
       })),
+      tomorrowJST,
     );
-    const r = await sendToSub(h, "morning", payload, now);
+    const r = await sendToSub(h, "digest", payload, now);
     if (r === "pushed") {
       sent += 1;
       await redis.set(firedKey, "1", { ex: 25 * 60 * 60 });

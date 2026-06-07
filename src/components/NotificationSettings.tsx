@@ -47,10 +47,10 @@ export function NotificationSettings() {
         onToggle={toggle("live")}
       />
       <ToggleRow
-        label="朝のダイジェスト"
-        hint="毎朝 8:00 に推しチームの今日の試合まとめ"
-        checked={prefs.morning}
-        onToggle={toggle("morning")}
+        label="1日の終わりダイジェスト"
+        hint="その日の最終試合終了後に、推しチームの「明日の試合」をまとめてお知らせ"
+        checked={prefs.digest}
+        onToggle={toggle("digest")}
       />
       <ToggleRow
         label="トーナメント進出通知"

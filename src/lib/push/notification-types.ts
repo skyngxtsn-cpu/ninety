@@ -11,13 +11,13 @@ export type NotificationType =
   | "fulltime"
   | "result"
   | "tournament"
-  | "morning";
+  | "digest"; // 1日の全試合終了後 → 明日の推し試合プレビュー
 
 export type NotificationGroup =
   | "pre"
   | "live"
   | "result"
-  | "morning"
+  | "digest"
   | "tournament";
 
 export const TYPE_TO_GROUP: Record<NotificationType, NotificationGroup> = {
@@ -29,7 +29,7 @@ export const TYPE_TO_GROUP: Record<NotificationType, NotificationGroup> = {
   fulltime: "live",
   result: "result",
   tournament: "tournament",
-  morning: "morning",
+  digest: "digest",
 };
 
 /**
@@ -45,7 +45,7 @@ export const OFFSET_MINUTES: Record<NotificationType, number | null> = {
   fulltime: 110, // 90 + ロスタイム + 後半開始までの間
   result: 115,
   tournament: null,
-  morning: null,
+  digest: null,
 };
 
 /**
@@ -59,8 +59,8 @@ export type NotificationPreferences = {
   pre: boolean;
   /** 試合中通知 (kickoff / halftime / fulltime — スコア無し) */
   live: boolean;
-  /** 朝 8 時のダイジェスト */
-  morning: boolean;
+  /** 1日の全試合終了後の「明日のプレビュー」ダイジェスト */
+  digest: boolean;
   /** トーナメント進出通知 */
   tournament: boolean;
   /**
@@ -75,7 +75,7 @@ export type NotificationPreferences = {
 export const DEFAULT_PREFERENCES: NotificationPreferences = {
   pre: true,
   live: true,
-  morning: true,
+  digest: true,
   tournament: true,
   result: false,
   quiet: null,
