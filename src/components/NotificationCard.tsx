@@ -10,6 +10,7 @@ import { useFavoriteTeams } from "../lib/useFavoriteTeams";
 import {
   useNotificationPreferences,
   useSpoilerBlock,
+  useDeveloperMode,
 } from "../lib/preferences";
 import type { NotificationPreferences } from "../lib/push/notification-types";
 
@@ -24,6 +25,7 @@ export function NotificationCard() {
   const { teams: favoriteTeamIds } = useFavoriteTeams();
   const { prefs, setPrefs, hydrated: prefsHydrated } = useNotificationPreferences();
   const { blocked: spoilerBlock } = useSpoilerBlock();
+  const { on: devMode } = useDeveloperMode();
   const [busy, setBusy] = useState(false);
 
   const payload: SyncPayload = useMemo(
@@ -173,24 +175,26 @@ export function NotificationCard() {
         </button>
       </div>
 
-      <details className="rounded-lg bg-white/[0.04] border border-white/8">
-        <summary className="cursor-pointer px-3 py-2 text-[12px] font-medium text-white/85 hover:bg-white/[0.06] select-none rounded-lg">
-          📨 テスト通知を送る
-        </summary>
-        <div className="px-3 pb-3 pt-1 grid grid-cols-2 gap-1.5">
-          {testTypes.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => sendTest(t.id)}
-              disabled={busy}
-              className="px-2 py-1.5 rounded-md bg-white/[0.05] hover:bg-white/[0.1] text-[11px] text-left text-white/85 disabled:opacity-40 truncate"
-              title={t.label}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-      </details>
+      {devMode && (
+        <details className="rounded-lg bg-amber-500/8 border border-amber-400/30">
+          <summary className="cursor-pointer px-3 py-2 text-[12px] font-medium text-amber-100 hover:bg-amber-500/12 select-none rounded-lg">
+            🛠 [開発者] テスト通知を送る
+          </summary>
+          <div className="px-3 pb-3 pt-1 grid grid-cols-2 gap-1.5">
+            {testTypes.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => sendTest(t.id)}
+                disabled={busy}
+                className="px-2 py-1.5 rounded-md bg-white/[0.05] hover:bg-white/[0.1] text-[11px] text-left text-white/85 disabled:opacity-40 truncate"
+                title={t.label}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </details>
+      )}
 
       <div className="border-t border-white/10 pt-3 space-y-3">
         <p className="text-[10px] uppercase tracking-wider text-white/45">

@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { SectionHeader } from "../../components/SectionHeader";
 import { FavoriteTeamPicker } from "../../components/FavoriteTeamPicker";
+import { useDeveloperMode } from "../../lib/preferences";
 
 type TeamMini = {
   id: string;
@@ -27,6 +29,25 @@ export function SettingsClient({ allTeams }: { allTeams: TeamMini[] }) {
 
 // 「その他」セクションは設定ページ末尾に別表示
 export function OtherSettings() {
+  const { on: devMode, setOn: setDevMode } = useDeveloperMode();
+  const [versionTaps, setVersionTaps] = useState(0);
+  const [tapToast, setTapToast] = useState<string | null>(null);
+
+  const onVersionTap = () => {
+    if (devMode) return; // 既に ON なら何もしない
+    const next = versionTaps + 1;
+    setVersionTaps(next);
+    if (next >= 5) {
+      setDevMode(true);
+      setVersionTaps(0);
+      setTapToast("🛠 開発者モード ON");
+      setTimeout(() => setTapToast(null), 2000);
+    } else if (next >= 3) {
+      setTapToast(`あと ${5 - next} 回...`);
+      setTimeout(() => setTapToast(null), 1500);
+    }
+  };
+
   return (
     <>
       <SectionHeader kicker="App" title="その他" />
@@ -43,7 +64,29 @@ export function OtherSettings() {
         <div className="border-t border-white/8" />
         <Row label="言語" value="日本語" />
         <div className="border-t border-white/8" />
-        <Row label="バージョン" value="0.1.0 (MVP)" />
+        <button
+          onClick={onVersionTap}
+          className="w-full flex items-center justify-between px-4 py-3.5 text-left hover:bg-white/[0.02] transition"
+        >
+          <span className="text-[14px]">バージョン</span>
+          <span className="text-[12px] text-white/60">0.1.0 (MVP)</span>
+        </button>
+        {devMode && (
+          <>
+            <div className="border-t border-white/8" />
+            <div className="flex items-center justify-between px-4 py-3.5 bg-amber-500/8">
+              <span className="text-[14px] text-amber-100">
+                🛠 開発者モード
+              </span>
+              <button
+                onClick={() => setDevMode(false)}
+                className="px-3 py-1 rounded-md bg-amber-500/20 text-[11px] font-semibold text-amber-100 hover:bg-amber-500/30"
+              >
+                OFF にする
+              </button>
+            </div>
+          </>
+        )}
         <div className="border-t border-white/8" />
         <button
           onClick={() => {
@@ -56,6 +99,7 @@ export function OtherSettings() {
               localStorage.removeItem("ninety.spoilerBlock");
               localStorage.removeItem("ninety.onboardingDone");
               localStorage.removeItem("ninety.reminderMatches");
+              localStorage.removeItem("ninety.developerMode");
               document.cookie = "ninety_fav=; path=/; max-age=0";
               location.reload();
             }
@@ -65,6 +109,12 @@ export function OtherSettings() {
           設定をリセット
         </button>
       </div>
+
+      {tapToast && (
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-black/85 text-white px-4 py-2.5 rounded-xl border border-white/15 text-[13px] font-medium backdrop-blur-md shadow-2xl pointer-events-none">
+          {tapToast}
+        </div>
+      )}
 
       <p className="text-center text-[10px] text-white/30 mt-8 pb-4">
         90 · W杯の意味を、90秒で。
