@@ -7,7 +7,16 @@
  */
 import type { Player, PlayerId, TeamId } from "../types";
 import squadsRaw from "./squads.json";
+import enrichedRaw from "./enriched-players.json";
 import { countryJa } from "./i18n";
+
+type EnrichedEntry = {
+  tagline?: string;
+  story?: string[];
+  strengths?: { label: string; rating: number }[];
+  whyWatch?: string;
+};
+const enriched = enrichedRaw as Record<string, EnrichedEntry>;
 
 type RawPlayer = {
   no: string;
@@ -139,6 +148,7 @@ export function autoPlayersFromSquads(): Player[] {
                   ? "最終ライン"
                   : "中盤の主役";
       const num = parseInt(p.no, 10) || 0;
+      const enrichedEntry = enriched[id];
       out.push({
         id,
         name: p.name,
@@ -148,12 +158,17 @@ export function autoPlayersFromSquads(): Player[] {
         club,
         position: POS_JA[p.pos] as Player["position"] ?? "MF",
         number: num,
-        story: [
-          `${countryName}代表の${posLabel(p.pos)}、${p.name}。`,
-          `所属は${club}。${p.captain ? "チームを率いるキャプテン。" : ""}`,
-          `2026 W杯本選メンバー、${countryName}の主力の一人。`,
-        ],
-        tagline,
+        story:
+          enrichedEntry?.story && enrichedEntry.story.length >= 3
+            ? (enrichedEntry.story.slice(0, 3) as [string, string, string])
+            : [
+                `${countryName}代表の${posLabel(p.pos)}、${p.name}。`,
+                `所属は${club}。${p.captain ? "チームを率いるキャプテン。" : ""}`,
+                `2026 W杯本選メンバー、${countryName}の主力の一人。`,
+              ],
+        tagline: enrichedEntry?.tagline ?? tagline,
+        strengths: enrichedEntry?.strengths,
+        whyWatch: enrichedEntry?.whyWatch,
         photoUrl: p.photo ?? undefined,
       });
     }
