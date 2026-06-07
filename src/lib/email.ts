@@ -30,6 +30,9 @@ export async function sendMail({
   const apiKey = process.env.RESEND_API_KEY;
   const dest = to ?? process.env.FEEDBACK_EMAIL_TO;
   if (!apiKey || !dest) {
+    console.warn(
+      `[sendMail] skipped (env missing): apiKey=${!!apiKey}, to=${!!dest}`,
+    );
     return { ok: true, skipped: true };
   }
 
@@ -49,14 +52,18 @@ export async function sendMail({
     });
     if (!res.ok) {
       const body = await res.text().catch(() => "");
-      return {
-        ok: false,
-        error: `resend ${res.status}: ${body.slice(0, 200)}`,
-      };
+      const errMsg = `resend ${res.status}: ${body.slice(0, 500)}`;
+      console.error(`[sendMail] failed: ${errMsg}`);
+      return { ok: false, error: errMsg };
     }
+    const okBody = await res.json().catch(() => ({}));
+    console.log(
+      `[sendMail] sent: subject="${subject}" id=${(okBody as { id?: string }).id ?? "?"}`,
+    );
     return { ok: true };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
+    console.error(`[sendMail] threw: ${msg}`);
     return { ok: false, error: msg };
   }
 }
