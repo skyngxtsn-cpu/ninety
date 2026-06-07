@@ -41,15 +41,15 @@ function toneFor(variant: Props["variant"], isConfirmed: boolean): string {
   return "bg-white/8 text-white/65";
 }
 
-function surnameForDisplay(name: string): string {
-  // 日本語名は「姓 名」の語順なので、最初のトークン（=苗字）を返す
-  if (/[぀-ヿ一-鿿]/.test(name)) {
-    const parts = name.split(/\s+/);
-    return parts[0] || name;
-  }
-  // 英語名: イニシャル+苗字 or 名+苗字 → 最終トークン
-  const parts = name.split(/\s+/);
-  return parts.length >= 2 ? parts[parts.length - 1] : name;
+function displayName(name: string): string {
+  // フルネームをそのまま返す。長い場合は2行に自動折り返し（CSS 側）
+  return name.trim();
+}
+
+function initialChar(name: string): string {
+  const t = name.trim();
+  // 日本語ならそのまま1文字、英字なら大文字
+  return t.slice(0, 1).toUpperCase();
 }
 
 function darken(hex: string, amount: number): string {
@@ -194,15 +194,20 @@ export function Pitch({
           const bottom = `${slot.y}%`;
           const player = slot.playerId ? getPlayer(slot.playerId) : undefined;
           const photo = player?.photoUrl;
-          const initial = surnameForDisplay(slot.name).slice(0, 1);
+          const initial = initialChar(slot.name);
 
           const dot = (
             <div className="flex flex-col items-center pointer-events-auto">
+              {/* 写真コンテナ。iOS Safari で transform + border-radius のクリップが
+                  甘いため、clip-path: circle() で確実に円形にクリップする。
+                  さらに isolation で transform 由来のはみ出しを防ぐ */}
               <div
-                className="relative w-12 h-12 rounded-full overflow-hidden border-2 shadow-[0_4px_10px_-2px_rgba(0,0,0,0.5)]"
+                className="relative w-12 h-12 rounded-full border-2 shadow-[0_4px_10px_-2px_rgba(0,0,0,0.5)]"
                 style={{
                   background: `linear-gradient(160deg, ${secondary} 0%, ${primary} 100%)`,
                   borderColor: "rgba(255,255,255,0.65)",
+                  clipPath: "circle(50% at 50% 50%)",
+                  isolation: "isolate",
                 }}
               >
                 {photo ? (
@@ -212,22 +217,23 @@ export function Pitch({
                     width={96}
                     height={96}
                     unoptimized
-                    className="absolute inset-0 w-full h-full object-cover object-top scale-[1.05]"
+                    className="absolute inset-0 w-full h-full object-cover object-top"
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center text-[14px] font-bold text-white">
                     {initial}
                   </div>
                 )}
-                <span className="absolute -bottom-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-black/85 border border-white/40 flex items-center justify-center text-[9px] font-bold text-white tabular-nums">
-                  {slot.number}
-                </span>
               </div>
-              <div className="mt-1 text-center whitespace-nowrap">
-                <p className="text-[10.5px] font-semibold text-white leading-tight px-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.95)]">
-                  {surnameForDisplay(slot.name)}
+              {/* 番号バッジは clip-path 外に置く（円から少し顔を出すデザイン保持） */}
+              <span className="-mt-3.5 ml-7 min-w-[18px] h-[18px] px-1 rounded-full bg-black/85 border border-white/40 flex items-center justify-center text-[9px] font-bold text-white tabular-nums">
+                {slot.number}
+              </span>
+              <div className="mt-0.5 text-center max-w-[68px]">
+                <p className="text-[10px] font-semibold text-white leading-tight px-0.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.95)] break-words">
+                  {displayName(slot.name)}
                 </p>
-                <p className="text-[8.5px] text-white/70 leading-tight">
+                <p className="text-[8.5px] text-white/70 leading-tight whitespace-nowrap">
                   {slot.role}
                 </p>
               </div>
