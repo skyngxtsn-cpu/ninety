@@ -98,6 +98,21 @@ export default async function HomePage() {
         </>
       )}
 
+      {/* フィードバック誘導 */}
+      <div className="mx-4 mt-8 mb-4">
+        <Link
+          href="/feedback"
+          className="block text-center py-3 rounded-2xl glass border border-white/8 hover:bg-white/[0.04] transition"
+        >
+          <p className="text-[13px] font-semibold text-white">
+            💬 こんな機能が欲しい・バグ見つけた
+          </p>
+          <p className="text-[10.5px] text-white/55 mt-0.5">
+            一言から大歓迎。開発者に直接届きます
+          </p>
+        </Link>
+      </div>
+
       <div className="h-12" />
     </>
   );

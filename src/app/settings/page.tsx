@@ -3,6 +3,7 @@ import { getAllTeams } from "../../lib/data/teams";
 import { SettingsClient, OtherSettings } from "./SettingsClient";
 import { SpoilerToggle } from "../../components/SpoilerToggle";
 import { NotificationCard } from "../../components/NotificationCard";
+import { PwaInstallGuide } from "../../components/PwaInstallGuide";
 
 export default async function SettingsPage() {
   const teams = await getAllTeams();
@@ -33,6 +34,7 @@ export default async function SettingsPage() {
 
       <SpoilerToggle />
       <NotificationCard />
+      <PwaInstallGuide />
 
       <OtherSettings />
     </>
