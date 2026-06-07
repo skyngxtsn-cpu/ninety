@@ -19,6 +19,7 @@ import { Pitch } from "../../../components/Pitch";
 import { TBDMatchHero } from "../../../components/TBDMatchHero";
 import { ReminderButton } from "../../../components/ReminderButton";
 import { BroadcastChipList } from "../../../components/BroadcastChip";
+import { SpoilerWrap } from "../../../components/SpoilerWrap";
 import { CHANNELS, type BroadcastChannelId } from "../../../lib/data/broadcasts";
 
 export default async function MatchPage(props: PageProps<"/matches/[id]">) {
@@ -70,11 +71,13 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
               {finished && match.result ? (
                 <div>
                   <div className="text-[12px] text-white/70 mb-1">終了</div>
-                  <div className="text-[40px] font-bold tabular-nums leading-none">
-                    {match.result.home}
-                    <span className="mx-2 text-white/40">-</span>
-                    {match.result.away}
-                  </div>
+                  <SpoilerWrap size="lg">
+                    <div className="text-[40px] font-bold tabular-nums leading-none">
+                      {match.result.home}
+                      <span className="mx-2 text-white/40">-</span>
+                      {match.result.away}
+                    </div>
+                  </SpoilerWrap>
                 </div>
               ) : (
                 <>

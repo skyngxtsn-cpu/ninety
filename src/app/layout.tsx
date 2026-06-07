@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "../components/BottomNav";
 import { ServiceWorkerRegistrar } from "../components/ServiceWorkerRegistrar";
+import { SpoilerOnboarding } from "../components/SpoilerOnboarding";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default function RootLayout({
         </div>
         <BottomNav />
         <ServiceWorkerRegistrar />
+        <SpoilerOnboarding />
       </body>
     </html>
   );

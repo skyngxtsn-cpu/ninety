@@ -3,6 +3,7 @@ import { BracketSlotRow } from "./BracketSlotRow";
 import type { BracketMatch } from "../lib/data/bracket";
 import type { Team } from "../lib/types";
 import { formatKickoffJST } from "../lib/data/matches";
+import { SpoilerWrap } from "./SpoilerWrap";
 
 type Props = {
   bm: BracketMatch;
@@ -45,11 +46,13 @@ export function BracketMatchCard({ bm, teams }: Props) {
         </div>
         {finishedResult && (
           <div className="shrink-0 text-center">
-            <div className="text-[20px] font-bold tabular-nums leading-none">
-              {bm.result!.home}
-              <span className="mx-1.5 text-white/40">-</span>
-              {bm.result!.away}
-            </div>
+            <SpoilerWrap size="md">
+              <div className="text-[20px] font-bold tabular-nums leading-none">
+                {bm.result!.home}
+                <span className="mx-1.5 text-white/40">-</span>
+                {bm.result!.away}
+              </div>
+            </SpoilerWrap>
             <div className="text-[9px] text-white/45 mt-1">終了</div>
           </div>
         )}

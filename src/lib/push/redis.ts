@@ -24,16 +24,26 @@ export const redis = makeRedis();
 
 /**
  * キー命名:
- *  - sub:{endpointHash}                → PushSubscription JSON
- *  - sub:{endpointHash}:matches        → SET<matchId> （この購読者がリマインド希望中の試合）
- *  - match:{matchId}:subs              → SET<endpointHash> （この試合をリマインド希望中の購読者）
- *  - match:{matchId}:fired             → "1" + TTL（重複送信防止、試合終了後に自動失効）
+ *  - sub:{h}                          → PushSubscription JSON
+ *  - sub:{h}:matches                  → SET<matchId> ベルマーク試合
+ *  - sub:{h}:favs                     → SET<teamId> 推しチーム
+ *  - sub:{h}:prefs                    → JSON NotificationPreferences
+ *  - sub:{h}:spoiler                  → "1" if spoilerBlock ON
+ *  - match:{m}:subs                   → SET<h> ベルマーク経由の購読者
+ *  - fav:{teamId}:subs                → SET<h> 推し経由の購読者
+ *  - match:{m}:fired:{type}           → "1" + TTL（重複送信防止）
+ *  - morning:{yyyy-mm-dd}:fired:{h}   → "1" + 25h TTL（朝ダイジェスト重複防止）
  */
 export const K = {
   sub: (h: string) => `sub:${h}`,
   subMatches: (h: string) => `sub:${h}:matches`,
+  subFavs: (h: string) => `sub:${h}:favs`,
+  subPrefs: (h: string) => `sub:${h}:prefs`,
+  subSpoiler: (h: string) => `sub:${h}:spoiler`,
   matchSubs: (m: string) => `match:${m}:subs`,
-  matchFired: (m: string) => `match:${m}:fired`,
+  favSubs: (teamId: string) => `fav:${teamId}:subs`,
+  matchFiredType: (m: string, t: string) => `match:${m}:fired:${t}`,
+  morningFired: (date: string, h: string) => `morning:${date}:fired:${h}`,
 };
 
 /** subscription endpoint URL から短いハッシュキーを作る */

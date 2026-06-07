@@ -1,12 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import type { NotificationPreferences } from "./push/notification-types";
 
 type State =
   | { status: "loading" }
   | { status: "unsupported" }
   | { status: "denied" }
-  | { status: "default" } // 未許可・購読なし
+  | { status: "default" }
   | { status: "subscribed"; subscription: PushSubscription };
 
 function urlBase64ToUint8Array(base64String: string): ArrayBuffer {
@@ -30,17 +31,17 @@ function subToStored(sub: PushSubscription) {
   };
 }
 
-/**
- * Web Push 購読の管理 + サーバーとの同期。
- *
- * - subscribe(matchIds): 通知許可を求めて購読、matchIds を初期同期
- * - sync(matchIds): 既に購読済みの場合、サーバー上の matchIds を最新化
- * - unsubscribe(): 購読解除
- */
+export type SyncPayload = {
+  matchIds: string[];
+  favoriteTeamIds: string[];
+  preferences: NotificationPreferences;
+  spoilerBlock: boolean;
+};
+
 export function usePushSubscription(): {
   state: State;
-  subscribe: (matchIds: string[]) => Promise<boolean>;
-  sync: (matchIds: string[]) => Promise<void>;
+  subscribe: (payload: SyncPayload) => Promise<boolean>;
+  sync: (payload: SyncPayload) => Promise<void>;
   unsubscribe: () => Promise<void>;
 } {
   const [state, setState] = useState<State>({ status: "loading" });
@@ -68,7 +69,7 @@ export function usePushSubscription(): {
     });
   }, []);
 
-  const subscribe = useCallback(async (matchIds: string[]): Promise<boolean> => {
+  const subscribe = useCallback(async (payload: SyncPayload): Promise<boolean> => {
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
       return false;
     }
@@ -77,19 +78,16 @@ export function usePushSubscription(): {
       setState({ status: perm === "denied" ? "denied" : "default" });
       return false;
     }
-    // SW 登録（既に登録済みなら使い回す）
     let reg = await navigator.serviceWorker.getRegistration();
     if (!reg) {
       reg = await navigator.serviceWorker.register("/sw.js");
     }
     await navigator.serviceWorker.ready;
 
-    // VAPID 公開鍵を取得
     const keyRes = await fetch("/api/push/vapid-key");
     if (!keyRes.ok) return false;
     const { publicKey } = (await keyRes.json()) as { publicKey: string };
 
-    // 購読
     const existing = await reg.pushManager.getSubscription();
     const sub =
       existing ??
@@ -98,13 +96,12 @@ export function usePushSubscription(): {
         applicationServerKey: urlBase64ToUint8Array(publicKey),
       }));
 
-    // サーバーに同期
     await fetch("/api/push/sync", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         subscription: subToStored(sub),
-        matchIds,
+        ...payload,
       }),
     });
 
@@ -113,14 +110,14 @@ export function usePushSubscription(): {
   }, []);
 
   const sync = useCallback(
-    async (matchIds: string[]) => {
+    async (payload: SyncPayload) => {
       if (state.status !== "subscribed") return;
       await fetch("/api/push/sync", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           subscription: subToStored(state.subscription),
-          matchIds,
+          ...payload,
         }),
       });
     },

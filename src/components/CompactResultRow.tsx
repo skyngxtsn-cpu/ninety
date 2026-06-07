@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Match } from "../lib/types";
 import { getTeam } from "../lib/data/teams";
+import { SpoilerWrap } from "./SpoilerWrap";
 
 type Props = {
   match: Match;
@@ -48,11 +49,13 @@ export async function CompactResultRow({ match, favoriteTeamIds }: Props) {
         >
           {home.name}
         </span>
-        <span className="text-[16px] font-bold tabular-nums shrink-0">
-          {match.result.home}
-          <span className="mx-1.5 text-white/40">-</span>
-          {match.result.away}
-        </span>
+        <SpoilerWrap size="md">
+          <span className="text-[16px] font-bold tabular-nums shrink-0">
+            {match.result.home}
+            <span className="mx-1.5 text-white/40">-</span>
+            {match.result.away}
+          </span>
+        </SpoilerWrap>
         <span
           className={`text-[13px] tracking-tight flex-1 truncate text-right ${
             awayWin ? "font-bold" : "font-medium"

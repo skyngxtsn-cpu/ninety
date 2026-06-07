@@ -2,30 +2,39 @@ import { NextResponse } from "next/server";
 import webpush from "web-push";
 import { K, redis } from "../../../../lib/push/redis";
 import type { StoredSubscription } from "../../../../lib/push/types";
+import {
+  type NotificationType,
+  type NotificationPreferences,
+  OFFSET_MINUTES,
+  TICK_WINDOW_MINUTES,
+  DEFAULT_PREFERENCES,
+  isTypeEnabled,
+} from "../../../../lib/push/notification-types";
+import { isInQuietHours } from "../../../../lib/push/quiet-hours";
+import {
+  buildPayload,
+  buildResultPayload,
+  buildMorningPayload,
+  type NotificationPayload,
+} from "../../../../lib/push/payload";
 import { getAllMatches, getAllTeams } from "../../../../lib/data";
+import type { Match, Team } from "../../../../lib/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
  * GitHub Actions が 5 分ごとに叩くエンドポイント。
- * Authorization: Bearer ${TICK_SECRET} ヘッダで保護。
+ * Authorization: Bearer ${TICK_SECRET} で保護。
  *
- * 動作:
- *   1. 現在から 15±2.5 分後にキックオフする試合を抽出
- *   2. すでに送信済みフラグ（match:{id}:fired）が立っているものは除外
- *   3. その試合の購読者全員にプッシュ
- *   4. 送信済みフラグを 2 時間 TTL で立てる
+ * 全 NotificationType について発火条件をチェックし、購読者に配信。
  */
 export async function POST(req: Request) {
-  // 認証
   const auth = req.headers.get("authorization") ?? "";
   const expected = `Bearer ${process.env.TICK_SECRET ?? ""}`;
   if (!process.env.TICK_SECRET || auth !== expected) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
-
-  // VAPID 設定
   const publicKey = process.env.VAPID_PUBLIC_KEY;
   const privateKey = process.env.VAPID_PRIVATE_KEY;
   const subject = process.env.VAPID_SUBJECT || "mailto:noreply@example.com";
@@ -37,112 +46,251 @@ export async function POST(req: Request) {
   }
   webpush.setVapidDetails(subject, publicKey, privateKey);
 
-  const now = Date.now();
-  // 15分 ±5分 のウィンドウ（cron が5分刻みなので前後余裕を取る）
-  const minOffsetMs = 12.5 * 60 * 1000;
-  const maxOffsetMs = 17.5 * 60 * 1000;
-
+  const now = new Date();
   const [matches, teams] = await Promise.all([getAllMatches(), getAllTeams()]);
   const teamById = new Map(teams.map((t) => [t.id, t]));
 
-  const candidates = matches.filter((m) => {
-    const t = new Date(m.kickoffJST).getTime();
-    const diff = t - now;
-    return diff >= minOffsetMs && diff <= maxOffsetMs;
-  });
-
-  const results: Array<{
-    matchId: string;
-    pushed: number;
-    failed: number;
-    skipped?: boolean;
-  }> = [];
-
-  for (const m of candidates) {
-    const mid = m.id;
-    // 重複送信ガード
-    const already = await redis.get(K.matchFired(mid));
-    if (already) {
-      results.push({ matchId: mid, pushed: 0, failed: 0, skipped: true });
-      continue;
-    }
-
-    // この試合の購読者一覧
-    const subHashes = await redis.smembers<string[]>(K.matchSubs(mid));
-    if (!subHashes || subHashes.length === 0) {
-      // 送信先なし。fired は立てないでおく（次の tick で誰か購読してくれば送れる）
-      results.push({ matchId: mid, pushed: 0, failed: 0 });
-      continue;
-    }
-
-    // プッシュ payload
-    const home = teamById.get(m.homeTeamId);
-    const away = teamById.get(m.awayTeamId);
-    const title = `まもなく ${home?.shortName ?? m.homeTeamId} × ${away?.shortName ?? m.awayTeamId}`;
-    const kickoff = new Date(m.kickoffJST);
-    const hh = kickoff.getHours().toString().padStart(2, "0");
-    const mm = kickoff.getMinutes().toString().padStart(2, "0");
-    const body = `${hh}:${mm} JST キックオフ — ${m.stage}`;
-    const payload = JSON.stringify({
-      title,
-      body,
-      url: `/matches/${mid}`,
-      matchId: mid,
-      tag: `match-${mid}`,
-    });
-
-    let pushed = 0;
-    let failed = 0;
-    for (const h of subHashes) {
-      const subRaw = await redis.get<string>(K.sub(h));
-      if (!subRaw) {
-        // ゴミ参照、削除
-        await redis.srem(K.matchSubs(mid), h);
-        continue;
-      }
-      let sub: StoredSubscription;
-      try {
-        sub = typeof subRaw === "string" ? JSON.parse(subRaw) : subRaw;
-      } catch {
-        await redis.srem(K.matchSubs(mid), h);
-        continue;
-      }
-      try {
-        await webpush.sendNotification(
-          {
-            endpoint: sub.endpoint,
-            keys: sub.keys,
-          },
-          payload,
-        );
-        pushed += 1;
-      } catch (e) {
-        failed += 1;
-        // 410 Gone / 404 → 購読を完全に削除
-        const status = (e as { statusCode?: number })?.statusCode;
-        if (status === 410 || status === 404) {
-          // 全リマインドからこの sub を削除
-          const matches = await redis.smembers<string[]>(K.subMatches(h));
-          const pipe = redis.pipeline();
-          for (const mm of matches ?? []) {
-            pipe.srem(K.matchSubs(mm), h);
-          }
-          pipe.del(K.subMatches(h));
-          pipe.del(K.sub(h));
-          await pipe.exec();
-        }
-      }
-    }
-
-    // 送信済みフラグ（2時間で自動失効）
-    await redis.set(K.matchFired(mid), "1", { ex: 7200 });
-    results.push({ matchId: mid, pushed, failed });
+  // 1. 試合関連の通知タイプ（オフセット定義済み）を処理
+  const offsetTypes: NotificationType[] = [
+    "pre-3h",
+    "pre-1h",
+    "pre-15m",
+    "kickoff",
+    "halftime",
+    "fulltime",
+    "result",
+  ];
+  const results: Record<string, unknown> = {};
+  for (const type of offsetTypes) {
+    results[type] = await processOffsetType(type, matches, teamById, now);
   }
+
+  // 2. 朝のダイジェスト（JST 8:00 ±2.5分）
+  results["morning"] = await processMorning(matches, teamById, now);
 
   return NextResponse.json({
     ok: true,
-    now: new Date(now).toISOString(),
-    candidates: candidates.length,
+    now: now.toISOString(),
     results,
   });
+}
+
+// ============= 各タイプ処理 =============
+
+/** 試合のキックオフ + オフセットで発火する系の処理 */
+async function processOffsetType(
+  type: NotificationType,
+  matches: Match[],
+  teamById: Map<string, Team>,
+  now: Date,
+): Promise<{ candidates: number; pushed: number; failed: number; skipped: number }> {
+  const offset = OFFSET_MINUTES[type];
+  if (offset === null) return { candidates: 0, pushed: 0, failed: 0, skipped: 0 };
+  const offsetMs = offset * 60 * 1000;
+  const windowMs = TICK_WINDOW_MINUTES * 60 * 1000;
+
+  const candidates = matches.filter((m) => {
+    const target = new Date(m.kickoffJST).getTime() + offsetMs;
+    const diff = target - now.getTime();
+    return diff >= -windowMs && diff <= windowMs;
+  });
+
+  // result タイプは結果が確定している試合だけ
+  const filtered =
+    type === "result"
+      ? candidates.filter((m) => m.status === "finished" && m.result)
+      : candidates;
+
+  let pushed = 0;
+  let failed = 0;
+  let skipped = 0;
+
+  for (const m of filtered) {
+    const firedKey = K.matchFiredType(m.id, type);
+    const already = await redis.get(firedKey);
+    if (already) {
+      skipped += 1;
+      continue;
+    }
+
+    // 配信対象を集める：ベルマーク経由 + 推しチーム経由
+    const home = teamById.get(m.homeTeamId);
+    const away = teamById.get(m.awayTeamId);
+    const [bellHashes, favHomeHashes, favAwayHashes] = await Promise.all([
+      redis.smembers<string[]>(K.matchSubs(m.id)),
+      redis.smembers<string[]>(K.favSubs(m.homeTeamId)),
+      redis.smembers<string[]>(K.favSubs(m.awayTeamId)),
+    ]);
+    const allHashes = new Set<string>([
+      ...(bellHashes ?? []),
+      ...(favHomeHashes ?? []),
+      ...(favAwayHashes ?? []),
+    ]);
+    if (allHashes.size === 0) continue;
+
+    const payload =
+      type === "result"
+        ? buildResultPayload(m, home, away)
+        : buildPayload(type, m, home, away);
+
+    for (const h of allHashes) {
+      const r = await sendToSub(h, type, payload, now);
+      if (r === "pushed") pushed += 1;
+      else if (r === "failed") failed += 1;
+    }
+
+    await redis.set(firedKey, "1", { ex: 6 * 60 * 60 }); // 6h TTL
+  }
+
+  return { candidates: filtered.length, pushed, failed, skipped };
+}
+
+/** 朝 8:00 (JST) ±2.5分に、各購読者の推しチームの今日の試合をまとめて送る */
+async function processMorning(
+  matches: Match[],
+  teamById: Map<string, Team>,
+  now: Date,
+): Promise<{ runs: boolean; sent: number }> {
+  // JST の時:分
+  const jstMin = (now.getUTCHours() * 60 + now.getUTCMinutes() + 9 * 60) % (24 * 60);
+  const targetMin = 8 * 60;
+  if (Math.abs(jstMin - targetMin) > TICK_WINDOW_MINUTES) {
+    return { runs: false, sent: 0 };
+  }
+
+  // JST の本日の年月日（YYYY-MM-DD）
+  const jstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  const jstDate = jstNow.toISOString().slice(0, 10);
+
+  // 本日キックオフがある試合
+  const todays = matches.filter((m) => {
+    const k = new Date(m.kickoffJST);
+    const jk = new Date(k.getTime() + 9 * 60 * 60 * 1000);
+    return jk.toISOString().slice(0, 10) === jstDate;
+  });
+
+  // 各購読者の推しチーム一覧を取得し、今日その試合があれば送る
+  // 全 sub のリストを取る→大規模化したら index を追加すべきだが現状の規模では問題なし
+  // 簡略化: 全ての fav:{teamId}:subs から各 sub の hash を集めて、その sub の推しチーム一覧を取り、今日試合があるかで判定
+  // ここでは、今日試合がある推しチーム集合を作って、それらの sub をユニオン
+
+  const favHashesByTeam = new Map<string, string[]>();
+  for (const t of todays) {
+    for (const teamId of [t.homeTeamId, t.awayTeamId]) {
+      if (!favHashesByTeam.has(teamId)) {
+        const arr = (await redis.smembers<string[]>(K.favSubs(teamId))) ?? [];
+        favHashesByTeam.set(teamId, arr);
+      }
+    }
+  }
+  // 候補 sub hash 集合
+  const allHashes = new Set<string>();
+  for (const arr of favHashesByTeam.values()) {
+    for (const h of arr) allHashes.add(h);
+  }
+
+  let sent = 0;
+  for (const h of allHashes) {
+    // 重複送信防止
+    const firedKey = K.morningFired(jstDate, h);
+    const already = await redis.get(firedKey);
+    if (already) continue;
+
+    // この sub の推しチーム一覧
+    const favs = (await redis.smembers<string[]>(K.subFavs(h))) ?? [];
+    const favSet = new Set(favs);
+    const myTodays = todays.filter(
+      (m) => favSet.has(m.homeTeamId) || favSet.has(m.awayTeamId),
+    );
+    if (myTodays.length === 0) continue;
+
+    const payload = buildMorningPayload(
+      myTodays.map((m) => ({
+        match: m,
+        home: teamById.get(m.homeTeamId),
+        away: teamById.get(m.awayTeamId),
+      })),
+    );
+    const r = await sendToSub(h, "morning", payload, now);
+    if (r === "pushed") {
+      sent += 1;
+      await redis.set(firedKey, "1", { ex: 25 * 60 * 60 });
+    }
+  }
+
+  return { runs: true, sent };
+}
+
+// ============= sub への送信 =============
+
+async function sendToSub(
+  h: string,
+  type: NotificationType,
+  payload: NotificationPayload,
+  now: Date,
+): Promise<"pushed" | "failed" | "skipped"> {
+  // 設定を取得
+  const [subRaw, prefsRaw, spoiler] = await Promise.all([
+    redis.get<string>(K.sub(h)),
+    redis.get<string>(K.subPrefs(h)),
+    redis.get<string>(K.subSpoiler(h)),
+  ]);
+  if (!subRaw) {
+    // ゴミ参照、ベル・推し全 index から削除しておく
+    await cleanupSub(h);
+    return "skipped";
+  }
+  const sub: StoredSubscription =
+    typeof subRaw === "string" ? JSON.parse(subRaw) : (subRaw as unknown as StoredSubscription);
+
+  let prefs: NotificationPreferences = DEFAULT_PREFERENCES;
+  if (prefsRaw) {
+    try {
+      prefs = typeof prefsRaw === "string" ? JSON.parse(prefsRaw) : (prefsRaw as unknown as NotificationPreferences);
+    } catch {
+      prefs = DEFAULT_PREFERENCES;
+    }
+  }
+  const spoilerBlock = spoiler === "1";
+
+  // タイプが許可されているか
+  if (!isTypeEnabled(type, prefs, spoilerBlock)) return "skipped";
+
+  // 静寂時間ならサイレント
+  const quiet = isInQuietHours(now, prefs.quiet);
+
+  try {
+    const body = JSON.stringify({ ...payload, silent: quiet });
+    await webpush.sendNotification(
+      {
+        endpoint: sub.endpoint,
+        keys: sub.keys,
+      },
+      body,
+      quiet ? { TTL: 6 * 60 * 60, urgency: "low" } : undefined,
+    );
+    return "pushed";
+  } catch (e) {
+    const status = (e as { statusCode?: number })?.statusCode;
+    if (status === 410 || status === 404) {
+      await cleanupSub(h);
+    }
+    return "failed";
+  }
+}
+
+async function cleanupSub(h: string): Promise<void> {
+  const [matches, favs] = await Promise.all([
+    redis.smembers<string[]>(K.subMatches(h)),
+    redis.smembers<string[]>(K.subFavs(h)),
+  ]);
+  const pipe = redis.pipeline();
+  for (const m of matches ?? []) pipe.srem(K.matchSubs(m), h);
+  for (const t of favs ?? []) pipe.srem(K.favSubs(t), h);
+  pipe.del(K.subMatches(h));
+  pipe.del(K.subFavs(h));
+  pipe.del(K.subPrefs(h));
+  pipe.del(K.subSpoiler(h));
+  pipe.del(K.sub(h));
+  await pipe.exec();
 }

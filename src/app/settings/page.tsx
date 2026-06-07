@@ -1,6 +1,8 @@
 import { AppHeader } from "../../components/AppHeader";
 import { getAllTeams } from "../../lib/data/teams";
 import { SettingsClient } from "./SettingsClient";
+import { SpoilerToggle } from "../../components/SpoilerToggle";
+import { NotificationSettings } from "../../components/NotificationSettings";
 
 export default async function SettingsPage() {
   const teams = await getAllTeams();
@@ -28,6 +30,9 @@ export default async function SettingsPage() {
       </div>
 
       <SettingsClient allTeams={allTeams} />
+
+      <SpoilerToggle />
+      <NotificationSettings />
     </>
   );
 }

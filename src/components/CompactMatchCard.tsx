@@ -10,6 +10,7 @@ import {
 import { ReminderButton } from "./ReminderButton";
 import { CompactMatchCardClient } from "./CompactMatchCardClient";
 import { BroadcastIcons } from "./BroadcastChip";
+import { SpoilerWrap } from "./SpoilerWrap";
 
 type Props = {
   match: Match;
@@ -164,13 +165,15 @@ function TeamLine({
         {name}
       </span>
       {score !== undefined && (
-        <span
-          className={`text-[15px] font-bold tabular-nums w-5 text-right ${
-            isWinner ? "text-white" : "text-white/85"
-          }`}
-        >
-          {score}
-        </span>
+        <SpoilerWrap size="sm">
+          <span
+            className={`text-[15px] font-bold tabular-nums w-5 text-right ${
+              isWinner ? "text-white" : "text-white/85"
+            }`}
+          >
+            {score}
+          </span>
+        </SpoilerWrap>
       )}
     </div>
   );
