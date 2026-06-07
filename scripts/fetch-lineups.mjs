@@ -362,6 +362,27 @@ async function main() {
         fdStatus === "IN_PLAY" ||
         fdStatus === "PAUSED"
       ) {
+        // 試合イベント: 得点・カード・交代
+        const goals = (md.goals ?? []).map((g) => ({
+          minute: g.minute ?? null,
+          injuryTime: g.injuryTime ?? null,
+          type: g.type ?? "REGULAR", // REGULAR / OWN / PENALTY
+          team: teamIdFromName(g.team?.name) ?? "",
+          scorer: g.scorer?.name ?? "",
+          assist: g.assist?.name ?? null,
+        }));
+        const bookings = (md.bookings ?? []).map((b) => ({
+          minute: b.minute ?? null,
+          team: teamIdFromName(b.team?.name) ?? "",
+          player: b.player?.name ?? "",
+          card: b.card ?? "YELLOW",
+        }));
+        const substitutions = (md.substitutions ?? []).map((s) => ({
+          minute: s.minute ?? null,
+          team: teamIdFromName(s.team?.name) ?? "",
+          playerOut: s.playerOut?.name ?? "",
+          playerIn: s.playerIn?.name ?? "",
+        }));
         existingResults[key] = {
           source: "auto",
           status: fdStatus,
@@ -369,6 +390,9 @@ async function main() {
           away: score.away,
           halfHome: halftime.home,
           halfAway: halftime.away,
+          goals,
+          bookings,
+          substitutions,
           fetchedAt: new Date().toISOString(),
         };
       }

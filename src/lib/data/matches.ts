@@ -13,6 +13,26 @@ type AutoResult = {
   away?: number | null;
   halfHome?: number | null;
   halfAway?: number | null;
+  goals?: {
+    minute: number | null;
+    injuryTime: number | null;
+    type: string;
+    team: string;
+    scorer: string;
+    assist: string | null;
+  }[];
+  bookings?: {
+    minute: number | null;
+    team: string;
+    player: string;
+    card: string;
+  }[];
+  substitutions?: {
+    minute: number | null;
+    team: string;
+    playerOut: string;
+    playerIn: string;
+  }[];
   fetchedAt?: string;
 };
 const autoResults = autoResultsRaw as Record<string, AutoResult>;
@@ -139,6 +159,14 @@ function toMatch(
           nextImplication: "順位表とトーナメント表が更新されました。",
         }
       : undefined,
+    events:
+      autoR?.goals || autoR?.bookings || autoR?.substitutions
+        ? {
+            goals: autoR.goals ?? [],
+            bookings: autoR.bookings ?? [],
+            substitutions: autoR.substitutions ?? [],
+          }
+        : undefined,
   };
 }
 

@@ -104,6 +104,32 @@ export type Match = {
     nextImplication: string;
     highlightUrl?: string;
   };
+  /** 試合イベント（得点・カード・交代）。football-data.org から自動取得 */
+  events?: {
+    goals: {
+      minute: number | null;
+      injuryTime: number | null;
+      /** REGULAR / OWN / PENALTY */
+      type: string;
+      /** teamId */
+      team: string;
+      scorer: string;
+      assist: string | null;
+    }[];
+    bookings: {
+      minute: number | null;
+      team: string;
+      player: string;
+      /** YELLOW / YELLOW_RED / RED */
+      card: string;
+    }[];
+    substitutions: {
+      minute: number | null;
+      team: string;
+      playerOut: string;
+      playerIn: string;
+    }[];
+  };
 };
 
 export type GroupRow = {

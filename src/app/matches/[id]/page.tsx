@@ -21,6 +21,7 @@ import { ReminderButton } from "../../../components/ReminderButton";
 import { BroadcastChipList } from "../../../components/BroadcastChip";
 import { SpoilerWrap } from "../../../components/SpoilerWrap";
 import { CommentBadge } from "../../../components/CommentBadge";
+import { MatchEventTimeline } from "../../../components/MatchEventTimeline";
 import { CHANNELS, type BroadcastChannelId } from "../../../lib/data/broadcasts";
 
 export default async function MatchPage(props: PageProps<"/matches/[id]">) {
@@ -105,6 +106,20 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
       {/* 試合後体験（最優先） */}
       {finished && match.result && (
         <section className="mx-4 mt-5 space-y-3">
+          {/* ⏱ 試合経過（タイムライン）: 得点・カード・交代 */}
+          {match.events &&
+            (match.events.goals.length > 0 ||
+              match.events.bookings.length > 0 ||
+              match.events.substitutions.length > 0) && (
+              <MatchEventTimeline
+                events={match.events}
+                homeTeamId={match.homeTeamId}
+                homeFlag={home.flag}
+                awayTeamId={match.awayTeamId}
+                awayFlag={away.flag}
+              />
+            )}
+
           <div className="glass rounded-2xl p-5">
             <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--accent-2)] mb-2">
               🔥 なぜ話題？
