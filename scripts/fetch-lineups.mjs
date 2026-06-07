@@ -25,6 +25,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.join(__dirname, "..");
 const OUT_PATH = path.join(ROOT, "src/lib/data/lineup-overrides-auto.json");
+const RESULTS_PATH = path.join(ROOT, "src/lib/data/match-results-auto.json");
 const SQUADS_PATH = path.join(ROOT, "src/lib/data/squads.json");
 
 const apiKey = process.env.FOOTBALL_DATA_API_KEY;
@@ -302,6 +303,12 @@ async function main() {
   } catch {
     existing = {};
   }
+  let existingResults = {};
+  try {
+    existingResults = JSON.parse(await fs.readFile(RESULTS_PATH, "utf8"));
+  } catch {
+    existingResults = {};
+  }
 
   // スコープ: 今 ± 6 時間以内の試合（env で範囲上書き可）
   const dateFrom =
@@ -344,18 +351,43 @@ async function main() {
       const md = detailData.match ?? detailData;
       const homeLineup = md.homeTeam?.lineup ?? [];
       const awayLineup = md.awayTeam?.lineup ?? [];
+
+      // === スコア・ステータスを取得して match-results-auto.json に保存 ===
+      // status: SCHEDULED / TIMED / IN_PLAY / PAUSED / FINISHED / SUSPENDED / POSTPONED 等
+      const fdStatus = md.status ?? m.status;
+      const score = md.score?.fullTime ?? {};
+      const halftime = md.score?.halfTime ?? {};
+      if (
+        fdStatus === "FINISHED" ||
+        fdStatus === "IN_PLAY" ||
+        fdStatus === "PAUSED"
+      ) {
+        existingResults[key] = {
+          source: "auto",
+          status: fdStatus,
+          home: score.home,
+          away: score.away,
+          halfHome: halftime.home,
+          halfAway: halftime.away,
+          fetchedAt: new Date().toISOString(),
+        };
+      }
+
       if (homeLineup.length === 0 && awayLineup.length === 0) {
-        console.log(`    lineup not yet available`);
+        console.log(`    lineup not yet available (status: ${fdStatus})`);
         continue;
       }
       const entry = {
         source: "auto",
+        fetchedAt: new Date().toISOString(),
         home: buildLineup(md.homeTeam, homeLineup),
         away: buildLineup(md.awayTeam, awayLineup),
       };
       existing[key] = entry;
       updated += 1;
-      console.log(`    ✓ home: ${homeLineup.length}, away: ${awayLineup.length}`);
+      console.log(
+        `    ✓ lineup: home ${homeLineup.length} / away ${awayLineup.length} | status: ${fdStatus}`,
+      );
     } catch (err) {
       console.error(`    ✗ ${err.message}`);
     }
@@ -363,7 +395,10 @@ async function main() {
   }
 
   await fs.writeFile(OUT_PATH, JSON.stringify(existing, null, 2));
-  console.log(`\nDone: updated=${updated}, skipped=${skipped}, total in JSON=${Object.keys(existing).length}`);
+  await fs.writeFile(RESULTS_PATH, JSON.stringify(existingResults, null, 2));
+  console.log(
+    `\nDone: updated=${updated}, skipped=${skipped}, total lineups=${Object.keys(existing).length}, total results=${Object.keys(existingResults).length}`,
+  );
 }
 
 main().catch((e) => {

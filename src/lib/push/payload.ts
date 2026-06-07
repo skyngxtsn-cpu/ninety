@@ -70,6 +70,10 @@ export function buildPayload(
       title = `📊 結果：${matchup}`;
       body = "試合終了、スコアはアプリで確認";
       break;
+    case "lineup":
+      title = `📋 スタメン発表：${matchup}`;
+      body = `${hh} JST キックオフ${hook}`.trim();
+      break;
     case "tournament":
       title = "🏆 推しの次の相手が決まりました";
       body = "決勝トーナメントの次戦カードが確定";

@@ -177,6 +177,12 @@ export function NotificationCard() {
           onToggle={togglePref("pre")}
         />
         <ToggleRow
+          label="スタメン発表通知"
+          hint="試合 1 時間前のスタメン発表をお知らせ"
+          checked={prefs.lineup}
+          onToggle={togglePref("lineup")}
+        />
+        <ToggleRow
           label="試合中通知（スコア無し）"
           hint="キックオフ / ハーフタイム / 終了の合図"
           checked={prefs.live}

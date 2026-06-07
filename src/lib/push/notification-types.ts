@@ -6,6 +6,7 @@ export type NotificationType =
   | "pre-3h"
   | "pre-1h"
   | "pre-15m"
+  | "lineup" // スタメン発表通知（football-data.org から取得した時点）
   | "kickoff"
   | "halftime"
   | "fulltime"
@@ -15,6 +16,7 @@ export type NotificationType =
 
 export type NotificationGroup =
   | "pre"
+  | "lineup"
   | "live"
   | "result"
   | "digest"
@@ -24,6 +26,7 @@ export const TYPE_TO_GROUP: Record<NotificationType, NotificationGroup> = {
   "pre-3h": "pre",
   "pre-1h": "pre",
   "pre-15m": "pre",
+  lineup: "lineup",
   kickoff: "live",
   halftime: "live",
   fulltime: "live",
@@ -34,15 +37,16 @@ export const TYPE_TO_GROUP: Record<NotificationType, NotificationGroup> = {
 
 /**
  * 各タイプの「キックオフからの相対オフセット（分）」。
- * morning と tournament は別ロジックなので null。
+ * morning, tournament, lineup は別ロジックなので null。
  */
 export const OFFSET_MINUTES: Record<NotificationType, number | null> = {
   "pre-3h": -180,
   "pre-1h": -60,
   "pre-15m": -15,
+  lineup: null, // 自動取得 JSON の fetchedAt から判定
   kickoff: 0,
-  halftime: 50, // 前半 45 + ロスタイム 5
-  fulltime: 110, // 90 + ロスタイム + 後半開始までの間
+  halftime: 50,
+  fulltime: 110,
   result: 115,
   tournament: null,
   digest: null,
@@ -57,6 +61,8 @@ export const TICK_WINDOW_MINUTES = 2.5;
 export type NotificationPreferences = {
   /** 事前通知 (pre-3h / pre-1h / pre-15m) */
   pre: boolean;
+  /** スタメン発表通知 */
+  lineup: boolean;
   /** 試合中通知 (kickoff / halftime / fulltime — スコア無し) */
   live: boolean;
   /** 1日の全試合終了後の「明日のプレビュー」ダイジェスト */
@@ -74,6 +80,7 @@ export type NotificationPreferences = {
 
 export const DEFAULT_PREFERENCES: NotificationPreferences = {
   pre: true,
+  lineup: true,
   live: true,
   digest: true,
   tournament: true,

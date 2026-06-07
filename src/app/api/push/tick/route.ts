@@ -22,6 +22,10 @@ import { getAllMatches, getAllTeams } from "../../../../lib/data";
 import { getBracketMatches } from "../../../../lib/data/bracket";
 import { TIER1_TEAM_IDS } from "../../../../lib/push/tier1";
 import type { Match, Team } from "../../../../lib/types";
+import lineupAutoRaw from "../../../../lib/data/lineup-overrides-auto.json";
+
+type AutoLineupEntry = { fetchedAt?: string };
+const lineupAuto = lineupAutoRaw as Record<string, AutoLineupEntry>;
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -74,6 +78,9 @@ export async function POST(req: Request) {
   // 3. トーナメント次戦カード確定通知
   const matchById = new Map(matches.map((m) => [m.id, m]));
   results["tournament"] = await processTournament(teamById, matchById, now);
+
+  // 4. スタメン発表通知（lineup-overrides-auto.json の fetchedAt から検知）
+  results["lineup"] = await processLineup(matches, teamById, now);
 
   return NextResponse.json({
     ok: true,
@@ -416,6 +423,72 @@ async function processTournament(
   }
 
   return { processed, pushed, skipped };
+}
+
+/**
+ * スタメン発表通知。
+ * lineup-overrides-auto.json の各エントリの fetchedAt を見て、
+ * 直近 15 分以内に更新されたものを「新スタメン到着」と判定し、
+ * 該当試合の購読者（ベルマーク or 推しチーム参戦）にプッシュ。
+ * 1 試合につき 1 度だけ発火（fired フラグで重複防止）。
+ */
+async function processLineup(
+  matches: Match[],
+  teamById: Map<string, Team>,
+  now: Date,
+): Promise<{ pushed: number; skipped: number }> {
+  const nowMs = now.getTime();
+  const windowMs = 15 * 60 * 1000;
+  let pushed = 0;
+  let skipped = 0;
+
+  const matchById = new Map(matches.map((m) => [m.id, m]));
+
+  for (const [matchId, entry] of Object.entries(lineupAuto)) {
+    if (!entry.fetchedAt) continue;
+    const fetchedMs = new Date(entry.fetchedAt).getTime();
+    if (Number.isNaN(fetchedMs)) continue;
+    if (nowMs - fetchedMs > windowMs) continue; // 古いものはスキップ
+    const m = matchById.get(matchId);
+    if (!m) continue;
+    // 試合終了済みは送らない
+    if (m.status === "finished") continue;
+
+    const firedKey = K.matchFiredType(matchId, "lineup");
+    const already = await redis.get(firedKey);
+    if (already) {
+      skipped += 1;
+      continue;
+    }
+
+    // 配信対象を集める：ベルマーク経由 + 推しチーム経由
+    const home = teamById.get(m.homeTeamId);
+    const away = teamById.get(m.awayTeamId);
+    const [bellHashes, favHomeHashes, favAwayHashes] = await Promise.all([
+      redis.smembers<string[]>(K.matchSubs(m.id)),
+      redis.smembers<string[]>(K.favSubs(m.homeTeamId)),
+      redis.smembers<string[]>(K.favSubs(m.awayTeamId)),
+    ]);
+    const allHashes = new Set<string>([
+      ...(bellHashes ?? []),
+      ...(favHomeHashes ?? []),
+      ...(favAwayHashes ?? []),
+    ]);
+    if (allHashes.size === 0) {
+      // 送信先なし。fired フラグは立てて再評価しない
+      await redis.set(firedKey, "1", { ex: 6 * 60 * 60 });
+      continue;
+    }
+
+    const payload = buildPayload("lineup", m, home, away);
+    for (const h of allHashes) {
+      const r = await sendToSub(h, "lineup", payload, now);
+      if (r === "pushed") pushed += 1;
+    }
+    await redis.set(firedKey, "1", { ex: 6 * 60 * 60 });
+  }
+
+  return { pushed, skipped };
 }
 
 function roundLabel(r: string): string {

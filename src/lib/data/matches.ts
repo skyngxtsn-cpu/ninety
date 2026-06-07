@@ -4,6 +4,18 @@ import { getAllTeams } from "./teams";
 import { getAugmentation, defaultAugmentation } from "./match-augment";
 import { jaRound, shortVenue } from "./i18n";
 import { broadcastsForMatch } from "./broadcasts";
+import autoResultsRaw from "./match-results-auto.json";
+
+type AutoResult = {
+  source?: string;
+  status?: string;
+  home?: number | null;
+  away?: number | null;
+  halfHome?: number | null;
+  halfAway?: number | null;
+  fetchedAt?: string;
+};
+const autoResults = autoResultsRaw as Record<string, AutoResult>;
 
 /**
  * リクエストごとに「いま」と試合状態を再計算する。
@@ -56,9 +68,24 @@ function toMatch(
 
   const kickoffMs = new Date(ef.kickoffJST).getTime();
   const finished = kickoffMs + 110 * 60 * 1000 < nowRef.getTime(); // 試合後110分
-  const status: MatchStatus = ef.status === "finished" ? "finished" : finished ? "finished" : "scheduled";
 
   const matchId = `${ef.date}-${ef.team1Id}-${ef.team2Id}`;
+
+  // football-data.org からの自動取得結果でステータス・スコアを上書き（OpenFootball より早い）
+  const autoR = autoResults[matchId];
+  const autoFinished = autoR?.status === "FINISHED";
+  const autoLive =
+    autoR?.status === "IN_PLAY" || autoR?.status === "PAUSED";
+  const status: MatchStatus =
+    ef.status === "finished" || finished || autoFinished
+      ? "finished"
+      : autoLive
+        ? "live"
+        : "scheduled";
+  const effectiveScore1 =
+    typeof autoR?.home === "number" ? autoR.home : ef.score1;
+  const effectiveScore2 =
+    typeof autoR?.away === "number" ? autoR.away : ef.score2;
   // 放送セットの優先順位: match-augment（手書き） > MATCH_OVERRIDES > デフォルト
   const broadcasts =
     aug.broadcasts && aug.broadcasts.length > 0
@@ -102,10 +129,10 @@ function toMatch(
       ];
     })(),
     // 試合後ダミーは後段で生成（今は省略）
-    result: status === "finished" && ef.score1 !== undefined && ef.score2 !== undefined
+    result: status === "finished" && effectiveScore1 !== undefined && effectiveScore2 !== undefined
       ? {
-          home: ef.score1,
-          away: ef.score2,
+          home: effectiveScore1,
+          away: effectiveScore2,
           whyTrending: `${teamById[ef.team1Id]?.name ?? ef.team1} と ${teamById[ef.team2Id]?.name ?? ef.team2} の対戦が終了。`,
           summary30s: "試合の詳細要約は順次更新されます。",
           manOfTheMatchId: aug.keyPlayerIds[0] ?? "kubo",
