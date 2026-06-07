@@ -38,7 +38,7 @@ export function MyFavoritesSection({ allPlayers, teamFlags, teamColors }: Props)
               <Link
                 key={p.id}
                 href={`/players/${p.id}`}
-                className="h-[210px] relative rounded-2xl overflow-hidden border border-[var(--border)] block"
+                className="relative rounded-2xl overflow-hidden border border-[var(--border)] block aspect-[3/4]"
               >
                 <div
                   className="absolute inset-0"
@@ -47,22 +47,25 @@ export function MyFavoritesSection({ allPlayers, teamFlags, teamColors }: Props)
                     opacity: 0.6,
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
                 {p.photoUrl ? (
-                  <div className="absolute inset-x-0 top-2 bottom-[64px] flex items-end justify-center">
+                  <div className="absolute inset-x-0 top-2 bottom-[70px] flex items-end justify-center overflow-hidden">
                     <Image
                       src={p.photoUrl}
                       alt={p.name}
                       width={180}
                       height={220}
                       unoptimized
-                      className="h-full w-auto object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.55)]"
+                      className="max-h-full w-auto object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.55)]"
                     />
                   </div>
                 ) : (
-                  <div className="absolute inset-x-0 top-[28%] flex justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white/15 border border-white/20 flex items-center justify-center text-2xl font-bold text-white/95">
-                      {p.name.slice(0, 1)}
+                  <div className="absolute inset-x-0 top-[26%] flex justify-center">
+                    <div className="w-16 h-16 rounded-full bg-white/15 border border-white/20 flex flex-col items-center justify-center text-white/95">
+                      <span className="text-[18px] leading-none">{flag}</span>
+                      <span className="text-[12px] font-bold leading-none mt-0.5">
+                        {p.name.slice(0, 1)}
+                      </span>
                     </div>
                   </div>
                 )}
@@ -72,14 +75,23 @@ export function MyFavoritesSection({ allPlayers, teamFlags, teamColors }: Props)
                   </span>
                   <span className="text-xl drop-shadow">{flag}</span>
                 </div>
-                <div className="absolute inset-x-0 bottom-0 p-2.5">
-                  <p className="text-[10px] tracking-widest uppercase text-white/70">
+                {/* テキスト領域：min-h で押し出されないよう高さを保証 */}
+                <div className="absolute inset-x-0 bottom-0 px-2 pb-2 pt-1 min-h-[62px]">
+                  <p className="text-[9px] tracking-wider uppercase text-white/70 truncate leading-tight">
                     {p.tagline}
                   </p>
-                  <p className="text-[13px] font-semibold leading-tight">
+                  <p
+                    className="text-[12px] font-semibold leading-tight mt-0.5 break-words"
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                  >
                     {p.name}
                   </p>
-                  <p className="text-[10px] text-white/70 truncate">{p.club}</p>
+                  <p className="text-[10px] text-white/65 truncate">{p.club}</p>
                 </div>
               </Link>
             );
