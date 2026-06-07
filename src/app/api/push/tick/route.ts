@@ -16,6 +16,7 @@ import {
   buildResultPayload,
   buildDigestPayload,
   buildTournamentPayload,
+  buildHalftimeScorePayload,
   type NotificationPayload,
 } from "../../../../lib/push/payload";
 import { getAllMatches, getAllTeams } from "../../../../lib/data";
@@ -23,9 +24,19 @@ import { getBracketMatches } from "../../../../lib/data/bracket";
 import { TIER1_TEAM_IDS } from "../../../../lib/push/tier1";
 import type { Match, Team } from "../../../../lib/types";
 import lineupAutoRaw from "../../../../lib/data/lineup-overrides-auto.json";
+import matchResultsAutoRaw from "../../../../lib/data/match-results-auto.json";
 
 type AutoLineupEntry = { fetchedAt?: string };
 const lineupAuto = lineupAutoRaw as Record<string, AutoLineupEntry>;
+
+type AutoResult = {
+  status?: string;
+  home?: number | null;
+  away?: number | null;
+  halfHome?: number | null;
+  halfAway?: number | null;
+};
+const matchResultsAuto = matchResultsAutoRaw as Record<string, AutoResult>;
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -142,12 +153,38 @@ async function processOffsetType(
     ]);
     if (allHashes.size === 0) continue;
 
-    const payload =
+    const defaultPayload =
       type === "result"
         ? buildResultPayload(m, home, away)
         : buildPayload(type, m, home, away);
 
+    // ハーフタイム: スコア取れているなら spoiler OFF ユーザーには別 payload
+    let spoilerOffPayload: NotificationPayload | null = null;
+    if (type === "halftime") {
+      const r = matchResultsAuto[m.id];
+      if (
+        r &&
+        typeof r.halfHome === "number" &&
+        typeof r.halfAway === "number"
+      ) {
+        spoilerOffPayload = buildHalftimeScorePayload(
+          m,
+          home,
+          away,
+          r.halfHome,
+          r.halfAway,
+        );
+      }
+    }
+
     for (const h of allHashes) {
+      let payload = defaultPayload;
+      if (spoilerOffPayload) {
+        const spoiler = await redis.get<string>(K.subSpoiler(h));
+        if (spoiler !== "1") {
+          payload = spoilerOffPayload;
+        }
+      }
       const r = await sendToSub(h, type, payload, now);
       if (r === "pushed") pushed += 1;
       else if (r === "failed") failed += 1;

@@ -183,6 +183,37 @@ export function buildTournamentPayload(opts: {
   };
 }
 
+/**
+ * ハーフタイムの「途中スコア付き」通知。
+ * ネタバレ防止モード OFF の人だけ受け取る用。
+ */
+export function buildHalftimeScorePayload(
+  match: Match,
+  home: Team | undefined,
+  away: Team | undefined,
+  halfHome: number,
+  halfAway: number,
+): NotificationPayload {
+  const hn = shortName(home, match.homeTeamId);
+  const an = shortName(away, match.awayTeamId);
+  const flag = (t: Team | undefined): string => t?.flag ?? "";
+  const title = `⏸ HT ${flag(home)} ${hn} ${halfHome} - ${halfAway} ${an} ${flag(away)}`.trim();
+  const body =
+    halfHome === halfAway
+      ? `前半終了。${halfHome}-${halfAway} のスコアで折り返し。後半が本番。`
+      : halfHome > halfAway
+        ? `前半終了。${flag(home)} ${hn} が ${halfHome}-${halfAway} とリード。\n後半 45 分が始まります。`
+        : `前半終了。${flag(away)} ${an} が ${halfAway}-${halfHome} とリード。\n後半 45 分が始まります。`;
+  return {
+    title,
+    body,
+    url: `/matches/${match.id}`,
+    matchId: match.id,
+    tag: `halftime-score-${match.id}`,
+    type: "halftime",
+  };
+}
+
 export function buildResultPayload(
   match: Match,
   home: Team | undefined,
