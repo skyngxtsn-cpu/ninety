@@ -1,6 +1,6 @@
 import { AppHeader } from "../../components/AppHeader";
 import { getAllTeams } from "../../lib/data/teams";
-import { SettingsClient } from "./SettingsClient";
+import { SettingsClient, OtherSettings } from "./SettingsClient";
 import { SpoilerToggle } from "../../components/SpoilerToggle";
 import { NotificationCard } from "../../components/NotificationCard";
 
@@ -33,6 +33,8 @@ export default async function SettingsPage() {
 
       <SpoilerToggle />
       <NotificationCard />
+
+      <OtherSettings />
     </>
   );
 }
