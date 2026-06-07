@@ -1,1 +1,742 @@
-{}
+{
+  "cze-ladislav-krejci": {
+    "tagline": "チェコの守備の要",
+    "story": [
+      "チェコ代表を率いる頼れるキャプテン。",
+      "センターバックやミッドフィルダーとして、",
+      "攻守にわたる活躍が期待されます。"
+    ],
+    "strengths": [
+      {
+        "label": "守備",
+        "rating": 4.5
+      },
+      {
+        "label": "パス",
+        "rating": 4
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "リーダーシップ",
+        "rating": 5
+      },
+      {
+        "label": "戦術理解度",
+        "rating": 4
+      }
+    ],
+    "whyWatch": "キャプテンとしてチームを鼓舞し、最終ラインからゲームを作るクレイトシュのプレーに注目です。",
+    "source": {
+      "wikiTitle": "Ladislav Krejčí (footballer, born 1999)",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Ladislav_Krej%C4%8D%C3%AD_(footballer%2C_born_1999)",
+      "extractLen": 232
+    },
+    "generatedAt": "2026-06-07T04:49:06.886Z"
+  },
+  "cze-patrik-schick": {
+    "tagline": "チェコの頼れる点取屋",
+    "story": [
+      "チェコ代表のエースストライカー、パトリック・シック。",
+      "ブンデスリーガのレバークーゼンで活躍する彼は、",
+      "力強いプレーでチームを牽引します。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "視野",
+        "rating": 4
+      },
+      {
+        "label": "決定力",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "高さとテクニックを活かしたヘディングシュートや、相手の意表を突くロングシュートに注目です。",
+    "source": {
+      "wikiTitle": "Patrik Schick",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Patrik_Schick",
+      "extractLen": 146
+    },
+    "generatedAt": "2026-06-07T04:49:13.439Z"
+  },
+  "cze-matej-kovar": {
+    "tagline": "チェコの守護神",
+    "story": [
+      "PSVで活躍するチェコ代表ゴールキーパー、マテイ・コヴァル。",
+      "若くして才能を開花させ、プロの舞台へと駆け上がりました。",
+      "安定したセービングでチームを支えます。"
+    ],
+    "strengths": [
+      {
+        "label": "反射神経",
+        "rating": 4.5
+      },
+      {
+        "label": "キャッチング",
+        "rating": 4
+      },
+      {
+        "label": "ポジショニング",
+        "rating": 4
+      },
+      {
+        "label": "シュートストップ",
+        "rating": 4.5
+      },
+      {
+        "label": "リーダーシップ",
+        "rating": 3.5
+      }
+    ],
+    "whyWatch": "彼の驚異的な反射神経と正確なポジショニングから繰り出されるセーブは必見です。",
+    "source": {
+      "wikiTitle": "Matěj Kovář",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Mat%C4%9Bj_Kov%C3%A1%C5%99",
+      "extractLen": 134
+    },
+    "generatedAt": "2026-06-07T04:49:20.433Z"
+  },
+  "cze-adam-hlozek": {
+    "tagline": "チェコの若き才能",
+    "story": [
+      "アダム・オシュレクは、チェコ代表とブンデスリーガのホッフェンハイムで活躍するフォワードです。",
+      "将来が期待される若手選手として、そのプレーに注目が集まっています。",
+      "攻撃の核として、チームに貢献しています。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "視野",
+        "rating": 4
+      },
+      {
+        "label": "決定力",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "彼の多彩な攻撃センスと、相手を翻弄するテクニックにぜひご注目ください。",
+    "source": {
+      "wikiTitle": "Adam Hložek",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Adam_Hlo%C5%BEek",
+      "extractLen": 142
+    },
+    "generatedAt": "2026-06-07T04:49:27.267Z"
+  },
+  "cze-vladimir-darida": {
+    "tagline": "チェコの心臓部",
+    "story": [
+      "チェコ代表の中心MF、ダリダ。",
+      "所属クラブでもチームを支えるベテラン。",
+      "経験とプレーでチームを牽引します。"
+    ],
+    "strengths": [
+      {
+        "label": "パス",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "スタミナ",
+        "rating": 3.5
+      },
+      {
+        "label": "戦術理解度",
+        "rating": 4
+      },
+      {
+        "label": "ゲームメイク",
+        "rating": 4
+      }
+    ],
+    "whyWatch": "中盤の底からゲームを組み立てるパスセンスと、豊富な運動量で攻守に貢献する姿に注目です。",
+    "source": {
+      "wikiTitle": "Vladimír Darida",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Vladim%C3%ADr_Darida",
+      "extractLen": 169
+    },
+    "generatedAt": "2026-06-07T04:49:33.452Z"
+  },
+  "mex-edson-alvarez": {
+    "tagline": "メキシコ代表の守備の要！",
+    "story": [
+      "メキシコ代表のキャプテン、エドソン・アルバレス。",
+      "守備的ミッドフィルダーやセンターバックとして活躍。",
+      "現在はトルコのフェネルバフチェでプレーしています。"
+    ],
+    "strengths": [
+      {
+        "label": "守備",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 4
+      },
+      {
+        "label": "戦術眼",
+        "rating": 4
+      },
+      {
+        "label": "リーダーシップ",
+        "rating": 4.5
+      },
+      {
+        "label": "パス",
+        "rating": 3.5
+      }
+    ],
+    "whyWatch": "キャプテンとしてチームを牽引する、力強い守備と的確な戦術眼に注目です。",
+    "source": {
+      "wikiTitle": "Edson Álvarez",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Edson_%C3%81lvarez",
+      "extractLen": 245
+    },
+    "generatedAt": "2026-06-07T04:49:40.213Z"
+  },
+  "mex-alexis-vega": {
+    "tagline": "メキシコの希望",
+    "story": [
+      "エルネスト・アレクシス・ベガ・ロハスは、",
+      "メキシコ代表とトルーカFCで活躍するフォワード。",
+      "チームのキャプテンも務める実力者です。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "視野",
+        "rating": 4
+      },
+      {
+        "label": "決定力",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "攻撃的なポジションを幅広くこなす彼の、創造性あふれるドリブルとパスワークに注目しましょう。",
+    "source": {
+      "wikiTitle": "Alexis Vega (Mexican footballer)",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Alexis_Vega_(Mexican_footballer)",
+      "extractLen": 169
+    },
+    "generatedAt": "2026-06-07T04:49:47.133Z"
+  },
+  "mex-raul-rangel": {
+    "tagline": "メキシコの新星GK",
+    "story": [
+      "メキシコ代表としても活躍するラウル・ランヘル。",
+      "愛称は「タラ・ランヘル」。",
+      "若き守護神として期待が集まる。"
+    ],
+    "strengths": [
+      {
+        "label": "セービング",
+        "rating": 4.5
+      },
+      {
+        "label": "反射神経",
+        "rating": 4
+      },
+      {
+        "label": "コーチング",
+        "rating": 3.5
+      },
+      {
+        "label": "ポジショニング",
+        "rating": 4
+      },
+      {
+        "label": "ビルドアップ",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "若き守護神が、ビッグセーブでチームを勝利に導く瞬間を見逃すな！",
+    "source": {
+      "wikiTitle": "Raúl Rangel (footballer)",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Ra%C3%BAl_Rangel_(footballer)",
+      "extractLen": 180
+    },
+    "generatedAt": "2026-06-07T04:49:54.225Z"
+  },
+  "mex-raul-jimenez": {
+    "tagline": "メキシコの頼れる点取り屋",
+    "story": [
+      "メキシコ代表のエースストライカー、ラウール・ヒメネス。",
+      "プレミアリーグのフラムでも活躍する彼は、",
+      "力強いプレーでチームを牽引します。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "視野",
+        "rating": 4
+      },
+      {
+        "label": "決定力",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "ゴール前での冷静な判断と、相手を翻弄するテクニックに注目。彼のプレーは試合の流れを変える力があります。",
+    "source": {
+      "wikiTitle": "Raúl Jiménez",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Ra%C3%BAl_Jim%C3%A9nez",
+      "extractLen": 150
+    },
+    "generatedAt": "2026-06-07T04:50:00.545Z"
+  },
+  "mex-erik-lira": {
+    "tagline": "メキシコの鉄壁MF",
+    "story": [
+      "メキシコ代表、そしてクルス・アズルのキャプテンを務めるエリク・リラ。",
+      "守備的ミッドフィルダーとして、チームの要として活躍しています。",
+      "若きリーダーシップでピッチを牽引します。"
+    ],
+    "strengths": [
+      {
+        "label": "守備",
+        "rating": 4.5
+      },
+      {
+        "label": "パス",
+        "rating": 4
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "戦術理解度",
+        "rating": 4
+      },
+      {
+        "label": "リーダーシップ",
+        "rating": 4.5
+      }
+    ],
+    "whyWatch": "キャプテンとしてチームを統率する、力強い守備と正確なパスワークに注目してください。",
+    "source": {
+      "wikiTitle": "Érik Lira",
+      "wikiUrl": "https://en.wikipedia.org/wiki/%C3%89rik_Lira",
+      "extractLen": 174
+    },
+    "generatedAt": "2026-06-07T04:50:06.858Z"
+  },
+  "rsa-ronwen-williams": {
+    "tagline": "南アフリカの守護神",
+    "story": [
+      "南アフリカ代表を率いる頼れるキャプテン。",
+      "国内リーグの名門マメロディ・サンダウンズで活躍。",
+      "ゴールを守る姿はまさに鉄壁です。"
+    ],
+    "strengths": [
+      {
+        "label": "セービング",
+        "rating": 4.5
+      },
+      {
+        "label": "リーダーシップ",
+        "rating": 4
+      },
+      {
+        "label": "経験",
+        "rating": 4
+      },
+      {
+        "label": "反射神経",
+        "rating": 4
+      },
+      {
+        "label": "安定感",
+        "rating": 3.5
+      }
+    ],
+    "whyWatch": "キャプテンとしてチームを鼓舞し、ビッグセーブでゴールを守り抜く姿に注目です。",
+    "source": {
+      "wikiTitle": "Ronwen Williams",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Ronwen_Williams",
+      "extractLen": 185
+    },
+    "generatedAt": "2026-06-07T04:50:13.346Z"
+  },
+  "rsa-relebohile-mofokeng": {
+    "tagline": "南アフリカの才能",
+    "story": [
+      "南アフリカ代表、オーランド・パイレーツで活躍するモフォケン。",
+      "攻撃的ミッドフィルダーやウインガーとして、チームを牽引します。",
+      "若き才能がワールドカップで輝きを放ちます。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "視野",
+        "rating": 4
+      },
+      {
+        "label": "決定力",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "攻撃的なポジションで、相手を翻弄するドリブルとパスセンスに注目です。",
+    "source": {
+      "wikiTitle": "Relebohile Mofokeng",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Relebohile_Mofokeng",
+      "extractLen": 165
+    },
+    "generatedAt": "2026-06-07T04:50:20.002Z"
+  },
+  "rsa-oswin-appollis": {
+    "tagline": "南アフリカの新たな宝石",
+    "story": [
+      "南アフリカ代表、そしてオーランド・パイレーツで活躍するアポリス。",
+      "彼のプレーは、観る者すべてを魅了する。",
+      "若き才能がワールドカップで輝く。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "視野",
+        "rating": 4
+      },
+      {
+        "label": "決定力",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "ウィングでも攻撃的ミッドフィルダーでもプレーできる、多彩な攻撃の起点となる彼に注目！",
+    "source": {
+      "wikiTitle": "Oswin Appollis",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Oswin_Appollis",
+      "extractLen": 217
+    },
+    "generatedAt": "2026-06-07T04:50:26.842Z"
+  },
+  "rsa-teboho-mokoena": {
+    "tagline": "南アフリカの心臓",
+    "story": [
+      "南アフリカ代表のMF、テボホ・モコナ。",
+      "所属は国内強豪マメロディ・サンダウンズ。",
+      "チームに欠かせない存在として活躍しています。"
+    ],
+    "strengths": [
+      {
+        "label": "パス",
+        "rating": 4.5
+      },
+      {
+        "label": "守備",
+        "rating": 3.5
+      },
+      {
+        "label": "運動量",
+        "rating": 4
+      },
+      {
+        "label": "戦術理解度",
+        "rating": 4
+      },
+      {
+        "label": "得点感覚",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "中盤でボールを奪い、正確なパスで攻撃の起点となるプレーは必見です。",
+    "source": {
+      "wikiTitle": "Teboho Mokoena (soccer, born 1997)",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Teboho_Mokoena_(soccer%2C_born_1997)",
+      "extractLen": 161
+    },
+    "generatedAt": "2026-06-07T04:50:34.845Z"
+  },
+  "rsa-thalente-mbatha": {
+    "tagline": "南アフリカの未来を担う",
+    "story": [
+      "南アフリカ代表でもプレーする若き才能、タレンテ・ンバサ。",
+      "守備的ミッドフィルダーとして、攻守にわたる貢献が期待されます。",
+      "オーランド・パイレーツでの活躍から目が離せません。"
+    ],
+    "strengths": [
+      {
+        "label": "守備",
+        "rating": 4
+      },
+      {
+        "label": "パス",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "戦術理解度",
+        "rating": 4
+      },
+      {
+        "label": "ボール奪取",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "守備的MFとして、チームのバランスを保ちながら正確なパスで攻撃の起点となるプレーに注目です。",
+    "source": {
+      "wikiTitle": "Thalente Mbatha",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Thalente_Mbatha",
+      "extractLen": 175
+    },
+    "generatedAt": "2026-06-07T04:50:41.798Z"
+  },
+  "kor-son-heung-min": {
+    "tagline": "アジアの至宝、ソン・フンミン",
+    "story": [
+      "韓国代表のキャプテンを務めるスター選手。",
+      "スピードと両足のシュートで観客を魅了します。",
+      "アジア人選手として歴史に名を刻む存在です。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4.5
+      },
+      {
+        "label": "両足の技術",
+        "rating": 4.5
+      },
+      {
+        "label": "攻撃参加",
+        "rating": 4
+      },
+      {
+        "label": "連携",
+        "rating": 4
+      },
+      {
+        "label": "得点力",
+        "rating": 4.5
+      }
+    ],
+    "whyWatch": "持ち前のスピードと、左右両足から繰り出される強烈なシュートに注目！",
+    "source": {
+      "wikiTitle": "Son Heung-min",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Son_Heung-min",
+      "extractLen": 398
+    },
+    "generatedAt": "2026-06-07T04:50:48.836Z"
+  },
+  "kor-lee-jae-sung": {
+    "tagline": "韓国のダイナモ！",
+    "story": [
+      "韓国代表としても活躍する、韓国のプロサッカー選手です。",
+      "攻撃的ミッドフィールダーやウインガーとして、",
+      "ブンデスリーガのマインツ05でプレーしています。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "パス",
+        "rating": 4
+      },
+      {
+        "label": "ドリブル",
+        "rating": 4
+      }
+    ],
+    "whyWatch": "攻撃的MFやウインガーとして、多彩なプレーでチャンスを演出する彼の攻撃センスに注目です！",
+    "source": {
+      "wikiTitle": "Lee Jae-sung",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Lee_Jae-sung",
+      "extractLen": 165
+    },
+    "generatedAt": "2026-06-07T04:50:55.547Z"
+  },
+  "kor-kim-seung-gyu": {
+    "tagline": "韓国の鉄壁ゴールキーパー",
+    "story": [
+      "韓国代表の守護神、キム・スンギュ選手。",
+      "J1リーグのFC東京でも活躍する実力派。",
+      "安定したセービングでチームを支えます。"
+    ],
+    "strengths": [
+      {
+        "label": "セービング",
+        "rating": 4.5
+      },
+      {
+        "label": "反射神経",
+        "rating": 4
+      },
+      {
+        "label": "コーチング",
+        "rating": 3.5
+      },
+      {
+        "label": "経験",
+        "rating": 4
+      },
+      {
+        "label": "リーダーシップ",
+        "rating": 3.5
+      }
+    ],
+    "whyWatch": "ゴールマウスに立ちはだかる、その安定感と的確な判断力に注目してください。",
+    "source": {
+      "wikiTitle": "Kim Seung-gyu",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Kim_Seung-gyu",
+      "extractLen": 144
+    },
+    "generatedAt": "2026-06-07T04:51:02.598Z"
+  },
+  "kor-cho-gue-sung": {
+    "tagline": "韓国の新たなストライカー",
+    "story": [
+      "韓国代表の若きストライカー、チョ・ギュソン。",
+      "デンマークのミッティランでプレーする。",
+      "ワールドカップでの活躍が期待される。"
+    ],
+    "strengths": [
+      {
+        "label": "スピード",
+        "rating": 4
+      },
+      {
+        "label": "テクニック",
+        "rating": 4.5
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "視野",
+        "rating": 4
+      },
+      {
+        "label": "決定力",
+        "rating": 3
+      }
+    ],
+    "whyWatch": "パワフルなプレーとゴールへの嗅覚で、韓国代表を牽引するストライカーの躍動に注目！",
+    "source": {
+      "wikiTitle": "Cho Gue-sung",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Cho_Gue-sung",
+      "extractLen": 148
+    },
+    "generatedAt": "2026-06-07T04:51:09.493Z"
+  },
+  "kor-lee-gi-hyuk": {
+    "tagline": "韓国の若き守備の要",
+    "story": [
+      "韓国代表にも選出された期待の若手、イ・ギヒョク。",
+      "センターバックでも左サイドバックでもプレーできる万能型。",
+      "所属はKリーグの江原FC。"
+    ],
+    "strengths": [
+      {
+        "label": "守備",
+        "rating": 4
+      },
+      {
+        "label": "パス",
+        "rating": 4
+      },
+      {
+        "label": "フィジカル",
+        "rating": 3.5
+      },
+      {
+        "label": "戦術理解度",
+        "rating": 4
+      },
+      {
+        "label": "対人プレー",
+        "rating": 3.5
+      }
+    ],
+    "whyWatch": "センターバックと左サイドバックをこなす守備の万能さに注目。攻守に貢献するプレーを見せてくれるはずです。",
+    "source": {
+      "wikiTitle": "Lee Gi-hyuk",
+      "wikiUrl": "https://en.wikipedia.org/wiki/Lee_Gi-hyuk",
+      "extractLen": 145
+    },
+    "generatedAt": "2026-06-07T04:51:16.116Z"
+  }
+}

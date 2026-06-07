@@ -91,10 +91,42 @@ export function buildPayload(
   };
 }
 
+/** 日付（kickoffJST ISO）を「6/29 (火) 4:00 JST」形式に */
+function dateTimeJST(iso: string): string {
+  const d = new Date(iso);
+  const utcMs = d.getTime();
+  const jst = new Date(utcMs + 9 * 60 * 60 * 1000);
+  const dow = ["日", "月", "火", "水", "木", "金", "土"][jst.getUTCDay()];
+  const mo = jst.getUTCMonth() + 1;
+  const da = jst.getUTCDate();
+  const hh = String(jst.getUTCHours()).padStart(2, "0");
+  const mm = String(jst.getUTCMinutes()).padStart(2, "0");
+  return `${mo}/${da} (${dow}) ${hh}:${mm} JST`;
+}
+
+/** 放送局 ID を表示用短文字に */
+function channelLabel(id: string): string {
+  return (
+    {
+      NHK_G: "NHK総合",
+      NHK_BS: "NHK BS",
+      TBS: "TBS",
+      TEREASA: "テレ朝",
+      FUJI: "フジ",
+      NTV: "日テレ",
+      ABEMA: "ABEMA",
+      DAZN: "DAZN",
+      "U-NEXT": "U-NEXT",
+      NHK_PLUS: "NHK+",
+      TVER: "TVer",
+    }[id] ?? id
+  );
+}
+
 /**
  * トーナメント通知。ネタバレ防止モードに応じて文言を変える。
- * - block: チーム名を出さず「次の相手が決まりました」のみ
- * - block無し: 「日本の次は 🇧🇷 ブラジル」のように具体的に
+ * - block: 相手を出さず「次の相手が決まりました」のみ
+ * - block無し: 推しの旗 + 相手 + 日時 + 会場 + 放送局
  */
 export function buildTournamentPayload(opts: {
   bracketMatchId: string;
@@ -102,29 +134,44 @@ export function buildTournamentPayload(opts: {
   opponent: Team | undefined;
   stage: string;
   kickoffJST: string;
+  venue?: string;
+  broadcasts?: string[];
   spoilerBlock: boolean;
 }): NotificationPayload {
   const fav = opts.favTeam;
   const opp = opts.opponent;
+  const favFlag = fav?.flag ?? "";
   const favName = fav?.shortName ?? "推しチーム";
-  const oppName = opp?.shortName ?? "相手";
   const oppFlag = opp?.flag ?? "";
-  const hh = timeJST(opts.kickoffJST);
+  const oppName = opp?.shortName ?? "相手";
+  const when = dateTimeJST(opts.kickoffJST);
   const tag = `tournament-${opts.bracketMatchId}-${fav?.id ?? "x"}`;
   const url = `/matches/${opts.bracketMatchId}`;
+
   if (opts.spoilerBlock) {
     return {
       title: "🏆 推しの次の相手が決まりました",
-      body: `${favName} の次戦カードが確定`,
+      body: `${when} キックオフ`,
       url,
       matchId: opts.bracketMatchId,
       tag,
       type: "tournament",
     };
   }
+
+  // タイトル: 「🏆 🇯🇵 日本 × 🇧🇷 ブラジル｜準々決勝」
+  const title = `🏆 ${favFlag} ${favName} × ${oppFlag} ${oppName}｜${opts.stage}`;
+  const bodyLines: string[] = [];
+  // 1行目: 日時 + 会場
+  bodyLines.push(opts.venue ? `${when} · ${opts.venue}` : when);
+  // 2行目: 放送局
+  if (opts.broadcasts && opts.broadcasts.length > 0) {
+    const labels = opts.broadcasts.slice(0, 3).map(channelLabel).join(" / ");
+    bodyLines.push(`📺 ${labels}`);
+  }
   return {
-    title: `🏆 ${favName} の次の相手 ${oppFlag} ${oppName}`,
-    body: `${opts.stage}・${hh} JST キックオフ`,
+    title,
+    body: bodyLines.join("\n"),
     url,
     matchId: opts.bracketMatchId,
     tag,

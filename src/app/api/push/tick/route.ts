@@ -72,7 +72,8 @@ export async function POST(req: Request) {
   results["digest"] = await processDigest(matches, teamById, now);
 
   // 3. トーナメント次戦カード確定通知
-  results["tournament"] = await processTournament(teamById, now);
+  const matchById = new Map(matches.map((m) => [m.id, m]));
+  results["tournament"] = await processTournament(teamById, matchById, now);
 
   return NextResponse.json({
     ok: true,
@@ -354,6 +355,7 @@ async function sendToSub(
  */
 async function processTournament(
   teamById: Map<string, Team>,
+  matchById: Map<string, Match>,
   now: Date,
 ): Promise<{ processed: number; pushed: number; skipped: number }> {
   const bracket = await getBracketMatches();
@@ -390,12 +392,16 @@ async function processTournament(
         const spoiler = await redis.get<string>(K.subSpoiler(h));
         const spoilerBlock = spoiler === "1";
 
+        // 対応する Match から会場・放送局を取得（fallback で bm から venue 取れる）
+        const m = matchById.get(bm.id);
         const payload = buildTournamentPayload({
           bracketMatchId: bm.id,
           favTeam: teamById.get(favId),
           opponent: teamById.get(oppId),
           stage: roundLabel(bm.round),
           kickoffJST: bm.kickoffJST,
+          venue: m?.venue ?? bm.venue,
+          broadcasts: m?.broadcasts,
           spoilerBlock,
         });
 

@@ -46,7 +46,10 @@ if (!apiKey) {
 }
 
 const ai = new GoogleGenAI({ apiKey });
-const MODEL = "gemini-2.5-flash";
+// gemini-2.5-flash-lite: 無料枠 15 RPM / 1000 RPD（240 人なら 5sec 間隔で問題なし）
+// gemini-2.0-flash: 無料枠 0 (このAPIキーでは未利用可)
+// gemini-2.5-flash: 5 RPM で厳しすぎる、503 多発
+const MODEL = "gemini-2.5-flash-lite";
 
 const POS_LABEL = { GK: "ゴールキーパー", DF: "DF", MF: "MF", FW: "FW" };
 
@@ -134,24 +137,37 @@ function buildPrompt({ name, club, position, country, wikiExtract, captain }) {
   ].join("\n");
 }
 
-async function callGemini(prompt) {
-  const resp = await ai.models.generateContent({
-    model: MODEL,
-    contents: prompt,
-    config: {
-      temperature: 0.7,
-      responseMimeType: "application/json",
-    },
-  });
-  const text = resp.text;
-  if (!text) throw new Error("Empty response");
+async function callGemini(prompt, attempt = 0) {
   try {
-    return JSON.parse(text);
-  } catch {
-    // fallback: try to extract first { ... } block
-    const m = text.match(/\{[\s\S]*\}/);
-    if (m) return JSON.parse(m[0]);
-    throw new Error("Failed to parse JSON: " + text.slice(0, 200));
+    const resp = await ai.models.generateContent({
+      model: MODEL,
+      contents: prompt,
+      config: {
+        temperature: 0.7,
+        responseMimeType: "application/json",
+      },
+    });
+    const text = resp.text;
+    if (!text) throw new Error("Empty response");
+    try {
+      return JSON.parse(text);
+    } catch {
+      const m = text.match(/\{[\s\S]*\}/);
+      if (m) return JSON.parse(m[0]);
+      throw new Error("Failed to parse JSON: " + text.slice(0, 200));
+    }
+  } catch (err) {
+    const msg = String(err?.message ?? err);
+    // 429: rate limit、503: 過負荷 → 指数バックオフでリトライ
+    const isRetryable = /429|RESOURCE_EXHAUSTED|503|UNAVAILABLE|overloaded/.test(msg);
+    if (isRetryable && attempt < 4) {
+      // 5, 15, 45, 90 秒
+      const waitSec = [5, 15, 45, 90][attempt] ?? 90;
+      process.stdout.write(`(${attempt + 1}/4 retry in ${waitSec}s)`);
+      await sleep(waitSec * 1000);
+      return callGemini(prompt, attempt + 1);
+    }
+    throw err;
   }
 }
 
@@ -228,7 +244,7 @@ async function main() {
           await fs.writeFile(OUT_PATH, JSON.stringify(existing, null, 2));
         }
 
-        // RPM制限対策：15 req/min → 5sec ごと安全
+        // RPM制限対策（gemini-1.5-flash 15RPM → 5sec ごとで 12 RPM）
         await sleep(5000);
       } catch (err) {
         failed += 1;
