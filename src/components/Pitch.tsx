@@ -198,43 +198,44 @@ export function Pitch({
 
           const dot = (
             <div className="flex flex-col items-center pointer-events-auto">
-              {/* 写真コンテナ。iOS Safari で transform + border-radius のクリップが
-                  甘いため、clip-path: circle() で確実に円形にクリップする。
-                  さらに isolation で transform 由来のはみ出しを防ぐ */}
-              <div
-                className="relative w-12 h-12 rounded-full border-2 shadow-[0_4px_10px_-2px_rgba(0,0,0,0.5)]"
-                style={{
-                  background: `linear-gradient(160deg, ${secondary} 0%, ${primary} 100%)`,
-                  borderColor: "rgba(255,255,255,0.65)",
-                  clipPath: "circle(50% at 50% 50%)",
-                  isolation: "isolate",
-                }}
-              >
-                {photo ? (
-                  <Image
-                    src={photo}
-                    alt={slot.name}
-                    width={96}
-                    height={96}
-                    unoptimized
-                    className="absolute inset-0 w-full h-full object-cover object-top"
-                  />
-                ) : (
-                  // フォールバック：チームカラーの円 + 旗 + イニシャル + ポジション
-                  // 「写真未取得」感を出さず、意図的なアバターに見せる
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-                    <span className="text-[18px] leading-none">{flag}</span>
-                    <span className="text-[10px] font-bold text-white/95 leading-none tracking-wider">
-                      {initial}
-                    </span>
-                  </div>
-                )}
+              {/* 写真ボックス全体の wrapper（位置 relative、バッジは absolute で外に出す） */}
+              <div className="relative w-12 h-12">
+                {/* 円形写真本体: iOS Safari で transform + border-radius のクリップが
+                    甘いため clip-path: circle() で確実に円形にクリップ */}
+                <div
+                  className="absolute inset-0 rounded-full border-2 shadow-[0_4px_10px_-2px_rgba(0,0,0,0.5)]"
+                  style={{
+                    background: `linear-gradient(160deg, ${secondary} 0%, ${primary} 100%)`,
+                    borderColor: "rgba(255,255,255,0.65)",
+                    clipPath: "circle(50% at 50% 50%)",
+                    isolation: "isolate",
+                  }}
+                >
+                  {photo ? (
+                    <Image
+                      src={photo}
+                      alt={slot.name}
+                      width={96}
+                      height={96}
+                      unoptimized
+                      className="absolute inset-0 w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    // フォールバック：旗 + イニシャル（意図的なアバター）
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
+                      <span className="text-[18px] leading-none">{flag}</span>
+                      <span className="text-[10px] font-bold text-white/95 leading-none tracking-wider">
+                        {initial}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {/* 番号バッジ: clip-path の外（兄弟 absolute）で確実に表示 */}
+                <span className="absolute -bottom-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-black/90 border border-white/55 flex items-center justify-center text-[9.5px] font-bold text-white tabular-nums shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10">
+                  {slot.number}
+                </span>
               </div>
-              {/* 番号バッジは clip-path 外に置く（円から少し顔を出すデザイン保持） */}
-              <span className="-mt-3.5 ml-7 min-w-[18px] h-[18px] px-1 rounded-full bg-black/85 border border-white/40 flex items-center justify-center text-[9px] font-bold text-white tabular-nums">
-                {slot.number}
-              </span>
-              <div className="mt-0.5 text-center max-w-[68px]">
+              <div className="mt-1 text-center max-w-[68px]">
                 <p className="text-[10px] font-semibold text-white leading-tight px-0.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.95)] break-words">
                   {displayName(slot.name)}
                 </p>
