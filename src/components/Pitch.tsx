@@ -220,8 +220,13 @@ export function Pitch({
                     className="absolute inset-0 w-full h-full object-cover object-top"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-[14px] font-bold text-white">
-                    {initial}
+                  // フォールバック：チームカラーの円 + 旗 + イニシャル + ポジション
+                  // 「写真未取得」感を出さず、意図的なアバターに見せる
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
+                    <span className="text-[18px] leading-none">{flag}</span>
+                    <span className="text-[10px] font-bold text-white/95 leading-none tracking-wider">
+                      {initial}
+                    </span>
                   </div>
                 )}
               </div>

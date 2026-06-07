@@ -457,10 +457,12 @@ function KeyPlayer({
         </div>
       )}
       <div className="relative p-2.5">
-        <p className="text-[9px] tracking-widest uppercase text-white/65">
+        <p className="text-[9px] tracking-widest uppercase text-white/65 truncate">
           {player.tagline}
         </p>
-        <p className="text-[12px] font-semibold leading-tight">{player.name}</p>
+        <p className="text-[12px] font-semibold leading-tight break-words">
+          {player.name}
+        </p>
       </div>
     </Link>
   );
