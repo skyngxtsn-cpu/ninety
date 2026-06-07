@@ -20,7 +20,7 @@ import { TBDMatchHero } from "../../../components/TBDMatchHero";
 import { ReminderButton } from "../../../components/ReminderButton";
 import { BroadcastChipList } from "../../../components/BroadcastChip";
 import { SpoilerWrap } from "../../../components/SpoilerWrap";
-import { CommentSection } from "../../../components/CommentSection";
+import { CommentBadge } from "../../../components/CommentBadge";
 import { CHANNELS, type BroadcastChannelId } from "../../../lib/data/broadcasts";
 
 export default async function MatchPage(props: PageProps<"/matches/[id]">) {
@@ -342,11 +342,9 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
         );
       })()}
 
-      <CommentSection
-        matchId={match.id}
-        status={match.status}
-        defaultFlag={home.flag}
-      />
+      <div className="mx-4 mt-5 flex justify-center">
+        <CommentBadge matchId={match.id} variant="chip" />
+      </div>
 
       <div className="h-12" />
     </>
