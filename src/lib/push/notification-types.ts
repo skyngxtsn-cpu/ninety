@@ -87,8 +87,12 @@ export function isTypeEnabled(
   pref: NotificationPreferences,
   spoilerBlock: boolean,
 ): boolean {
-  // ネタバレ防止モード ON は result を強制 OFF
-  if (type === "result" && spoilerBlock) return false;
+  // ネタバレ防止モード ON 時は、結果を暗黙的にバラすタイプを強制 OFF
+  //   - result: スコア丸見え
+  //   - tournament: 通知が届く＝推しが勝ち抜けたことが分かる
+  if (spoilerBlock && (type === "result" || type === "tournament")) {
+    return false;
+  }
   const group = TYPE_TO_GROUP[type];
   return pref[group] === true;
 }

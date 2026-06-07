@@ -48,7 +48,7 @@ export function SpoilerToggle() {
       </div>
       {blocked && (
         <p className="mt-2 text-[10px] text-amber-300/90 bg-amber-500/10 border border-amber-400/30 rounded-md px-2 py-1.5 leading-relaxed">
-          ⚠️ ONの間、「試合結果通知（スコア付き）」は自動で無効になります
+          ⚠️ ONの間、「試合結果通知」と「推しの次戦カード確定」は自動で無効になります
         </p>
       )}
     </section>

@@ -188,18 +188,23 @@ export function NotificationCard() {
           checked={prefs.digest}
           onToggle={togglePref("digest")}
         />
-        <ToggleRow
-          label="推しの次戦カード確定"
-          hint="決勝T で次の対戦相手が決まった時にお知らせ ⚠️ 通知が届く＝推しが勝ち上がったことが分かります"
-          checked={prefs.tournament}
-          onToggle={togglePref("tournament")}
-        />
       </div>
 
-      <div className="border-t border-white/10 pt-3 space-y-2">
+      <div className="border-t border-white/10 pt-3 space-y-3">
         <p className="text-[10px] uppercase tracking-wider text-white/45">
           ネタバレOK時のみ
         </p>
+        <ToggleRow
+          label="推しの次戦カード確定"
+          hint={
+            spoilerBlock
+              ? "❌ ネタバレ防止モード ON のため無効中（届く＝推しが勝ち上がったことが分かるため）"
+              : "決勝T で次の対戦相手が決まった時にお知らせ"
+          }
+          checked={!spoilerBlock && prefs.tournament}
+          onToggle={togglePref("tournament")}
+          disabled={spoilerBlock}
+        />
         <ToggleRow
           label="試合結果通知（スコア付き）"
           hint={
