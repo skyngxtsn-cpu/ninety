@@ -49,28 +49,58 @@ export function PushNotificationToggle() {
   }
 
   if (state.status === "subscribed") {
+    const sendTest = async () => {
+      setBusy(true);
+      try {
+        const j = state.subscription.toJSON();
+        const res = await fetch("/api/push/test", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            subscription: {
+              endpoint: j.endpoint,
+              keys: { p256dh: j.keys?.p256dh, auth: j.keys?.auth },
+            },
+          }),
+        });
+        if (!res.ok) {
+          alert("テスト通知の送信に失敗しました");
+        }
+      } finally {
+        setBusy(false);
+      }
+    };
     return (
-      <div className="mx-4 mt-4 px-4 py-3 rounded-xl bg-blue-500/12 border border-blue-400/40 flex items-center gap-3">
-        <span className="text-[20px]">🔔</span>
-        <div className="flex-1">
-          <p className="text-[13px] font-semibold text-white">通知ON</p>
-          <p className="text-[11px] text-white/65 mt-0.5">
-            ベルでマークした試合の15分前に通知が届きます
-          </p>
+      <div className="mx-4 mt-4 px-4 py-3 rounded-xl bg-blue-500/12 border border-blue-400/40">
+        <div className="flex items-center gap-3">
+          <span className="text-[20px]">🔔</span>
+          <div className="flex-1">
+            <p className="text-[13px] font-semibold text-white">通知ON</p>
+            <p className="text-[11px] text-white/65 mt-0.5">
+              ベルでマークした試合の15分前に通知が届きます
+            </p>
+          </div>
+          <button
+            onClick={async () => {
+              setBusy(true);
+              try {
+                await unsubscribe();
+              } finally {
+                setBusy(false);
+              }
+            }}
+            disabled={busy}
+            className="px-3 py-1.5 rounded-lg bg-white/10 text-[11px] font-semibold text-white/85 hover:bg-white/15 disabled:opacity-50"
+          >
+            OFF
+          </button>
         </div>
         <button
-          onClick={async () => {
-            setBusy(true);
-            try {
-              await unsubscribe();
-            } finally {
-              setBusy(false);
-            }
-          }}
+          onClick={sendTest}
           disabled={busy}
-          className="px-3 py-1.5 rounded-lg bg-white/10 text-[11px] font-semibold text-white/85 hover:bg-white/15 disabled:opacity-50"
+          className="mt-2.5 w-full py-1.5 rounded-lg bg-white/8 hover:bg-white/12 text-[12px] font-medium text-white/85 disabled:opacity-50"
         >
-          OFF
+          {busy ? "送信中…" : "📨 テスト通知を送る"}
         </button>
       </div>
     );
