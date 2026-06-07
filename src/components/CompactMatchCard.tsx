@@ -13,7 +13,6 @@ import { BroadcastIcons } from "./BroadcastChip";
 import { SpoilerWrap } from "./SpoilerWrap";
 import { CommentBadge } from "./CommentBadge";
 import { HotMatchBadge } from "./HotMatchBadge";
-import { CommentPreview } from "./CommentPreview";
 
 type Props = {
   match: Match;
@@ -131,12 +130,9 @@ export async function CompactMatchCard({ match, favoriteTeamIds }: Props) {
           </div>
         )}
         <span className="ml-auto shrink-0">
-          <CommentBadge matchId={match.id} variant="inline" threshold={3} />
+          <CommentBadge matchId={match.id} variant="inline" threshold={0} />
         </span>
       </div>
-
-      {/* コメントプレビュー（最新1件 + 残り件数） */}
-      <CommentPreview matchId={match.id} status={match.status} />
     </>
   );
 

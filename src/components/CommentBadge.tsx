@@ -47,8 +47,10 @@ export function CommentBadge({
         href={`/matches/${matchId}/comments`}
         onClick={(e) => e.stopPropagation()}
         className="inline-flex items-center gap-1 text-[10px] text-blue-200/85 hover:text-blue-200"
+        aria-label={`コメント ${count} 件`}
       >
-        💬 {count}
+        <span>💬</span>
+        <span>{count}</span>
       </Link>
     );
   }
