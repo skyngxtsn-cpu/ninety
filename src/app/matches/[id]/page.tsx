@@ -437,30 +437,42 @@ function KeyPlayer({
           opacity: 0.6,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
       {player.photoUrl ? (
-        <div className="relative flex-1 flex items-end justify-center pt-4">
+        <div className="relative flex-1 min-h-0 flex items-end justify-center pt-3 overflow-hidden">
           <Image
             src={player.photoUrl}
             alt={player.name}
             width={180}
             height={220}
             unoptimized
-            className="h-[88%] w-auto object-contain drop-shadow-[0_6px_18px_rgba(0,0,0,0.55)]"
+            className="max-h-[88%] w-auto object-contain drop-shadow-[0_6px_18px_rgba(0,0,0,0.55)]"
           />
         </div>
       ) : (
-        <div className="relative flex-1 flex items-center justify-center pt-4">
-          <div className="w-14 h-14 rounded-full bg-white/15 border border-white/20 flex items-center justify-center text-lg font-bold">
-            {player.name.slice(0, 1)}
+        <div className="relative flex-1 min-h-0 flex items-center justify-center pt-3">
+          <div className="w-14 h-14 rounded-full bg-white/15 border border-white/20 flex flex-col items-center justify-center">
+            <span className="text-[16px] leading-none">{team.flag}</span>
+            <span className="text-[10px] font-bold leading-none mt-0.5">
+              {player.name.slice(0, 1)}
+            </span>
           </div>
         </div>
       )}
-      <div className="relative p-2.5">
-        <p className="text-[9px] tracking-widest uppercase text-white/65 truncate">
+      {/* テキスト領域は固定の最小高さを確保（カードの aspect-[3/4] に収まる範囲） */}
+      <div className="relative px-2 pb-2 pt-1 min-h-[44px]">
+        <p className="text-[9px] tracking-widest uppercase text-white/65 truncate leading-tight">
           {player.tagline}
         </p>
-        <p className="text-[12px] font-semibold leading-tight break-words">
+        <p
+          className="text-[11.5px] font-semibold leading-tight break-words mt-0.5"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
           {player.name}
         </p>
       </div>
