@@ -31,6 +31,14 @@ export function OtherSettings() {
     <>
       <SectionHeader kicker="App" title="その他" />
       <div className="mx-4 glass rounded-2xl overflow-hidden">
+        <a
+          href="/feedback"
+          className="block px-4 py-3.5 text-[14px] hover:bg-white/[0.04] transition flex items-center justify-between"
+        >
+          <span>💌 フィードバックを送る</span>
+          <span className="text-white/40">›</span>
+        </a>
+        <div className="border-t border-white/8" />
         <Row label="タイムゾーン" value="日本時間 (JST)" />
         <div className="border-t border-white/8" />
         <Row label="言語" value="日本語" />
