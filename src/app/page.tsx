@@ -19,7 +19,7 @@ export default async function HomePage() {
   const [countdown, favNext, upcoming, recent] = await Promise.all([
     getTournamentCountdown(),
     getFavoriteNextMatch(favoriteIds),
-    getUpcomingByDate(14),
+    getUpcomingByDate(60),
     getRecentResults(5),
   ]);
 

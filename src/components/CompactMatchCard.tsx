@@ -112,10 +112,12 @@ export async function CompactMatchCard({ match, favoriteTeamIds }: Props) {
           />
         </div>
 
-        {/* 右: 推し ❤️ アイコン + 🔔 ボタン */}
-        <div className="shrink-0 flex flex-col items-end gap-1">
+        {/* 右: 推し ❤️ アイコン + ⭐ お気に入りボタン（垂直中央揃え） */}
+        <div className="shrink-0 flex flex-col items-center gap-1">
           {involvesFavorite && (
-            <span className="text-[13px] leading-none">❤️</span>
+            <span className="w-7 text-center text-[13px] leading-none">
+              ❤️
+            </span>
           )}
           <ReminderButton matchId={match.id} size="sm" />
         </div>

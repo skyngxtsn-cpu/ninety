@@ -205,7 +205,7 @@ export function CommentBoardClient({ matchId, status, defaultFlag }: Props) {
               onChange={(e) => setText(e.target.value)}
               maxLength={200}
               placeholder="話しながら見よう…"
-              className="flex-1 resize-none bg-transparent text-[13px] text-white placeholder:text-white/40 focus:outline-none px-2 py-1 max-h-24"
+              className="flex-1 resize-none bg-transparent text-[16px] text-white placeholder:text-white/40 focus:outline-none px-2 py-1 max-h-24"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
                   e.preventDefault();
@@ -341,7 +341,7 @@ function NickEditor({
           onChange={(e) => setValue(e.target.value)}
           maxLength={24}
           placeholder={generateDefaultNick(defaultFlag)}
-          className="flex-1 bg-white/5 border border-white/15 rounded-lg px-2.5 py-1.5 text-[13px] text-white"
+          className="flex-1 bg-white/5 border border-white/15 rounded-lg px-2.5 py-1.5 text-[16px] text-white"
         />
         <button
           onClick={() => onSave(value.trim() || generateDefaultNick(defaultFlag))}
