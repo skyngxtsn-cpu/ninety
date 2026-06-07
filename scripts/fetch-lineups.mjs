@@ -62,6 +62,7 @@ const TEAM_NAME_TO_ID = {
   Canada: "can",
   "Bosnia and Herzegovina": "bih",
   "Bosnia & Herzegovina": "bih",
+  "Bosnia-Herzegovina": "bih",
   Qatar: "qat",
   Switzerland: "sui",
   Brazil: "bra",
