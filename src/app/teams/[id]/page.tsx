@@ -10,7 +10,9 @@ import {
   matchesByTeam,
   playersByTeam,
   getAllGroups,
+  getPredictedLineup,
 } from "../../../lib/data";
+import { Pitch } from "../../../components/Pitch";
 
 export default async function TeamPage(props: PageProps<"/teams/[id]">) {
   const { id } = await props.params;
@@ -23,6 +25,7 @@ export default async function TeamPage(props: PageProps<"/teams/[id]">) {
   ]);
   const teamPlayers = playersByTeam(team.id);
   const group = allGroups.find((g) => g.name === team.group);
+  const lineup = getPredictedLineup(team.id);
 
   return (
     <>
@@ -118,6 +121,23 @@ export default async function TeamPage(props: PageProps<"/teams/[id]">) {
             <p className="relative text-[14px] leading-relaxed font-medium">
               🔥 {team.hype}
             </p>
+          </div>
+        </>
+      )}
+
+      {lineup && (
+        <>
+          <SectionHeader kicker="Lineup" title="想定スタメン" />
+          <div className="mx-4">
+            <Pitch
+              lineup={lineup}
+              primary={team.primary}
+              secondary={team.secondary}
+              flag={team.flag}
+              teamName={team.name}
+              teamId={team.id}
+              variant="predicted"
+            />
           </div>
         </>
       )}

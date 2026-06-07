@@ -299,6 +299,7 @@ export const curatedPlayers: Player[] = [
       "ヨーロッパ最高峰のクラブで揉まれた左サイドの要。",
     ],
     tagline: "左の万能DF",
+    photoUrl: "https://r2.thesportsdb.com/images/media/player/cutout/9jngzv1756409131.png",
   },
   {
     id: "tanakaao",
@@ -315,6 +316,7 @@ export const curatedPlayers: Player[] = [
       "ボール奪取と展開の両方ができる、遠藤の相棒。",
     ],
     tagline: "中盤の相棒",
+    photoUrl: "https://r2.thesportsdb.com/images/media/player/cutout/4xeu161757086571.png",
   },
   {
     id: "zsuzuki",
