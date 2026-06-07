@@ -15,10 +15,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  title: "90 — W杯の意味を、90秒で。",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "90 — W杯の意味を、90秒で。",
+    template: "%s",
+  },
   description:
-    "サッカーを知らなくてもW杯が楽しめる。なぜ注目なのか、何が起きたのかを30秒で。",
+    "W杯 2026 を 90 秒で。推しチームの試合だけ通知、結果ネタバレなしの観戦サポート PWA。",
   applicationName: "90",
   appleWebApp: {
     capable: true,
@@ -33,6 +41,20 @@ export const metadata: Metadata = {
     telephone: false,
     address: false,
     email: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: "90",
+    title: "90 — W杯の意味を、90秒で。",
+    description:
+      "推しチームの試合だけ通知、結果ネタバレなし。W杯 2026 の観戦サポート PWA。",
+    locale: "ja_JP",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "90 — W杯の意味を、90秒で。",
+    description:
+      "推しチームの試合だけ通知、結果ネタバレなし。W杯 2026 の観戦サポート PWA。",
   },
 };
 

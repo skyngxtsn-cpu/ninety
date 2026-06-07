@@ -20,6 +20,9 @@ export default function FeedbackPage() {
           バグ・改善案・感想、なんでも歓迎です。<br />
           一言だけでも大歓迎。
         </p>
+        <p className="text-[11px] text-amber-200/80 mt-2 leading-relaxed">
+          ⚠️ 氏名・メール・電話番号など個人情報は本文に書かないでください。
+        </p>
       </div>
       <FeedbackFormClient />
       <div className="h-12" />

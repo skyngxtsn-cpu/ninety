@@ -60,6 +60,22 @@ export function OtherSettings() {
           <span className="text-white/40">›</span>
         </a>
         <div className="border-t border-white/8" />
+        <a
+          href="/privacy"
+          className="block px-4 py-3.5 text-[14px] hover:bg-white/[0.04] transition flex items-center justify-between"
+        >
+          <span>📄 プライバシーポリシー</span>
+          <span className="text-white/40">›</span>
+        </a>
+        <div className="border-t border-white/8" />
+        <a
+          href="/terms"
+          className="block px-4 py-3.5 text-[14px] hover:bg-white/[0.04] transition flex items-center justify-between"
+        >
+          <span>📄 利用規約</span>
+          <span className="text-white/40">›</span>
+        </a>
+        <div className="border-t border-white/8" />
         <Row label="タイムゾーン" value="日本時間 (JST)" />
         <div className="border-t border-white/8" />
         <Row label="言語" value="日本語" />

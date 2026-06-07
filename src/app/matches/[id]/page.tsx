@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -23,6 +24,39 @@ import { SpoilerWrap } from "../../../components/SpoilerWrap";
 import { CommentBadge } from "../../../components/CommentBadge";
 import { MatchEventTimeline } from "../../../components/MatchEventTimeline";
 import { CHANNELS, type BroadcastChannelId } from "../../../lib/data/broadcasts";
+import { XShareButton } from "../../../components/XShareButton";
+
+export async function generateMetadata(
+  props: PageProps<"/matches/[id]">,
+): Promise<Metadata> {
+  const { id } = await props.params;
+  const match = await getMatch(id);
+  if (!match) return { title: "試合｜90" };
+  const [home, away] = await Promise.all([
+    getTeam(match.homeTeamId),
+    getTeam(match.awayTeamId),
+  ]);
+  const title = home && away
+    ? `${home.flag} ${home.shortName} vs ${away.shortName} ${away.flag}｜90`
+    : `${match.stage}｜90`;
+  const description = match.hook
+    ? `🔥 ${match.hook}｜W杯 2026 観戦サポート PWA「90」`
+    : "W杯 2026 観戦サポート PWA「90」";
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default async function MatchPage(props: PageProps<"/matches/[id]">) {
   const { id } = await props.params;
@@ -359,6 +393,13 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
 
       <div className="mx-4 mt-5 flex justify-center">
         <CommentBadge matchId={match.id} variant="chip" />
+      </div>
+
+      <div className="mx-4 mt-5">
+        <XShareButton
+          matchId={match.id}
+          text={`📺 ${formatKickoffJST(match.kickoffJST)}\n${home.flag} ${home.shortName} vs ${away.shortName} ${away.flag}\n🔥 ${match.hook}`}
+        />
       </div>
 
       <div className="h-12" />
