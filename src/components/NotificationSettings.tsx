@@ -52,8 +52,8 @@ export function NotificationSettings() {
         onToggle={toggle("digest")}
       />
       <ToggleRow
-        label="トーナメント進出通知"
-        hint="⚠️ 通知が届く = 推しが勝ち抜けたバレ可能"
+        label="推しの次戦カード確定"
+        hint="決勝T で次の対戦相手が決まった時にお知らせ ⚠️ 通知が届く＝推しが勝ち上がったことが分かります"
         checked={prefs.tournament}
         onToggle={toggle("tournament")}
       />

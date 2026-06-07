@@ -71,8 +71,8 @@ export function buildPayload(
       body = "試合終了、スコアはアプリで確認";
       break;
     case "tournament":
-      title = "🏆 トーナメント：次の相手が決まりました";
-      body = "推しチームの次戦カードが確定しました";
+      title = "🏆 推しの次の相手が決まりました";
+      body = "決勝トーナメントの次戦カードが確定";
       break;
     case "digest":
       // digest はサマリで複数試合なので呼び出し側で組み立て
