@@ -102,7 +102,7 @@ export function NotificationCard() {
   }
 
   // subscribed
-  const sendTest = async () => {
+  const sendTest = async (type?: string) => {
     setBusy(true);
     try {
       const j = state.subscription.toJSON();
@@ -114,6 +114,7 @@ export function NotificationCard() {
             endpoint: j.endpoint,
             keys: { p256dh: j.keys?.p256dh, auth: j.keys?.auth },
           },
+          type,
         }),
       });
       if (!res.ok) {
@@ -123,6 +124,20 @@ export function NotificationCard() {
       setBusy(false);
     }
   };
+
+  // 各通知タイプのテスト用ラベル
+  const testTypes: { id: string; label: string }[] = [
+    { id: "pre-3h", label: "事前 3時間前" },
+    { id: "pre-1h", label: "事前 1時間前" },
+    { id: "pre-15m", label: "事前 15分前" },
+    { id: "lineup", label: "📋 スタメン発表" },
+    { id: "kickoff", label: "🟢 キックオフ" },
+    { id: "halftime", label: "⏸ ハーフタイム" },
+    { id: "fulltime", label: "🏁 試合終了" },
+    { id: "result", label: "📊 結果 (2-1)" },
+    { id: "tournament", label: "🏆 次戦カード" },
+    { id: "digest", label: "🌙 ダイジェスト" },
+  ];
 
   const togglePref = (key: keyof NotificationPreferences) => () => {
     setPrefs((p) => ({ ...p, [key]: !p[key] }));
@@ -158,13 +173,24 @@ export function NotificationCard() {
         </button>
       </div>
 
-      <button
-        onClick={sendTest}
-        disabled={busy}
-        className="w-full py-1.5 rounded-lg bg-white/8 hover:bg-white/12 text-[12px] font-medium text-white/85 disabled:opacity-50"
-      >
-        {busy ? "送信中…" : "📨 テスト通知を送る"}
-      </button>
+      <details className="rounded-lg bg-white/[0.04] border border-white/8">
+        <summary className="cursor-pointer px-3 py-2 text-[12px] font-medium text-white/85 hover:bg-white/[0.06] select-none rounded-lg">
+          📨 テスト通知を送る
+        </summary>
+        <div className="px-3 pb-3 pt-1 grid grid-cols-2 gap-1.5">
+          {testTypes.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => sendTest(t.id)}
+              disabled={busy}
+              className="px-2 py-1.5 rounded-md bg-white/[0.05] hover:bg-white/[0.1] text-[11px] text-left text-white/85 disabled:opacity-40 truncate"
+              title={t.label}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </details>
 
       <div className="border-t border-white/10 pt-3 space-y-3">
         <p className="text-[10px] uppercase tracking-wider text-white/45">
