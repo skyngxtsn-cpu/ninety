@@ -2,10 +2,25 @@ import { Redis } from "@upstash/redis";
 
 /**
  * Upstash Redis クライアント。
- * 環境変数 UPSTASH_REDIS_REST_URL と UPSTASH_REDIS_REST_TOKEN が必要。
- * Vercel の Upstash Marketplace 連携で自動セットされる。
+ *
+ * Vercel の Upstash Marketplace 連携で自動セットされる環境変数を使う。
+ * 2025年現在の連携は KV_REST_API_URL / KV_REST_API_TOKEN という名前で入る。
+ * （旧 UPSTASH_REDIS_REST_URL/TOKEN もフォールバックでサポート）
  */
-export const redis = Redis.fromEnv();
+function makeRedis(): Redis {
+  const url =
+    process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
+  const token =
+    process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) {
+    // 起動時はビルド時に実行されるため、ここで throw すると build が失敗する。
+    // 実際の呼び出し時にエラーが返るよう、空の URL/Token で初期化（クエリ時に例外）
+    return new Redis({ url: url ?? "", token: token ?? "" });
+  }
+  return new Redis({ url, token });
+}
+
+export const redis = makeRedis();
 
 /**
  * キー命名:
