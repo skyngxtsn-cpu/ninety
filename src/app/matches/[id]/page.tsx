@@ -25,6 +25,7 @@ import { CommentBadge } from "../../../components/CommentBadge";
 import { MatchEventTimeline } from "../../../components/MatchEventTimeline";
 import { CHANNELS, type BroadcastChannelId } from "../../../lib/data/broadcasts";
 import { XShareButton } from "../../../components/XShareButton";
+import { PostMatchSpoilerCover } from "../../../components/PostMatchSpoilerCover";
 
 export async function generateMetadata(
   props: PageProps<"/matches/[id]">,
@@ -137,8 +138,9 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
         </div>
       </section>
 
-      {/* 試合後体験（最優先） */}
+      {/* 試合後体験（最優先） — ネタバレ防止モード時はまとめてカバー */}
       {finished && match.result && (
+        <PostMatchSpoilerCover>
         <section className="mx-4 mt-5 space-y-3">
           {/* ⏱ 試合経過（タイムライン）: 得点・カード・交代 */}
           {match.events &&
@@ -223,6 +225,7 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
             </a>
           )}
         </section>
+        </PostMatchSpoilerCover>
       )}
 
       {/* この試合の意味 */}

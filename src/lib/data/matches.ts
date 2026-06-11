@@ -208,6 +208,42 @@ export async function getFinishedMatches(): Promise<Match[]> {
   return matches.filter((m) => m.status === "finished").slice(-3);
 }
 
+/** 全ての終了試合を新しい順（最近 → 開幕日）で日付バケットに分割 */
+export async function getFinishedByDate(): Promise<DateBucket[]> {
+  const { matches, nowRef } = await loadAll();
+  const finished = matches.filter((m) => m.status === "finished" && m.result);
+  const buckets = new Map<string, Match[]>();
+  for (const m of finished) {
+    const key = jstDateKey(new Date(m.kickoffJST));
+    const arr = buckets.get(key) ?? [];
+    arr.push(m);
+    buckets.set(key, arr);
+  }
+  const result: DateBucket[] = [];
+  const todayKey = jstDateKey(nowRef);
+  const yesterdayKey = jstDateKey(new Date(nowRef.getTime() - 24 * 3600 * 1000));
+  // 新しい順
+  for (const [dateKey, ms] of [...buckets.entries()].sort(
+    ([a], [b]) => (a > b ? -1 : a < b ? 1 : 0),
+  )) {
+    const date = new Date(dateKey + "T00:00:00+09:00");
+    let label: string;
+    if (dateKey === todayKey) label = "今日";
+    else if (dateKey === yesterdayKey) label = "昨日";
+    else label = formatDateLabel(date);
+    result.push({
+      dateKey,
+      label,
+      date,
+      matches: ms.sort(
+        (a, b) =>
+          new Date(b.kickoffJST).getTime() - new Date(a.kickoffJST).getTime(),
+      ),
+    });
+  }
+  return result;
+}
+
 export async function getTrendingMatches(
   favoriteTeams: string[] = ["jpn"],
 ): Promise<Match[]> {

@@ -95,6 +95,14 @@ export default async function HomePage() {
               />
             ))}
           </div>
+          <div className="mx-4 mt-3">
+            <Link
+              href="/results"
+              className="block text-center text-[12px] text-white/65 hover:text-white py-2 rounded-lg hover:bg-white/[0.04] transition"
+            >
+              すべての試合結果を見る ›
+            </Link>
+          </div>
         </>
       )}
 
