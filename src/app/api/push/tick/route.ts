@@ -114,10 +114,29 @@ async function processOffsetType(
   const offsetMs = offset * 60 * 1000;
   const windowMs = TICK_WINDOW_MINUTES * 60 * 1000;
 
+  // GitHub Actions の cron が 5 分刻みのはずが実際は 2〜4 時間ずれることがあるため、
+  // 「未発火 + 目標時刻が過去 + 古すぎない」を満たすものは catch-up 発火する。
+  // pre-* は試合開始までなら遅延発火 OK、kickoff/halftime/fulltime は 90 分以内に限定。
+  const LATE_TOLERANCE_MS: Record<NotificationType, number> = {
+    "pre-3h": 165 * 60 * 1000, // kickoff-3h から kickoff-15m まで catch-up 可
+    "pre-1h": 45 * 60 * 1000, // kickoff-1h から kickoff-15m まで
+    "pre-15m": 14 * 60 * 1000, // kickoff直前のみ
+    lineup: 60 * 60 * 1000,
+    kickoff: 25 * 60 * 1000,
+    halftime: 30 * 60 * 1000,
+    fulltime: 60 * 60 * 1000,
+    result: 12 * 60 * 60 * 1000, // 結果は丸 1 日以内なら出す価値あり
+    tournament: 24 * 60 * 60 * 1000,
+    digest: 0,
+  };
+  const lateTolerance = LATE_TOLERANCE_MS[type] ?? windowMs;
+
   const candidates = matches.filter((m) => {
     const target = new Date(m.kickoffJST).getTime() + offsetMs;
     const diff = target - now.getTime();
-    return diff >= -windowMs && diff <= windowMs;
+    // diff > 0: target is in the future → use small window (cron が早めに走っちゃった時)
+    // diff <= 0: target is in the past → late tolerance まで catch-up 発火
+    return diff <= windowMs && diff >= -lateTolerance;
   });
 
   // result タイプは結果が確定している試合だけ
@@ -231,9 +250,14 @@ async function processDigest(
   );
   const triggerMs = lastKickoff + 110 * 60 * 1000 + 30 * 60 * 1000;
   const windowMs = TICK_WINDOW_MINUTES * 60 * 1000;
+  // GitHub Actions cron 遅延を考慮: trigger 時刻を過ぎていれば最大 4 時間まで catch-up 発火
+  const LATE_TOLERANCE = 4 * 60 * 60 * 1000;
   const diff = triggerMs - now.getTime();
-  if (Math.abs(diff) > windowMs) {
-    return { runs: false, sent: 0, reason: "not yet (or already past window)" };
+  if (diff > windowMs) {
+    return { runs: false, sent: 0, reason: "not yet" };
+  }
+  if (diff < -LATE_TOLERANCE) {
+    return { runs: false, sent: 0, reason: "already past late tolerance" };
   }
 
   // 明日 JST の年月日
