@@ -22,7 +22,7 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 8
     permissions:
       contents: write
     steps:
@@ -45,9 +45,9 @@ jobs:
         run: |
           git config user.name "ninety-bot"
           git config user.email "bot@users.noreply.github.com"
-          if ! git diff --quiet src/lib/data/lineup-overrides-auto.json; then
-            git add src/lib/data/lineup-overrides-auto.json
-            git commit -m "auto: lineup update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          if ! git diff --quiet src/lib/data/lineup-overrides-auto.json src/lib/data/match-results-auto.json; then
+            git add src/lib/data/lineup-overrides-auto.json src/lib/data/match-results-auto.json
+            git commit -m "auto: lineup/results update $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           else
             echo "No changes"

@@ -41,10 +41,19 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function fdRequest(path) {
+async function fdRequest(path, _retried = false) {
   const res = await fetch(`${BASE}${path}`, {
     headers: { "X-Auth-Token": apiKey },
   });
+  if (res.status === 429 && !_retried) {
+    // Wait the time the API tells us, plus 2s buffer, then retry once
+    const t = await res.text();
+    const match = /Wait (\d+) seconds/.exec(t);
+    const waitSec = match ? Number(match[1]) + 2 : 62;
+    console.log(`    ⏳ rate limit, sleeping ${waitSec}s before retry`);
+    await sleep(waitSec * 1000);
+    return fdRequest(path, true);
+  }
   if (!res.ok) {
     const t = await res.text();
     throw new Error(`HTTP ${res.status}: ${t.slice(0, 200)}`);
@@ -93,6 +102,7 @@ const TEAM_NAME_TO_ID = {
   "New Zealand": "nzl",
   Spain: "esp",
   "Cape Verde": "cpv",
+  "Cape Verde Islands": "cpv",
   "Saudi Arabia": "ksa",
   Uruguay: "uru",
   France: "fra",
@@ -105,6 +115,7 @@ const TEAM_NAME_TO_ID = {
   Jordan: "jor",
   Portugal: "por",
   "DR Congo": "cod",
+  "Congo DR": "cod",
   "Democratic Republic of the Congo": "cod",
   Uzbekistan: "uzb",
   Colombia: "col",
@@ -310,13 +321,14 @@ async function main() {
     existingResults = {};
   }
 
-  // スコープ: 今 ± 6 時間以内の試合（env で範囲上書き可）
+  // スコープ: 直近 24h + 翌 6h（env で範囲上書き可）
+  // 空文字も無視（`??` だけでなく `||` も使用）
   const dateFrom =
-    process.env.LINEUP_FROM ??
-    new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    (process.env.LINEUP_FROM || "").trim() ||
+    new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
   const dateTo =
-    process.env.LINEUP_TO ??
-    new Date(Date.now() + 18 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    (process.env.LINEUP_TO || "").trim() ||
+    new Date(Date.now() + 6 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
   console.log(`Fetching W杯 fixtures for ${dateFrom} 〜 ${dateTo}`);
 
