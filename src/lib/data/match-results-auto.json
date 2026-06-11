@@ -1,1 +1,14 @@
-{}
+{
+  "2026-06-11-mex-rsa": {
+    "source": "auto",
+    "status": "FINISHED",
+    "home": 2,
+    "away": 0,
+    "halfHome": 1,
+    "halfAway": 0,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-11T23:08:34.909Z"
+  }
+}
