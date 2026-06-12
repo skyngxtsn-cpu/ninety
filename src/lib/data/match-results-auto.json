@@ -9,7 +9,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-12T23:05:25.939Z"
+    "fetchedAt": "2026-06-12T23:10:33.006Z"
   },
   "2026-06-12-kor-cze": {
     "source": "auto",
@@ -21,7 +21,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-12T23:05:26.048Z"
+    "fetchedAt": "2026-06-12T23:10:33.117Z"
   },
   "2026-06-12-can-bih": {
     "source": "auto",
@@ -33,6 +33,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-12T23:05:26.165Z"
+    "fetchedAt": "2026-06-12T23:10:33.227Z"
   }
 }
