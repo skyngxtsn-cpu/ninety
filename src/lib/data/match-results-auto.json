@@ -9,18 +9,18 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-12T02:57:58.782Z"
+    "fetchedAt": "2026-06-12T04:50:48.585Z"
   },
   "2026-06-12-kor-cze": {
     "source": "auto",
-    "status": "PAUSED",
-    "home": 0,
-    "away": 0,
+    "status": "FINISHED",
+    "home": 2,
+    "away": 1,
     "halfHome": 0,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-12T02:57:58.892Z"
+    "fetchedAt": "2026-06-12T04:50:48.730Z"
   }
 }
