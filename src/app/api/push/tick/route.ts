@@ -17,6 +17,7 @@ import {
   buildDigestPayload,
   buildTournamentPayload,
   buildHalftimeScorePayload,
+  buildGoalPayload,
   type NotificationPayload,
 } from "../../../../lib/push/payload";
 import { getAllMatches, getAllTeams } from "../../../../lib/data";
@@ -29,12 +30,21 @@ import matchResultsAutoRaw from "../../../../lib/data/match-results-auto.json";
 type AutoLineupEntry = { fetchedAt?: string };
 const lineupAuto = lineupAutoRaw as Record<string, AutoLineupEntry>;
 
+type AutoGoal = {
+  minute: number | null;
+  injuryTime: number | null;
+  type: string;
+  team: string;
+  scorer: string;
+  assist: string | null;
+};
 type AutoResult = {
   status?: string;
   home?: number | null;
   away?: number | null;
   halfHome?: number | null;
   halfAway?: number | null;
+  goals?: AutoGoal[];
 };
 const matchResultsAuto = matchResultsAutoRaw as Record<string, AutoResult>;
 
@@ -93,6 +103,9 @@ export async function POST(req: Request) {
   // 4. スタメン発表通知（lineup-overrides-auto.json の fetchedAt から検知）
   results["lineup"] = await processLineup(matches, teamById, now);
 
+  // 5. ⚽ 得点通知（match-results-auto.json の goals 配列の差分検知）
+  results["goal"] = await processGoals(matches, teamById, now);
+
   return NextResponse.json({
     ok: true,
     now: now.toISOString(),
@@ -123,6 +136,7 @@ async function processOffsetType(
     "pre-15m": 14 * 60 * 1000, // kickoff直前のみ
     lineup: 60 * 60 * 1000,
     kickoff: 25 * 60 * 1000,
+    goal: 0, // goal は offset 系では処理しない (processGoals 担当)
     halftime: 30 * 60 * 1000,
     fulltime: 60 * 60 * 1000,
     result: 12 * 60 * 60 * 1000, // 結果は丸 1 日以内なら出す価値あり
@@ -550,6 +564,108 @@ async function processLineup(
   }
 
   return { pushed, skipped };
+}
+
+/**
+ * ⚽ 得点通知。
+ * match-results-auto.json の各試合の goals 配列を見て、未配信のゴール
+ * （fired flag が無いもの）を購読者に配信。
+ *
+ * 各ゴールに対し goal idx (0,1,2,...) で重複防止。同じ試合の 1 点目と
+ * 2 点目はそれぞれ別の通知として届く。
+ *
+ * 仕様:
+ *  - 試合が IN_PLAY / PAUSED / FINISHED いずれかで goals が入っていれば対象
+ *  - 累積スコアを計算（goals 配列を時系列で並べた状態で home / away を加算）
+ *  - 各ゴールごとに firedKey: match:{id}:fired:goal-{idx}
+ *  - 配信先はベルマーク + 推しチーム（result と同じ）
+ *  - ネタバレ防止モード ON ユーザーは isTypeEnabled で自動的に除外される
+ *  - 最終的に試合終了して 24h 経ったゴールはスキップ (catch-up しない)
+ */
+async function processGoals(
+  matches: Match[],
+  teamById: Map<string, Team>,
+  now: Date,
+): Promise<{ candidates: number; pushed: number; failed: number; skipped: number }> {
+  let candidates = 0;
+  let pushed = 0;
+  let failed = 0;
+  let skipped = 0;
+
+  const FRESH_TOLERANCE_MS = 24 * 60 * 60 * 1000;
+
+  for (const m of matches) {
+    const r = matchResultsAuto[m.id];
+    if (!r || !r.goals || r.goals.length === 0) continue;
+
+    // 古すぎる試合（試合開始から 24h 以上経過）はスキップ
+    const kickMs = new Date(m.kickoffJST).getTime();
+    if (now.getTime() - kickMs > FRESH_TOLERANCE_MS) continue;
+
+    // 配信対象を集める：ベルマーク経由 + 推しチーム経由
+    const home = teamById.get(m.homeTeamId);
+    const away = teamById.get(m.awayTeamId);
+
+    // 累積スコアを 1 ゴールずつ追っていく
+    let scoreHome = 0;
+    let scoreAway = 0;
+
+    for (let idx = 0; idx < r.goals.length; idx++) {
+      const g = r.goals[idx];
+      // type=OWN は team フィールドがオウンゴール「した側」のチーム ID。
+      // その場合スコアは相手側に入る。
+      const scoringIsHome =
+        g.type === "OWN" ? g.team !== m.homeTeamId : g.team === m.homeTeamId;
+      if (scoringIsHome) scoreHome += 1;
+      else scoreAway += 1;
+
+      candidates += 1;
+
+      const firedKey = K.matchFiredType(m.id, `goal-${idx}`);
+      const already = await redis.get(firedKey);
+      if (already) {
+        skipped += 1;
+        continue;
+      }
+
+      const [bellHashes, favHomeHashes, favAwayHashes] = await Promise.all([
+        redis.smembers<string[]>(K.matchSubs(m.id)),
+        redis.smembers<string[]>(K.favSubs(m.homeTeamId)),
+        redis.smembers<string[]>(K.favSubs(m.awayTeamId)),
+      ]);
+      const allHashes = new Set<string>([
+        ...(bellHashes ?? []),
+        ...(favHomeHashes ?? []),
+        ...(favAwayHashes ?? []),
+      ]);
+
+      if (allHashes.size === 0) {
+        // 送信先なし。fired フラグだけ立てて以降スキップ
+        await redis.set(firedKey, "1", { ex: 6 * 60 * 60 });
+        continue;
+      }
+
+      const payload = buildGoalPayload(
+        m,
+        home,
+        away,
+        scoreHome,
+        scoreAway,
+        g,
+      );
+
+      for (const h of allHashes) {
+        const res = await sendToSub(h, "goal", payload, now);
+        if (res === "pushed") pushed += 1;
+        else if (res === "failed") failed += 1;
+      }
+
+      // 1 ゴールあたり 6h fired flag
+      await redis.set(firedKey, "1", { ex: 6 * 60 * 60 });
+    }
+  }
+
+  return { candidates, pushed, failed, skipped };
 }
 
 function roundLabel(r: string): string {

@@ -187,6 +187,79 @@ export function buildTournamentPayload(opts: {
  * ハーフタイムの「途中スコア付き」通知。
  * ネタバレ防止モード OFF の人だけ受け取る用。
  */
+/**
+ * ⚽ 得点通知 payload。
+ * 「⚽ ゴール！🇯🇵 日本 1-0 オランダ 🇳🇱 (33分・三笘 薫)」
+ * - スコアは得点後の状態
+ * - ownGoal / penalty の場合は強調
+ */
+export function buildGoalPayload(
+  match: Match,
+  home: Team | undefined,
+  away: Team | undefined,
+  scoreHome: number,
+  scoreAway: number,
+  goal: {
+    minute: number | null;
+    injuryTime: number | null;
+    type: string; // REGULAR / OWN / PENALTY
+    team: string; // teamId
+    scorer: string;
+    assist: string | null;
+  },
+): NotificationPayload {
+  const hn = shortName(home, match.homeTeamId);
+  const an = shortName(away, match.awayTeamId);
+  const flag = (t: Team | undefined): string => t?.flag ?? "";
+  const isHomeGoal = goal.team === match.homeTeamId;
+  const scoringFlag = isHomeGoal ? flag(home) : flag(away);
+  const scoringName = isHomeGoal ? hn : an;
+
+  // 時間表示
+  const minuteText =
+    goal.minute !== null
+      ? goal.injuryTime !== null && goal.injuryTime > 0
+        ? `${goal.minute}+${goal.injuryTime}分`
+        : `${goal.minute}分`
+      : "";
+
+  // 種類
+  const goalEmoji =
+    goal.type === "PENALTY"
+      ? "🎯"
+      : goal.type === "OWN"
+        ? "😱"
+        : "⚽";
+  const goalLabel =
+    goal.type === "PENALTY"
+      ? "PK"
+      : goal.type === "OWN"
+        ? "オウンゴール"
+        : "ゴール";
+
+  const title = `${goalEmoji} ${goalLabel}！${flag(home)} ${hn} ${scoreHome}-${scoreAway} ${an} ${flag(away)}`.trim();
+
+  const bodyParts: string[] = [];
+  if (minuteText) bodyParts.push(minuteText);
+  if (goal.scorer) bodyParts.push(`${scoringFlag} ${goal.scorer}`);
+  if (goal.assist && goal.type !== "OWN")
+    bodyParts.push(`アシスト: ${goal.assist}`);
+  const body =
+    bodyParts.length > 0
+      ? bodyParts.join(" ・ ")
+      : `${scoringFlag} ${scoringName} が得点！`;
+
+  return {
+    title,
+    body,
+    url: `/matches/${match.id}`,
+    matchId: match.id,
+    // タグはゴール idx を含めて重複再表示防止と独立通知を両立
+    tag: `goal-${match.id}-${scoreHome}-${scoreAway}`,
+    type: "goal",
+  };
+}
+
 export function buildHalftimeScorePayload(
   match: Match,
   home: Team | undefined,

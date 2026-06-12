@@ -7,6 +7,7 @@ import {
   buildResultPayload,
   buildDigestPayload,
   buildTournamentPayload,
+  buildGoalPayload,
 } from "../../../../lib/push/payload";
 import { getAllMatches, getAllTeams } from "../../../../lib/data";
 
@@ -66,6 +67,23 @@ export async function POST(req: Request) {
     case "halftime":
     case "fulltime":
       payload = buildPayload(type, sample, home, away);
+      break;
+    case "goal":
+      payload = buildGoalPayload(
+        sample,
+        home,
+        away,
+        1, // テスト用スコア
+        0,
+        {
+          minute: 33,
+          injuryTime: null,
+          type: "REGULAR",
+          team: sample.homeTeamId,
+          scorer: "（テスト選手）",
+          assist: null,
+        },
+      );
       break;
     case "result": {
       // テストなので適当なスコアをでっち上げ

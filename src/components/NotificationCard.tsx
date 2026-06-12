@@ -134,6 +134,7 @@ export function NotificationCard() {
     { id: "pre-15m", label: "事前 15分前" },
     { id: "lineup", label: "📋 スタメン発表" },
     { id: "kickoff", label: "🟢 キックオフ" },
+    { id: "goal", label: "⚽ 得点 (1-0)" },
     { id: "halftime", label: "⏸ ハーフタイム" },
     { id: "fulltime", label: "🏁 試合終了" },
     { id: "result", label: "📊 結果 (2-1)" },
@@ -250,6 +251,17 @@ export function NotificationCard() {
           }
           checked={!spoilerBlock && prefs.result}
           onToggle={togglePref("result")}
+          disabled={spoilerBlock}
+        />
+        <ToggleRow
+          label="⚽ 得点通知（リアルタイム）"
+          hint={
+            spoilerBlock
+              ? "❌ ネタバレ防止モード ON のため無効中"
+              : "点が入るたびに「⚽ ゴール！日本 1-0 オランダ (33分・三笘)」のように即配信"
+          }
+          checked={!spoilerBlock && prefs.goal}
+          onToggle={togglePref("goal")}
           disabled={spoilerBlock}
         />
       </div>

@@ -8,6 +8,7 @@ export type NotificationType =
   | "pre-15m"
   | "lineup" // スタメン発表通知（football-data.org から取得した時点）
   | "kickoff"
+  | "goal" // ⚽ 得点通知（ネタバレOK時のみ）
   | "halftime"
   | "fulltime"
   | "result"
@@ -20,7 +21,8 @@ export type NotificationGroup =
   | "live"
   | "result"
   | "digest"
-  | "tournament";
+  | "tournament"
+  | "goal";
 
 export const TYPE_TO_GROUP: Record<NotificationType, NotificationGroup> = {
   "pre-3h": "pre",
@@ -28,6 +30,7 @@ export const TYPE_TO_GROUP: Record<NotificationType, NotificationGroup> = {
   "pre-15m": "pre",
   lineup: "lineup",
   kickoff: "live",
+  goal: "goal",
   halftime: "live",
   fulltime: "live",
   result: "result",
@@ -37,7 +40,7 @@ export const TYPE_TO_GROUP: Record<NotificationType, NotificationGroup> = {
 
 /**
  * 各タイプの「キックオフからの相対オフセット（分）」。
- * morning, tournament, lineup は別ロジックなので null。
+ * morning, tournament, lineup, goal は別ロジックなので null。
  */
 export const OFFSET_MINUTES: Record<NotificationType, number | null> = {
   "pre-3h": -180,
@@ -45,6 +48,7 @@ export const OFFSET_MINUTES: Record<NotificationType, number | null> = {
   "pre-15m": -15,
   lineup: null, // 自動取得 JSON の fetchedAt から判定
   kickoff: 0,
+  goal: null, // 得点イベントの差分検知で発火
   halftime: 50,
   fulltime: 110,
   result: 115,
@@ -74,6 +78,11 @@ export type NotificationPreferences = {
    * ネタバレ防止モード ON 時はサーバー側で強制 false 扱い。
    */
   result: boolean;
+  /**
+   * ⚽ 得点通知。点が入るたびにスコア付きで配信。
+   * ネタバレ防止モード ON 時はサーバー側で強制 false 扱い。
+   */
+  goal: boolean;
   /** 静寂時間 (HH:mm の文字列。null なら無し) */
   quiet: { start: string; end: string } | null;
 };
@@ -85,6 +94,7 @@ export const DEFAULT_PREFERENCES: NotificationPreferences = {
   digest: true,
   tournament: true,
   result: false,
+  goal: false,
   quiet: null,
 };
 
@@ -97,7 +107,11 @@ export function isTypeEnabled(
   // ネタバレ防止モード ON 時は、結果を暗黙的にバラすタイプを強制 OFF
   //   - result: スコア丸見え
   //   - tournament: 通知が届く＝推しが勝ち抜けたことが分かる
-  if (spoilerBlock && (type === "result" || type === "tournament")) {
+  //   - goal: 点数推移バラし
+  if (
+    spoilerBlock &&
+    (type === "result" || type === "tournament" || type === "goal")
+  ) {
     return false;
   }
 
