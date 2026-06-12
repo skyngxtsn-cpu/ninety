@@ -160,23 +160,27 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
               />
             )}
 
-          <div className="glass rounded-2xl p-5">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--accent-2)] mb-2">
-              🔥 なぜ話題？
+          {match.result.whyTrending && (
+            <div className="glass rounded-2xl p-5">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--accent-2)] mb-2">
+                🔥 なぜ話題？
+              </div>
+              <p className="text-[15px] leading-relaxed font-medium">
+                {match.result.whyTrending}
+              </p>
             </div>
-            <p className="text-[15px] leading-relaxed font-medium">
-              {match.result.whyTrending}
-            </p>
-          </div>
+          )}
 
-          <div className="glass rounded-2xl p-5">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-white/60 mb-2">
-              📝 30秒で要約
+          {match.result.summary30s && (
+            <div className="glass rounded-2xl p-5">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-white/60 mb-2">
+                📝 30秒で要約
+              </div>
+              <p className="text-[14px] leading-relaxed text-white/90">
+                {match.result.summary30s}
+              </p>
             </div>
-            <p className="text-[14px] leading-relaxed text-white/90">
-              {match.result.summary30s}
-            </p>
-          </div>
+          )}
 
           {motm && (
             <Link
@@ -211,12 +215,16 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
             </Link>
           )}
 
-          <div className="glass rounded-2xl p-5">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-white/60 mb-2">
-              🏆 結果どうなった？
+          {match.result.nextImplication && (
+            <div className="glass rounded-2xl p-5">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-white/60 mb-2">
+                🏆 結果どうなった？
+              </div>
+              <p className="text-[14px] leading-relaxed">
+                {match.result.nextImplication}
+              </p>
             </div>
-            <p className="text-[14px] leading-relaxed">{match.result.nextImplication}</p>
-          </div>
+          )}
 
           {match.result.highlightUrl && (
             <a

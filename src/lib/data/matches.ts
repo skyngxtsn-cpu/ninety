@@ -154,18 +154,13 @@ function toMatch(
         string,
       ];
     })(),
-    // 試合後ダミーは後段で生成（今は省略）
+    // auto 結果ではスコアのみ。仮テキスト (whyTrending / summary30s /
+    // nextImplication / MotM) は出さない方針。
+    // 必要なら match-augment.ts に手動キュレーションを追加する。
     result: status === "finished" && effectiveScore1 !== undefined && effectiveScore2 !== undefined
       ? {
           home: effectiveScore1,
           away: effectiveScore2,
-          whyTrending: `${teamById[ef.team1Id]?.name ?? ef.team1} と ${teamById[ef.team2Id]?.name ?? ef.team2} の対戦が終了。`,
-          summary30s: "試合の詳細要約は順次更新されます。",
-          // MotM は football-data.org 無料枠で取得不可。
-          // auto 結果では undefined → 試合詳細ページでは MotM カードを非表示。
-          // 手動キュレーションが必要な場合は match-augment.ts を拡張する。
-          manOfTheMatchId: undefined,
-          nextImplication: "順位表とトーナメント表が更新されました。",
         }
       : undefined,
     events:

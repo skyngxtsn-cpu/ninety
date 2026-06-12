@@ -98,11 +98,11 @@ export type Match = {
   result?: {
     home: number;
     away: number;
-    whyTrending: string;
-    summary30s: string;
-    /** MotM が確定していなければ undefined。UI 側で非表示にする。 */
+    /** 手動キュレーション時のみ設定。auto 結果では undefined (UI 側で非表示) */
+    whyTrending?: string;
+    summary30s?: string;
     manOfTheMatchId?: PlayerId;
-    nextImplication: string;
+    nextImplication?: string;
     highlightUrl?: string;
   };
   /** 試合イベント（得点・カード・交代）。football-data.org から自動取得 */
