@@ -65,6 +65,7 @@ export async function POST(req: Request) {
     case "lineup":
     case "kickoff":
     case "halftime":
+    case "halftime-end":
     case "fulltime":
       payload = buildPayload(type, sample, home, away);
       break;

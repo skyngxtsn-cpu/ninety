@@ -10,6 +10,7 @@ export type NotificationType =
   | "kickoff"
   | "goal" // ⚽ 得点通知（ネタバレOK時のみ）
   | "halftime"
+  | "halftime-end" // 後半開始（ハーフタイム終了）
   | "fulltime"
   | "result"
   | "tournament"
@@ -32,6 +33,7 @@ export const TYPE_TO_GROUP: Record<NotificationType, NotificationGroup> = {
   kickoff: "live",
   goal: "goal",
   halftime: "live",
+  "halftime-end": "live",
   fulltime: "live",
   result: "result",
   tournament: "tournament",
@@ -50,6 +52,7 @@ export const OFFSET_MINUTES: Record<NotificationType, number | null> = {
   kickoff: 0,
   goal: null, // 得点イベントの差分検知で発火
   halftime: 50,
+  "halftime-end": 65, // ハーフタイム 15 分後＝後半開始
   fulltime: 110,
   result: 115,
   tournament: null,

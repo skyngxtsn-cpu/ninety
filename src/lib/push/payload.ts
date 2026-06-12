@@ -62,6 +62,10 @@ export function buildPayload(
       title = `⏸ ハーフタイム — ${matchup}`;
       body = `前半終了。ここまでの45分、どうだった？\n後半が本番。途中参戦も大歓迎。`;
       break;
+    case "halftime-end":
+      title = `▶️ 後半開始 — ${matchup}`;
+      body = `ハーフタイム終了。45分の後半戦が始まる。\nこの45分で全てが決まる。`;
+      break;
     case "fulltime":
       title = `🏁 試合終了 — ${matchup}`;
       body = `90分が終わりました。\n録画派の方は記事・SNS・順位表にご注意。`;
@@ -284,6 +288,37 @@ export function buildHalftimeScorePayload(
     matchId: match.id,
     tag: `halftime-score-${match.id}`,
     type: "halftime",
+  };
+}
+
+/**
+ * ハーフタイム終了（後半開始）のスコア付き payload。
+ * ネタバレ防止モード OFF のユーザーに、現在スコアと共に「後半始まるぞ」を伝える。
+ */
+export function buildHalftimeEndScorePayload(
+  match: Match,
+  home: Team | undefined,
+  away: Team | undefined,
+  scoreHome: number,
+  scoreAway: number,
+): NotificationPayload {
+  const hn = shortName(home, match.homeTeamId);
+  const an = shortName(away, match.awayTeamId);
+  const flag = (t: Team | undefined): string => t?.flag ?? "";
+  const title = `▶️ 後半開始 ${flag(home)} ${hn} ${scoreHome} - ${scoreAway} ${an} ${flag(away)}`.trim();
+  const body =
+    scoreHome === scoreAway
+      ? `${scoreHome}-${scoreAway} のまま後半キックオフ。\nこの 45 分で勝者が決まる。`
+      : scoreHome > scoreAway
+        ? `${flag(home)} ${hn} が ${scoreHome}-${scoreAway} でリードして後半開始。\n逆転なるか、押し切るか。`
+        : `${flag(away)} ${an} が ${scoreAway}-${scoreHome} でリードして後半開始。\n逆転なるか、押し切るか。`;
+  return {
+    title,
+    body,
+    url: `/matches/${match.id}`,
+    matchId: match.id,
+    tag: `halftime-end-score-${match.id}`,
+    type: "halftime-end",
   };
 }
 

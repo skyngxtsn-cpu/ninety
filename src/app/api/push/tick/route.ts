@@ -17,6 +17,7 @@ import {
   buildDigestPayload,
   buildTournamentPayload,
   buildHalftimeScorePayload,
+  buildHalftimeEndScorePayload,
   buildGoalPayload,
   type NotificationPayload,
 } from "../../../../lib/push/payload";
@@ -85,6 +86,7 @@ export async function POST(req: Request) {
     "pre-15m",
     "kickoff",
     "halftime",
+    "halftime-end",
     "fulltime",
     "result",
   ];
@@ -138,6 +140,7 @@ async function processOffsetType(
     kickoff: 25 * 60 * 1000,
     goal: 0, // goal は offset 系では処理しない (processGoals 担当)
     halftime: 30 * 60 * 1000,
+    "halftime-end": 25 * 60 * 1000, // 後半開始は 25 分以内なら catch-up
     fulltime: 60 * 60 * 1000,
     result: 12 * 60 * 60 * 1000, // 結果は丸 1 日以内なら出す価値あり
     tournament: 24 * 60 * 60 * 1000,
@@ -191,7 +194,7 @@ async function processOffsetType(
         ? buildResultPayload(m, home, away)
         : buildPayload(type, m, home, away);
 
-    // ハーフタイム: スコア取れているなら spoiler OFF ユーザーには別 payload
+    // ハーフタイム / 後半開始: スコア取れているなら spoiler OFF ユーザーには別 payload
     let spoilerOffPayload: NotificationPayload | null = null;
     if (type === "halftime") {
       const r = matchResultsAuto[m.id];
@@ -206,6 +209,37 @@ async function processOffsetType(
           away,
           r.halfHome,
           r.halfAway,
+        );
+      }
+    } else if (type === "halftime-end") {
+      // 後半開始時はその時点での現在スコアを表示。
+      // football-data.org の home/away は最新のフルスコアなので、
+      // 後半まだ始まったばかりなら ≒ 前半終了時のスコア。
+      // halfHome/halfAway があればそれを優先（必ず前半終了時のスコア）
+      const r = matchResultsAuto[m.id];
+      if (
+        r &&
+        typeof r.halfHome === "number" &&
+        typeof r.halfAway === "number"
+      ) {
+        spoilerOffPayload = buildHalftimeEndScorePayload(
+          m,
+          home,
+          away,
+          r.halfHome,
+          r.halfAway,
+        );
+      } else if (
+        r &&
+        typeof r.home === "number" &&
+        typeof r.away === "number"
+      ) {
+        spoilerOffPayload = buildHalftimeEndScorePayload(
+          m,
+          home,
+          away,
+          r.home,
+          r.away,
         );
       }
     }

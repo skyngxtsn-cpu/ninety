@@ -136,6 +136,7 @@ export function NotificationCard() {
     { id: "kickoff", label: "🟢 キックオフ" },
     { id: "goal", label: "⚽ 得点 (1-0)" },
     { id: "halftime", label: "⏸ ハーフタイム" },
+    { id: "halftime-end", label: "▶️ 後半開始" },
     { id: "fulltime", label: "🏁 試合終了" },
     { id: "result", label: "📊 結果 (2-1)" },
     { id: "tournament", label: "🏆 次戦カード" },
