@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const items = [
   { href: "/", label: "ホーム", icon: HomeIcon },
+  { href: "/results", label: "結果", icon: ScoreIcon },
   { href: "/standings", label: "順位", icon: TableIcon },
   { href: "/tournament", label: "T表", icon: BracketIcon },
   { href: "/my", label: "マイ", icon: HeartIcon },
@@ -47,6 +48,39 @@ function HomeIcon({ active }: { active: boolean }) {
         stroke="currentColor"
         strokeWidth="1.6"
         fill={active ? "rgba(255,255,255,0.10)" : "none"}
+      />
+    </svg>
+  );
+}
+
+function ScoreIcon({ active }: { active: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <rect
+        x="3"
+        y="6"
+        width="6.5"
+        height="12"
+        rx="1.2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill={active ? "rgba(255,255,255,0.10)" : "none"}
+      />
+      <rect
+        x="14.5"
+        y="6"
+        width="6.5"
+        height="12"
+        rx="1.2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill={active ? "rgba(255,255,255,0.10)" : "none"}
+      />
+      <path
+        d="M10.5 12h3"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
       />
     </svg>
   );

@@ -50,6 +50,30 @@ export default async function HomePage() {
       {/* 推しチームの次の試合（あれば） */}
       {favNext && <FavoriteCountdownRow match={favNext} />}
 
+      {/* 見逃した試合結果（試合日程の前に出すことで結果へすぐアクセス可） */}
+      {recent.length > 0 && (
+        <>
+          <SectionHeader kicker="Recap" title="見逃した試合結果" />
+          <div className="mx-4 glass rounded-2xl px-2 py-1 divide-y divide-white/8">
+            {recent.map((m) => (
+              <CompactResultRow
+                key={m.id}
+                match={m}
+                favoriteTeamIds={favoriteSet}
+              />
+            ))}
+          </div>
+          <div className="mx-4 mt-3">
+            <Link
+              href="/results"
+              className="block text-center text-[12px] text-white/65 hover:text-white py-2 rounded-lg hover:bg-white/[0.04] transition"
+            >
+              すべての試合結果を見る ›
+            </Link>
+          </div>
+        </>
+      )}
+
       {/* 試合日程：日付ごとにグループ表示 */}
       <SectionHeader kicker="Schedule" title="試合日程" />
       {upcoming.length === 0 ? (
@@ -80,30 +104,6 @@ export default async function HomePage() {
             </section>
           ))}
         </div>
-      )}
-
-      {/* 見逃した試合結果 */}
-      {recent.length > 0 && (
-        <>
-          <SectionHeader kicker="Recap" title="見逃した試合結果" />
-          <div className="mx-4 glass rounded-2xl px-2 py-1 divide-y divide-white/8">
-            {recent.map((m) => (
-              <CompactResultRow
-                key={m.id}
-                match={m}
-                favoriteTeamIds={favoriteSet}
-              />
-            ))}
-          </div>
-          <div className="mx-4 mt-3">
-            <Link
-              href="/results"
-              className="block text-center text-[12px] text-white/65 hover:text-white py-2 rounded-lg hover:bg-white/[0.04] transition"
-            >
-              すべての試合結果を見る ›
-            </Link>
-          </div>
-        </>
       )}
 
       {/* フィードバック誘導 */}
