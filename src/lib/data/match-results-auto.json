@@ -9,7 +9,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-12T20:45:25.793Z"
+    "fetchedAt": "2026-06-12T20:50:23.920Z"
   },
   "2026-06-12-kor-cze": {
     "source": "auto",
@@ -21,18 +21,18 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-12T20:45:25.929Z"
+    "fetchedAt": "2026-06-12T20:50:24.078Z"
   },
   "2026-06-12-can-bih": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
+    "home": 1,
     "away": 1,
     "halfHome": 0,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-12T20:45:26.160Z"
+    "fetchedAt": "2026-06-12T20:50:24.237Z"
   }
 }
