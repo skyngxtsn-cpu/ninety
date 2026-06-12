@@ -92,7 +92,13 @@ function toMatch(
   const matchId = `${ef.date}-${ef.team1Id}-${ef.team2Id}`;
 
   // football-data.org からの自動取得結果でステータス・スコアを上書き（OpenFootball より早い）
-  const autoR = autoResults[matchId];
+  // OpenFootball は現地日付、football-data.org は UTC 日付なので
+  // 日付がズレる場合がある（深夜キックオフが UTC 翌日になるケース）。
+  // 前後 1 日のキーも試してマッチさせる。
+  const utcDate = new Date(ef.kickoffJST).toISOString().slice(0, 10);
+  const autoR =
+    autoResults[matchId] ??
+    autoResults[`${utcDate}-${ef.team1Id}-${ef.team2Id}`];
   const autoFinished = autoR?.status === "FINISHED";
   const autoLive =
     autoR?.status === "IN_PLAY" || autoR?.status === "PAUSED";
