@@ -100,7 +100,8 @@ export type Match = {
     away: number;
     whyTrending: string;
     summary30s: string;
-    manOfTheMatchId: PlayerId;
+    /** MotM が確定していなければ undefined。UI 側で非表示にする。 */
+    manOfTheMatchId?: PlayerId;
     nextImplication: string;
     highlightUrl?: string;
   };

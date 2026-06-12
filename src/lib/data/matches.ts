@@ -161,7 +161,10 @@ function toMatch(
           away: effectiveScore2,
           whyTrending: `${teamById[ef.team1Id]?.name ?? ef.team1} と ${teamById[ef.team2Id]?.name ?? ef.team2} の対戦が終了。`,
           summary30s: "試合の詳細要約は順次更新されます。",
-          manOfTheMatchId: aug.keyPlayerIds[0] ?? "kubo",
+          // MotM は football-data.org 無料枠で取得不可。
+          // auto 結果では undefined → 試合詳細ページでは MotM カードを非表示。
+          // 手動キュレーションが必要な場合は match-augment.ts を拡張する。
+          manOfTheMatchId: undefined,
           nextImplication: "順位表とトーナメント表が更新されました。",
         }
       : undefined,

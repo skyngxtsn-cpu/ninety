@@ -76,7 +76,11 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
     return <TBDMatchHero match={match} bracketMatch={bm} />;
   }
   const finished = match.status === "finished";
-  const motm = match.result ? getPlayer(match.result.manOfTheMatchId) : null;
+  // MotM は確定している (= manOfTheMatchId が定義済み) 場合のみ表示する。
+  // auto 取得の結果では undefined になるため、自動で MotM が出てしまう問題を防ぐ。
+  const motm = match.result?.manOfTheMatchId
+    ? getPlayer(match.result.manOfTheMatchId)
+    : null;
 
   return (
     <>
