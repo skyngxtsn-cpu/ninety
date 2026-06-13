@@ -49,14 +49,14 @@
   },
   "2026-06-13-qat-sui": {
     "source": "auto",
-    "status": "IN_PLAY",
-    "home": 0,
+    "status": "FINISHED",
+    "home": 1,
     "away": 1,
     "halfHome": 0,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-13T20:20:38.349Z"
+    "fetchedAt": "2026-06-13T21:10:31.529Z"
   }
 }
