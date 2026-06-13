@@ -51,12 +51,12 @@
     "source": "auto",
     "status": "IN_PLAY",
     "home": 0,
-    "away": 0,
+    "away": 1,
     "halfHome": null,
     "halfAway": null,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-13T19:10:24.645Z"
+    "fetchedAt": "2026-06-13T19:30:32.736Z"
   }
 }
