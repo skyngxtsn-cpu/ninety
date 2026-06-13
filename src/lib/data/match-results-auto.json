@@ -46,5 +46,17 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-13T07:05:15.604Z"
+  },
+  "2026-06-13-qat-sui": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 0,
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-13T19:10:24.645Z"
   }
 }
