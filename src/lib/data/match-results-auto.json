@@ -26,14 +26,14 @@
   "2026-06-12-can-bih": {
     "source": "auto",
     "status": "FINISHED",
-    "home": null,
-    "away": null,
-    "halfHome": null,
-    "halfAway": null,
+    "home": 1,
+    "away": 1,
+    "halfHome": 0,
+    "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-13T21:40:32.311Z"
+    "fetchedAt": "2026-06-13T21:45:32.036Z"
   },
   "2026-06-13-usa-par": {
     "source": "auto",
