@@ -156,13 +156,19 @@ function toMatch(
     })(),
     // auto 結果ではスコアのみ。仮テキスト (whyTrending / summary30s /
     // nextImplication / MotM) は出さない方針。
-    // 必要なら match-augment.ts に手動キュレーションを追加する。
-    result: status === "finished" && effectiveScore1 !== undefined && effectiveScore2 !== undefined
-      ? {
-          home: effectiveScore1,
-          away: effectiveScore2,
-        }
-      : undefined,
+    // 試合中 (live) もスコアを result に格納してホーム画面 / 試合詳細で
+    // ライブスコア表示できるようにする。
+    // standings は status === 'finished' で別途フィルタしているため、
+    // ライブ試合のスコアが順位表に混入することはない。
+    result:
+      (status === "finished" || status === "live") &&
+      effectiveScore1 !== undefined &&
+      effectiveScore2 !== undefined
+        ? {
+            home: effectiveScore1,
+            away: effectiveScore2,
+          }
+        : undefined,
     events:
       autoR?.goals || autoR?.bookings || autoR?.substitutions
         ? {

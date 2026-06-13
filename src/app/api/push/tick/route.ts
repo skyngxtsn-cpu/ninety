@@ -626,77 +626,95 @@ async function processGoals(
   let failed = 0;
   let skipped = 0;
 
-  const FRESH_TOLERANCE_MS = 24 * 60 * 60 * 1000;
+  // football-data.org 無料枠は goals 配列が空で返ってくるため、
+  // スコア (home/away) の差分検知で得点通知を発火する方式に変更。
+  //
+  // 仕様:
+  //  - 試合ごとに redis に「最後に通知したスコア」を保存 (例: "1-0")
+  //  - 現在スコアと比較して increment があれば差分ぶん通知
+  //  - 最初の検知では現在スコアを記録するだけで通知しない
+  //    （試合途中で fetcher が止まってた場合に過去ゴールを大量送信しない）
+  //  - LIVE 中の試合 + 終了後 3 時間以内まで対応
+
+  const FRESH_AFTER_FINISH_MS = 3 * 60 * 60 * 1000;
 
   for (const m of matches) {
     const r = matchResultsAuto[m.id];
-    if (!r || !r.goals || r.goals.length === 0) continue;
+    if (!r) continue;
+    if (typeof r.home !== "number" || typeof r.away !== "number") continue;
 
-    // 古すぎる試合（試合開始から 24h 以上経過）はスキップ
-    const kickMs = new Date(m.kickoffJST).getTime();
-    if (now.getTime() - kickMs > FRESH_TOLERANCE_MS) continue;
+    // 状態フィルタ: 試合中 OR 終了から 3 時間以内
+    const status = r.status ?? "";
+    const isLive = status === "IN_PLAY" || status === "PAUSED";
+    const isFinished = status === "FINISHED";
+    if (!isLive && !isFinished) continue;
+    if (isFinished) {
+      const kickMs = new Date(m.kickoffJST).getTime();
+      if (now.getTime() - kickMs - 110 * 60 * 1000 > FRESH_AFTER_FINISH_MS) continue;
+    }
 
-    // 配信対象を集める：ベルマーク経由 + 推しチーム経由
+    const lastScoreKey = K.matchFiredType(m.id, "score-baseline");
+    const currentScore = `${r.home}-${r.away}`;
+    const lastScore = await redis.get<string>(lastScoreKey);
+
+    // 初回検知 → ベースラインだけ記録（通知はしない）
+    if (lastScore === null || lastScore === undefined) {
+      await redis.set(lastScoreKey, currentScore, { ex: 24 * 60 * 60 });
+      continue;
+    }
+    if (lastScore === currentScore) continue;
+
+    // スコア差分を計算
+    const [lastHome, lastAway] = String(lastScore).split("-").map(Number);
+    const homeDiff = r.home - lastHome;
+    const awayDiff = r.away - lastAway;
+    if (homeDiff <= 0 && awayDiff <= 0) {
+      // ありえないが念のため（スコア減ったら最新値で更新）
+      await redis.set(lastScoreKey, currentScore, { ex: 24 * 60 * 60 });
+      continue;
+    }
+
+    candidates += 1;
+
+    // 配信対象を集める
     const home = teamById.get(m.homeTeamId);
     const away = teamById.get(m.awayTeamId);
+    const [bellHashes, favHomeHashes, favAwayHashes] = await Promise.all([
+      redis.smembers<string[]>(K.matchSubs(m.id)),
+      redis.smembers<string[]>(K.favSubs(m.homeTeamId)),
+      redis.smembers<string[]>(K.favSubs(m.awayTeamId)),
+    ]);
+    const allHashes = new Set<string>([
+      ...(bellHashes ?? []),
+      ...(favHomeHashes ?? []),
+      ...(favAwayHashes ?? []),
+    ]);
 
-    // 累積スコアを 1 ゴールずつ追っていく
-    let scoreHome = 0;
-    let scoreAway = 0;
-
-    for (let idx = 0; idx < r.goals.length; idx++) {
-      const g = r.goals[idx];
-      // type=OWN は team フィールドがオウンゴール「した側」のチーム ID。
-      // その場合スコアは相手側に入る。
-      const scoringIsHome =
-        g.type === "OWN" ? g.team !== m.homeTeamId : g.team === m.homeTeamId;
-      if (scoringIsHome) scoreHome += 1;
-      else scoreAway += 1;
-
-      candidates += 1;
-
-      const firedKey = K.matchFiredType(m.id, `goal-${idx}`);
-      const already = await redis.get(firedKey);
-      if (already) {
-        skipped += 1;
-        continue;
-      }
-
-      const [bellHashes, favHomeHashes, favAwayHashes] = await Promise.all([
-        redis.smembers<string[]>(K.matchSubs(m.id)),
-        redis.smembers<string[]>(K.favSubs(m.homeTeamId)),
-        redis.smembers<string[]>(K.favSubs(m.awayTeamId)),
-      ]);
-      const allHashes = new Set<string>([
-        ...(bellHashes ?? []),
-        ...(favHomeHashes ?? []),
-        ...(favAwayHashes ?? []),
-      ]);
-
-      if (allHashes.size === 0) {
-        // 送信先なし。fired フラグだけ立てて以降スキップ
-        await redis.set(firedKey, "1", { ex: 6 * 60 * 60 });
-        continue;
-      }
-
-      const payload = buildGoalPayload(
-        m,
-        home,
-        away,
-        scoreHome,
-        scoreAway,
-        g,
-      );
-
-      for (const h of allHashes) {
-        const res = await sendToSub(h, "goal", payload, now);
-        if (res === "pushed") pushed += 1;
-        else if (res === "failed") failed += 1;
-      }
-
-      // 1 ゴールあたり 6h fired flag
-      await redis.set(firedKey, "1", { ex: 6 * 60 * 60 });
+    if (allHashes.size === 0) {
+      await redis.set(lastScoreKey, currentScore, { ex: 24 * 60 * 60 });
+      continue;
     }
+
+    // どちらが入れたか: より多くの増分があった側
+    const scoringTeamId =
+      homeDiff > awayDiff ? m.homeTeamId : m.awayTeamId;
+
+    const payload = buildGoalPayload(m, home, away, r.home, r.away, {
+      minute: null,
+      injuryTime: null,
+      type: "REGULAR",
+      team: scoringTeamId,
+      scorer: "",
+      assist: null,
+    });
+
+    for (const h of allHashes) {
+      const res = await sendToSub(h, "goal", payload, now);
+      if (res === "pushed") pushed += 1;
+      else if (res === "failed") failed += 1;
+    }
+
+    await redis.set(lastScoreKey, currentScore, { ex: 24 * 60 * 60 });
   }
 
   return { candidates, pushed, failed, skipped };
