@@ -42,9 +42,11 @@ jobs:
         run: node scripts/fetch-lineups.mjs
 
       - name: Commit and push if changed
+        # Vercel Hobby は project owner 以外のコミットでのデプロイをブロックするため、
+        # 所有者の noreply メアドで author を上書きする。
         run: |
-          git config user.name "ninety-bot"
-          git config user.email "bot@users.noreply.github.com"
+          git config user.name "skyngxtsn-cpu"
+          git config user.email "280671677+skyngxtsn-cpu@users.noreply.github.com"
           if ! git diff --quiet src/lib/data/lineup-overrides-auto.json src/lib/data/match-results-auto.json; then
             git add src/lib/data/lineup-overrides-auto.json src/lib/data/match-results-auto.json
             git commit -m "auto: lineup/results update $(date -u +'%Y-%m-%d %H:%M UTC')"
