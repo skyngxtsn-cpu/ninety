@@ -208,12 +208,9 @@ export function NotificationCard() {
           checked={prefs.pre}
           onToggle={togglePref("pre")}
         />
-        <ToggleRow
-          label="スタメン発表通知"
-          hint="試合 1 時間前のスタメン発表をお知らせ"
-          checked={prefs.lineup}
-          onToggle={togglePref("lineup")}
-        />
+        {/* スタメン発表通知は football-data.org 無料枠で取得不可のため
+            UI から非表示。バックエンドロジックは残してあるので将来データが
+            来るようになれば再有効化可。 */}
         <ToggleRow
           label="試合中通知（スコア無し）"
           hint="キックオフ / ハーフタイム / 終了の合図"
