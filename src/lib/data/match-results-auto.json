@@ -61,7 +61,7 @@
   },
   "2026-06-13-bra-mar": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 1,
     "halfHome": 1,
@@ -69,6 +69,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-13T23:00:49.293Z"
+    "fetchedAt": "2026-06-13T23:20:29.621Z"
   }
 }
