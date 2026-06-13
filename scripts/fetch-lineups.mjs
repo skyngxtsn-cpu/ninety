@@ -395,7 +395,10 @@ async function main() {
           playerOut: s.playerOut?.name ?? "",
           playerIn: s.playerIn?.name ?? "",
         }));
-        existingResults[key] = {
+        // 冪等にするため、本質的に変わってない時は fetchedAt を更新しない。
+        // これがないと 5 分ごとに毎回コミット → Vercel ビルド消費 → デイリー制限。
+        const prev = existingResults[key];
+        const next = {
           source: "auto",
           status: fdStatus,
           home: score.home,
@@ -405,21 +408,50 @@ async function main() {
           goals,
           bookings,
           substitutions,
-          fetchedAt: new Date().toISOString(),
         };
+        const changed =
+          !prev ||
+          prev.status !== next.status ||
+          prev.home !== next.home ||
+          prev.away !== next.away ||
+          prev.halfHome !== next.halfHome ||
+          prev.halfAway !== next.halfAway ||
+          (prev.goals?.length ?? 0) !== next.goals.length ||
+          (prev.bookings?.length ?? 0) !== next.bookings.length ||
+          (prev.substitutions?.length ?? 0) !== next.substitutions.length;
+        if (changed) {
+          existingResults[key] = {
+            ...next,
+            fetchedAt: new Date().toISOString(),
+          };
+        }
+        // 変化なし → 既存エントリそのままで上書きしない（fetchedAt も維持）
       }
 
       if (homeLineup.length === 0 && awayLineup.length === 0) {
         console.log(`    lineup not yet available (status: ${fdStatus})`);
         continue;
       }
-      const entry = {
+      // 冪等性: 既に同じ人数のスタメンが入っていれば fetchedAt 含め更新しない
+      const prevLineup = existing[key];
+      const newHome = buildLineup(md.homeTeam, homeLineup);
+      const newAway = buildLineup(md.awayTeam, awayLineup);
+      const prevHomeCount = prevLineup?.home?.slots?.length ?? 0;
+      const prevAwayCount = prevLineup?.away?.slots?.length ?? 0;
+      const lineupChanged =
+        !prevLineup ||
+        prevHomeCount !== (newHome?.slots?.length ?? 0) ||
+        prevAwayCount !== (newAway?.slots?.length ?? 0);
+      if (!lineupChanged) {
+        console.log(`    lineup already up-to-date (skipped)`);
+        continue;
+      }
+      existing[key] = {
         source: "auto",
         fetchedAt: new Date().toISOString(),
-        home: buildLineup(md.homeTeam, homeLineup),
-        away: buildLineup(md.awayTeam, awayLineup),
+        home: newHome,
+        away: newAway,
       };
-      existing[key] = entry;
       updated += 1;
       console.log(
         `    ✓ lineup: home ${homeLineup.length} / away ${awayLineup.length} | status: ${fdStatus}`,
