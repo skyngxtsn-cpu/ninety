@@ -20,7 +20,7 @@ export default async function HomePage() {
     getTournamentCountdown(),
     getFavoriteNextMatch(favoriteIds),
     getUpcomingByDate(60),
-    getRecentResults(5),
+    getRecentResults(), // 直近24h以内の終了試合（古いものは /results へ）
   ]);
 
   return (
@@ -50,10 +50,10 @@ export default async function HomePage() {
       {/* 推しチームの次の試合（あれば） */}
       {favNext && <FavoriteCountdownRow match={favNext} />}
 
-      {/* 見逃した試合結果（試合日程の前に出すことで結果へすぐアクセス可） */}
+      {/* 見逃した試合結果（直近24h、それより古いものは /results へ） */}
       {recent.length > 0 && (
         <>
-          <SectionHeader kicker="Recap" title="見逃した試合結果" />
+          <SectionHeader kicker="Recap" title="昨日今日の試合結果" />
           <div className="mx-4 glass rounded-2xl px-2 py-1 divide-y divide-white/8">
             {recent.map((m) => (
               <CompactResultRow
@@ -68,7 +68,7 @@ export default async function HomePage() {
               href="/results"
               className="block text-center text-[12px] text-white/65 hover:text-white py-2 rounded-lg hover:bg-white/[0.04] transition"
             >
-              すべての試合結果を見る ›
+              これまでの試合結果を全部見る ›
             </Link>
           </div>
         </>

@@ -496,13 +496,22 @@ function formatDateLabel(d: Date): string {
   return `${get("month")}月${get("day")}日 (${get("weekday")})`;
 }
 
-/** 試合終了済みの直近 N 試合（新しい順） */
-export async function getRecentResults(limit = 5): Promise<Match[]> {
+/**
+ * 試合終了済みの「直近 24 時間以内」の試合（新しい順）。
+ * ホーム画面の「見逃した試合結果」用。
+ * それより古い結果は /results ページで一覧表示する。
+ */
+export async function getRecentResults(limit = 10): Promise<Match[]> {
   const { matches, nowRef } = await loadAll();
+  const nowMs = nowRef.getTime();
+  // キックオフから 24 時間以内 + 終了済み (kickoff + 110min < now)
+  const RECENT_HORIZON_MS = 24 * 60 * 60 * 1000;
   return matches
     .filter((m) => {
       const kickMs = new Date(m.kickoffJST).getTime();
-      return kickMs + 110 * 60 * 1000 < nowRef.getTime();
+      const finishedTimeBased = kickMs + 110 * 60 * 1000 < nowMs;
+      const withinHorizon = nowMs - kickMs <= RECENT_HORIZON_MS;
+      return finishedTimeBased && withinHorizon;
     })
     .sort(
       (a, b) =>
