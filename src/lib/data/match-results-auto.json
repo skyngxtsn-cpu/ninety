@@ -73,7 +73,7 @@
   },
   "2026-06-14-hai-sco": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 1,
     "halfHome": 0,
@@ -81,6 +81,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-14T01:58:10.521Z"
+    "fetchedAt": "2026-06-14T02:20:24.847Z"
   }
 }
