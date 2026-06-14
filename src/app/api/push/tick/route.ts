@@ -207,11 +207,23 @@ async function processOffsetType(
     return diff <= windowMs && diff >= -lateTolerance;
   });
 
-  // result タイプは結果が確定している試合だけ
-  const filtered =
-    type === "result"
-      ? candidates.filter((m) => m.status === "finished" && m.result)
-      : candidates;
+  // status による発火ガード:
+  //  - result: 試合が確定 (finished) してから配信
+  //  - fulltime: 試合が確定 (finished) してから配信。延長戦・ロスタイム中に
+  //              「もう終わったはず」と誤発火するバグを防ぐ。
+  //  - halftime / halftime-end / kickoff: 試合が始まってから (live or finished)
+  //  - pre-X: 試合前にだけ配信 (scheduled)
+  const filtered = candidates.filter((m) => {
+    if (type === "result") return m.status === "finished" && m.result;
+    if (type === "fulltime") return m.status === "finished";
+    if (type === "halftime" || type === "halftime-end" || type === "kickoff") {
+      return m.status === "live" || m.status === "finished";
+    }
+    if (type === "pre-3h" || type === "pre-1h" || type === "pre-15m") {
+      return m.status === "scheduled";
+    }
+    return true;
+  });
 
   let pushed = 0;
   let failed = 0;
