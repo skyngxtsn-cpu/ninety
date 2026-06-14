@@ -109,14 +109,14 @@
   },
   "2026-06-14-ned-jpn": {
     "source": "auto",
-    "status": "PAUSED",
-    "home": 0,
+    "status": "IN_PLAY",
+    "home": 1,
     "away": 0,
     "halfHome": 0,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-14T20:55:25.716Z"
+    "fetchedAt": "2026-06-14T21:15:27.328Z"
   }
 }
