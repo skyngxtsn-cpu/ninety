@@ -45,6 +45,12 @@ type AutoResult = {
   away?: number | null;
   halfHome?: number | null;
   halfAway?: number | null;
+  extraHome?: number | null;
+  extraAway?: number | null;
+  penHome?: number | null;
+  penAway?: number | null;
+  duration?: string;
+  winner?: string | null;
   goals?: AutoGoal[];
 };
 const matchResultsAutoStatic = matchResultsAutoRaw as Record<string, AutoResult>;

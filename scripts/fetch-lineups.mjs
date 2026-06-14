@@ -368,8 +368,13 @@ async function main() {
       // === スコア・ステータスを取得して match-results-auto.json に保存 ===
       // status: SCHEDULED / TIMED / IN_PLAY / PAUSED / FINISHED / SUSPENDED / POSTPONED 等
       const fdStatus = md.status ?? m.status;
-      const score = md.score?.fullTime ?? {};
+      const score = md.score?.fullTime ?? {}; // 規定時間 (90 分) 終了時点のスコア
       const halftime = md.score?.halfTime ?? {};
+      // 決勝T のみで使う延長 / PK 情報。普通のグループ試合では null。
+      const extraTime = md.score?.extraTime ?? null; // 延長戦終了時点の累計
+      const penalties = md.score?.penalties ?? null; // PK 戦の勝負シュート
+      const duration = md.score?.duration ?? "REGULAR"; // REGULAR / EXTRA_TIME / PENALTY_SHOOTOUT
+      const winner = md.score?.winner ?? null; // HOME_TEAM / AWAY_TEAM / DRAW
       if (
         fdStatus === "FINISHED" ||
         fdStatus === "IN_PLAY" ||
@@ -404,6 +409,13 @@ async function main() {
           status: fdStatus,
           home: score.home,
           away: score.away,
+          // 延長戦 / PK 戦情報（決勝Tでのみ意味あり）
+          extraHome: extraTime?.home ?? null,
+          extraAway: extraTime?.away ?? null,
+          penHome: penalties?.home ?? null,
+          penAway: penalties?.away ?? null,
+          duration,
+          winner,
           halfHome: halftime.home,
           halfAway: halftime.away,
           goals,
@@ -417,6 +429,12 @@ async function main() {
           prev.away !== next.away ||
           prev.halfHome !== next.halfHome ||
           prev.halfAway !== next.halfAway ||
+          prev.extraHome !== next.extraHome ||
+          prev.extraAway !== next.extraAway ||
+          prev.penHome !== next.penHome ||
+          prev.penAway !== next.penAway ||
+          prev.duration !== next.duration ||
+          prev.winner !== next.winner ||
           (prev.goals?.length ?? 0) !== next.goals.length ||
           (prev.bookings?.length ?? 0) !== next.bookings.length ||
           (prev.substitutions?.length ?? 0) !== next.substitutions.length;

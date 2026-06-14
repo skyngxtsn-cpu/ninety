@@ -13,6 +13,12 @@ type AutoResult = {
   away?: number | null;
   halfHome?: number | null;
   halfAway?: number | null;
+  extraHome?: number | null;
+  extraAway?: number | null;
+  penHome?: number | null;
+  penAway?: number | null;
+  duration?: string;
+  winner?: string | null;
   goals?: {
     minute: number | null;
     injuryTime: number | null;
@@ -88,9 +94,9 @@ function toMatch(
 
   const kickoffMs = new Date(ef.kickoffJST).getTime();
   // 時間ベースの finished 推定。autoR が無い時の保険として使う。
-  // 規定 90 + HT 15 + 延長 30 + ロスタイム余裕 15 = 150 分。
+  // 規定 90 + HT 15 + 延長 30 + ET 後 HT 5 + PK 戦想定 20 + ロスタイム余裕 20 = 180 分。
   // この値を超えても autoR が IN_PLAY を返している限り autoLive 優先で live のまま。
-  const finished = kickoffMs + 150 * 60 * 1000 < nowRef.getTime();
+  const finished = kickoffMs + 180 * 60 * 1000 < nowRef.getTime();
 
   const matchId = `${ef.date}-${ef.team1Id}-${ef.team2Id}`;
 
@@ -172,10 +178,40 @@ function toMatch(
       (status === "finished" || status === "live") &&
       effectiveScore1 !== undefined &&
       effectiveScore2 !== undefined
-        ? {
-            home: effectiveScore1,
-            away: effectiveScore2,
-          }
+        ? (() => {
+            const r: NonNullable<Match["result"]> = {
+              home: effectiveScore1,
+              away: effectiveScore2,
+            };
+            // 決勝T で延長戦 / PK 戦になった試合の追加情報。
+            // autoR (football-data.org) から取れた時のみ含める。
+            if (
+              typeof autoR?.extraHome === "number" &&
+              typeof autoR?.extraAway === "number"
+            ) {
+              r.extraTime = {
+                home: autoR.extraHome,
+                away: autoR.extraAway,
+              };
+            }
+            if (
+              typeof autoR?.penHome === "number" &&
+              typeof autoR?.penAway === "number"
+            ) {
+              r.penalties = {
+                home: autoR.penHome,
+                away: autoR.penAway,
+              };
+            }
+            if (autoR?.duration === "EXTRA_TIME") r.duration = "EXTRA_TIME";
+            else if (autoR?.duration === "PENALTY_SHOOTOUT")
+              r.duration = "PENALTY_SHOOTOUT";
+            else if (autoR?.duration === "REGULAR") r.duration = "REGULAR";
+            if (autoR?.winner === "HOME_TEAM") r.winner = "home";
+            else if (autoR?.winner === "AWAY_TEAM") r.winner = "away";
+            else if (autoR?.winner === "DRAW") r.winner = "draw";
+            return r;
+          })()
         : undefined,
     events:
       autoR?.goals || autoR?.bookings || autoR?.substitutions
@@ -423,11 +459,10 @@ export function isLiveMatch(match: Match, now: Date): boolean {
   // 延長戦・ロスタイム中も live のまま維持できる。
   if (match.status === "live") return true;
   if (match.status === "finished") return false;
-  // fallback: 時間ベース（autoR が無い時の保険）。実用上の上限を 150 分に拡張
-  // (90 + 15HT + 30ET + 15 ロスタイム余裕 = 150min)
+  // fallback: 時間ベース（autoR が無い時の保険）。PK 戦込みで 180 分上限
   const kickMs = new Date(match.kickoffJST).getTime();
   const nowMs = now.getTime();
-  return nowMs >= kickMs && nowMs <= kickMs + 150 * 60 * 1000;
+  return nowMs >= kickMs && nowMs <= kickMs + 180 * 60 * 1000;
 }
 
 /** 試合のキックオフ後経過分（0〜150）。終わってる試合は null */

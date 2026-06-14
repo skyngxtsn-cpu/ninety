@@ -111,12 +111,32 @@ export default async function MatchPage(props: PageProps<"/matches/[id]">) {
             <div className="text-center px-2 shrink-0 min-w-[80px]">
               {finished && match.result ? (
                 <div>
-                  <div className="text-[12px] text-white/70 mb-1">終了</div>
+                  <div className="text-[12px] text-white/70 mb-1">
+                    {match.result.duration === "PENALTY_SHOOTOUT"
+                      ? "PK 戦終了"
+                      : match.result.duration === "EXTRA_TIME"
+                        ? "延長終了"
+                        : "終了"}
+                  </div>
                   <SpoilerWrap size="lg">
-                    <div className="text-[40px] font-bold tabular-nums leading-none">
-                      {match.result.home}
-                      <span className="mx-2 text-white/40">-</span>
-                      {match.result.away}
+                    <div className="flex flex-col items-center">
+                      <div className="text-[40px] font-bold tabular-nums leading-none">
+                        {match.result.extraTime?.home ?? match.result.home}
+                        <span className="mx-2 text-white/40">-</span>
+                        {match.result.extraTime?.away ?? match.result.away}
+                      </div>
+                      {match.result.penalties && (
+                        <div className="text-[11px] font-semibold text-white/85 tabular-nums tracking-wide mt-1">
+                          PK {match.result.penalties.home}-
+                          {match.result.penalties.away}
+                        </div>
+                      )}
+                      {match.result.duration === "EXTRA_TIME" &&
+                        !match.result.penalties && (
+                          <div className="text-[10px] font-semibold text-white/65 tracking-wider mt-1">
+                            (AET)
+                          </div>
+                        )}
                     </div>
                   </SpoilerWrap>
                 </div>

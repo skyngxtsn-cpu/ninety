@@ -26,12 +26,27 @@ export async function CompactResultRow({ match, favoriteTeamIds }: Props) {
     favoriteTeamIds.has(match.homeTeamId) ||
     favoriteTeamIds.has(match.awayTeamId);
 
+  // 延長戦 / PK 戦の表示用情報
+  const displayHome =
+    match.result.extraTime?.home ?? match.result.home;
+  const displayAway =
+    match.result.extraTime?.away ?? match.result.away;
+  const pk = match.result.penalties;
+  const duration = match.result.duration;
+
   return (
     <CompactResultRowClient
       matchId={match.id}
       home={{ flag: home.flag, name: home.name }}
       away={{ flag: away.flag, name: away.name }}
-      result={{ home: match.result.home, away: match.result.away }}
+      result={{
+        home: displayHome,
+        away: displayAway,
+        penalties: pk
+          ? { home: pk.home, away: pk.away }
+          : undefined,
+        duration,
+      }}
       involvesFavorite={involvesFavorite}
     />
   );

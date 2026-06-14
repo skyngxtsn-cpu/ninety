@@ -10,7 +10,14 @@ type Props = {
   matchId: string;
   home: TeamMini;
   away: TeamMini;
-  result: { home: number; away: number };
+  result: {
+    home: number;
+    away: number;
+    /** PK 戦の勝負シュート結果 */
+    penalties?: { home: number; away: number };
+    /** REGULAR / EXTRA_TIME / PENALTY_SHOOTOUT */
+    duration?: "REGULAR" | "EXTRA_TIME" | "PENALTY_SHOOTOUT";
+  };
   involvesFavorite: boolean;
 };
 
@@ -29,8 +36,19 @@ export function CompactResultRowClient({
 
   // ハイドレート前 or ネタバレ防止 ON → ニュートラルスタイル
   const showWinnerStyle = hydrated && !blocked;
-  const homeWin = showWinnerStyle && result.home > result.away;
-  const awayWin = showWinnerStyle && result.away > result.home;
+  // 勝者判定: PK 戦に入った場合は PK 結果で決定、それ以外はスコア（延長込み）
+  const pkHome = result.penalties?.home ?? 0;
+  const pkAway = result.penalties?.away ?? 0;
+  const homeWin =
+    showWinnerStyle &&
+    (result.penalties
+      ? pkHome > pkAway
+      : result.home > result.away);
+  const awayWin =
+    showWinnerStyle &&
+    (result.penalties
+      ? pkAway > pkHome
+      : result.away > result.home);
 
   return (
     <Link
@@ -57,10 +75,22 @@ export function CompactResultRowClient({
           {home.name}
         </span>
         <SpoilerWrap size="md">
-          <span className="text-[16px] font-bold tabular-nums shrink-0">
-            {result.home}
-            <span className="mx-1.5 text-white/40">-</span>
-            {result.away}
+          <span className="inline-flex items-baseline gap-1 shrink-0">
+            <span className="text-[16px] font-bold tabular-nums">
+              {result.home}
+              <span className="mx-1.5 text-white/40">-</span>
+              {result.away}
+            </span>
+            {result.duration === "EXTRA_TIME" && !result.penalties && (
+              <span className="text-[9px] text-white/55 font-semibold tracking-wide">
+                AET
+              </span>
+            )}
+            {result.penalties && (
+              <span className="text-[10px] text-white/70 font-semibold tracking-wide tabular-nums">
+                PK {result.penalties.home}-{result.penalties.away}
+              </span>
+            )}
           </span>
         </SpoilerWrap>
         <span

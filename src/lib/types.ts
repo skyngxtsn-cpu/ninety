@@ -96,8 +96,17 @@ export type Match = {
   };
   /** 試合後 */
   result?: {
+    /** 規定 90 分終了時点のスコア */
     home: number;
     away: number;
+    /** 延長戦終了時点のスコア（延長戦に入った場合のみ） */
+    extraTime?: { home: number; away: number };
+    /** PK 戦の勝負シュート結果（PK 戦に入った場合のみ） */
+    penalties?: { home: number; away: number };
+    /** 勝敗が決まった方式: REGULAR / EXTRA_TIME / PENALTY_SHOOTOUT */
+    duration?: "REGULAR" | "EXTRA_TIME" | "PENALTY_SHOOTOUT";
+    /** どちらが勝ったか: home / away / draw */
+    winner?: "home" | "away" | "draw";
     /** 手動キュレーション時のみ設定。auto 結果では undefined (UI 側で非表示) */
     whyTrending?: string;
     summary30s?: string;

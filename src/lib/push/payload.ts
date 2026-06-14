@@ -330,21 +330,58 @@ export function buildResultPayload(
   const hn = shortName(home, match.homeTeamId);
   const an = shortName(away, match.awayTeamId);
   const flag = (t: Team | undefined): string => t?.flag ?? "";
-  const sh = match.result?.home ?? 0;
-  const sa = match.result?.away ?? 0;
-  const emoji = sh === sa ? "🤝" : sh > sa ? "🏆" : "🏆";
-  const title = `${emoji} ${flag(home)} ${hn} ${sh} - ${sa} ${an} ${flag(away)}`.trim();
-  const winner = sh === sa ? null : sh > sa ? hn : an;
-  const winFlag =
-    sh === sa
-      ? null
-      : sh > sa
-        ? flag(home)
-        : flag(away);
-  const body =
-    sh === sa
-      ? `両者譲らず、痛み分け。\n試合の流れはアプリで。`
-      : `${winFlag} ${winner} の勝利！\n試合の流れと得点者はアプリで。`;
+
+  // 表示スコア: 延長戦に入った場合は ET の累計を採用、それ以外は規定 90 分のスコア。
+  const r = match.result;
+  const displayHome = r?.extraTime?.home ?? r?.home ?? 0;
+  const displayAway = r?.extraTime?.away ?? r?.away ?? 0;
+  const pk = r?.penalties;
+  const duration = r?.duration;
+
+  // 勝者判定: r.winner があれば優先、なければスコアで判断（PK 戦は引き分けが規定スコアなので winner 必須）
+  let winnerSide: "home" | "away" | "draw";
+  if (r?.winner) {
+    winnerSide = r.winner;
+  } else if (pk) {
+    winnerSide = pk.home > pk.away ? "home" : pk.away > pk.home ? "away" : "draw";
+  } else {
+    winnerSide =
+      displayHome === displayAway
+        ? "draw"
+        : displayHome > displayAway
+          ? "home"
+          : "away";
+  }
+
+  // タイトル: スコア + ET / PK の補足
+  let suffix = "";
+  if (duration === "EXTRA_TIME") suffix = " (AET)";
+  else if (duration === "PENALTY_SHOOTOUT" && pk) {
+    suffix = ` (PK ${pk.home}-${pk.away})`;
+  }
+  const emoji = winnerSide === "draw" ? "🤝" : "🏆";
+  const title =
+    `${emoji} ${flag(home)} ${hn} ${displayHome} - ${displayAway} ${an} ${flag(away)}${suffix}`.trim();
+
+  const winnerName =
+    winnerSide === "home" ? hn : winnerSide === "away" ? an : null;
+  const winnerFlag =
+    winnerSide === "home"
+      ? flag(home)
+      : winnerSide === "away"
+        ? flag(away)
+        : null;
+
+  let body: string;
+  if (winnerSide === "draw") {
+    body = `両者譲らず、痛み分け。\n試合の流れはアプリで。`;
+  } else if (duration === "PENALTY_SHOOTOUT") {
+    body = `${winnerFlag} ${winnerName} が PK 戦を制して勝利！\n試合の流れはアプリで。`;
+  } else if (duration === "EXTRA_TIME") {
+    body = `${winnerFlag} ${winnerName} が延長戦で勝利！\n試合の流れと得点者はアプリで。`;
+  } else {
+    body = `${winnerFlag} ${winnerName} の勝利！\n試合の流れと得点者はアプリで。`;
+  }
   return {
     title,
     body,
