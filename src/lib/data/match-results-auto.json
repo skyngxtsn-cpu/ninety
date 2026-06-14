@@ -97,7 +97,7 @@
   },
   "2026-06-14-ger-cuw": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 7,
     "away": 1,
     "halfHome": 3,
@@ -105,6 +105,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-14T19:00:43.787Z"
+    "fetchedAt": "2026-06-14T19:05:31.580Z"
   }
 }
