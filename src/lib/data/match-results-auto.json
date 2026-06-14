@@ -106,5 +106,17 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-14T19:05:31.580Z"
+  },
+  "2026-06-14-ned-jpn": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 0,
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-14T20:10:29.575Z"
   }
 }
