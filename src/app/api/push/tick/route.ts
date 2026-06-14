@@ -7,8 +7,8 @@ import {
   type NotificationPreferences,
   OFFSET_MINUTES,
   TICK_WINDOW_MINUTES,
-  DEFAULT_PREFERENCES,
   isTypeEnabled,
+  migratePreferences,
 } from "../../../../lib/push/notification-types";
 import { isInQuietHours } from "../../../../lib/push/quiet-hours";
 import {
@@ -430,14 +430,18 @@ async function sendToSub(
   const sub: StoredSubscription =
     typeof subRaw === "string" ? JSON.parse(subRaw) : (subRaw as unknown as StoredSubscription);
 
-  let prefs: NotificationPreferences = DEFAULT_PREFERENCES;
+  let prefsRawObj: unknown = null;
   if (prefsRaw) {
     try {
-      prefs = typeof prefsRaw === "string" ? JSON.parse(prefsRaw) : (prefsRaw as unknown as NotificationPreferences);
+      prefsRawObj =
+        typeof prefsRaw === "string" ? JSON.parse(prefsRaw) : prefsRaw;
     } catch {
-      prefs = DEFAULT_PREFERENCES;
+      prefsRawObj = null;
     }
   }
+  // Redis に旧構造 (`pre: boolean`) で保存されている購読者も
+  // migratePreferences で新構造に変換してから判定。
+  const prefs: NotificationPreferences = migratePreferences(prefsRawObj);
   const spoilerBlock = spoiler === "1";
 
   // タイプが許可されているか

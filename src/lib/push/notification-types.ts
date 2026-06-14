@@ -66,11 +66,15 @@ export const OFFSET_MINUTES: Record<NotificationType, number | null> = {
 export const TICK_WINDOW_MINUTES = 2.5;
 
 export type NotificationPreferences = {
-  /** 事前通知 (pre-3h / pre-1h / pre-15m) */
-  pre: boolean;
+  /** 3 時間前通知 */
+  pre3h: boolean;
+  /** 1 時間前通知 */
+  pre1h: boolean;
+  /** 15 分前通知 */
+  pre15m: boolean;
   /** スタメン発表通知 */
   lineup: boolean;
-  /** 試合中通知 (kickoff / halftime / fulltime — スコア無し) */
+  /** 試合中通知 (kickoff / halftime / halftime-end / fulltime — スコア無し) */
   live: boolean;
   /** 1日の全試合終了後の「明日のプレビュー」ダイジェスト */
   digest: boolean;
@@ -91,7 +95,9 @@ export type NotificationPreferences = {
 };
 
 export const DEFAULT_PREFERENCES: NotificationPreferences = {
-  pre: true,
+  pre3h: true,
+  pre1h: true,
+  pre15m: true,
   lineup: true,
   live: true,
   digest: true,
@@ -101,7 +107,39 @@ export const DEFAULT_PREFERENCES: NotificationPreferences = {
   quiet: null,
 };
 
-/** group が ON なら type も配信可。各 type のフラグはまだ細分化していない */
+/**
+ * 旧バージョンの NotificationPreferences (`{pre: boolean, ...}`) を
+ * 新バージョン (`{pre3h, pre1h, pre15m, ...}`) に変換する。
+ * 既存ユーザーの localStorage / Redis に旧構造が残っているため、
+ * 読み出し直後に必ずこれを通す。
+ */
+export function migratePreferences(stored: unknown): NotificationPreferences {
+  if (!stored || typeof stored !== "object") return { ...DEFAULT_PREFERENCES };
+  const s = stored as Record<string, unknown>;
+  const preLegacy =
+    typeof s.pre === "boolean" ? s.pre : true; // 旧フィールドが boolean なら採用、無ければ true
+  const merged = {
+    ...DEFAULT_PREFERENCES,
+    ...s,
+    pre3h: typeof s.pre3h === "boolean" ? s.pre3h : preLegacy,
+    pre1h: typeof s.pre1h === "boolean" ? s.pre1h : preLegacy,
+    pre15m: typeof s.pre15m === "boolean" ? s.pre15m : preLegacy,
+  } as Record<string, unknown>;
+  // 旧 `pre` フィールドは持ち越さない（型に含まれていないため）
+  delete merged.pre;
+  return merged as unknown as NotificationPreferences;
+}
+
+/** pre-* タイプ → 該当する pref フィールド */
+const PRE_TYPE_TO_FIELD: Partial<
+  Record<NotificationType, keyof NotificationPreferences>
+> = {
+  "pre-3h": "pre3h",
+  "pre-1h": "pre1h",
+  "pre-15m": "pre15m",
+};
+
+/** group が ON なら type も配信可。pre-* は個別フィールドで判定 */
 export function isTypeEnabled(
   type: NotificationType,
   pref: NotificationPreferences,
@@ -125,6 +163,12 @@ export function isTypeEnabled(
     return false;
   }
 
+  // pre-3h / pre-1h / pre-15m は個別フィールドで判定
+  const preField = PRE_TYPE_TO_FIELD[type];
+  if (preField !== undefined) {
+    return pref[preField] === true;
+  }
+
   const group = TYPE_TO_GROUP[type];
-  return pref[group] === true;
+  return pref[group as keyof NotificationPreferences] === true;
 }

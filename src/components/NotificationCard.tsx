@@ -202,12 +202,31 @@ export function NotificationCard() {
         <p className="text-[10px] uppercase tracking-wider text-white/45">
           通知の内訳
         </p>
-        <ToggleRow
-          label="事前通知"
-          hint="3時間前 / 1時間前 / 15分前"
-          checked={prefs.pre}
-          onToggle={togglePref("pre")}
-        />
+        <div className="space-y-2.5">
+          <p className="text-[12.5px] font-semibold text-white/85">
+            事前通知
+          </p>
+          <div className="pl-3 space-y-2.5 border-l-2 border-white/10">
+            <ToggleRow
+              label="3 時間前"
+              hint="心の準備の時間"
+              checked={prefs.pre3h}
+              onToggle={togglePref("pre3h")}
+            />
+            <ToggleRow
+              label="1 時間前"
+              hint="観戦スタンバイ"
+              checked={prefs.pre1h}
+              onToggle={togglePref("pre1h")}
+            />
+            <ToggleRow
+              label="15 分前"
+              hint="まもなく開始"
+              checked={prefs.pre15m}
+              onToggle={togglePref("pre15m")}
+            />
+          </div>
+        </div>
         {/* スタメン発表通知は football-data.org 無料枠で取得不可のため
             UI から非表示。バックエンドロジックは残してあるので将来データが
             来るようになれば再有効化可。 */}

@@ -5,6 +5,7 @@ import { BottomNav } from "../components/BottomNav";
 import { ServiceWorkerRegistrar } from "../components/ServiceWorkerRegistrar";
 import { SpoilerOnboarding } from "../components/SpoilerOnboarding";
 import { ClientErrorReporter } from "../components/ClientErrorReporter";
+import { PullToRefreshWrapper } from "../components/PullToRefreshWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,9 +78,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <div className="mx-auto w-full max-w-[480px] flex-1 pb-safe">
-          {children}
-        </div>
+        <PullToRefreshWrapper>
+          <div className="mx-auto w-full max-w-[480px] flex-1 pb-safe">
+            {children}
+          </div>
+        </PullToRefreshWrapper>
         <BottomNav />
         <ServiceWorkerRegistrar />
         <SpoilerOnboarding />

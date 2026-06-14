@@ -1,7 +1,9 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   DEFAULT_PREFERENCES,
+  migratePreferences,
   type NotificationPreferences,
 } from "./push/notification-types";
 import { usePersistedState } from "./usePersistedState";
@@ -16,10 +18,11 @@ export function useNotificationPreferences(): {
   setPrefs: (next: NotificationPreferences | ((p: NotificationPreferences) => NotificationPreferences)) => void;
   hydrated: boolean;
 } {
-  const [prefs, setPrefs, hydrated] = usePersistedState<NotificationPreferences>(
-    PREF_KEY,
-    DEFAULT_PREFERENCES,
-  );
+  const [storedPrefs, setPrefs, hydrated] =
+    usePersistedState<NotificationPreferences>(PREF_KEY, DEFAULT_PREFERENCES);
+  // 旧構造 (`pre: boolean`) を新構造 (`pre3h/pre1h/pre15m`) に変換。
+  // 既存ユーザーの localStorage に旧データが残っていても破綻しないように。
+  const prefs = useMemo(() => migratePreferences(storedPrefs), [storedPrefs]);
   return { prefs, setPrefs, hydrated };
 }
 
