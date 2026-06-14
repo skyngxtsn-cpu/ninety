@@ -82,5 +82,17 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-14T03:15:26.881Z"
+  },
+  "2026-06-14-aus-tur": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 0,
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-14T04:10:33.131Z"
   }
 }
