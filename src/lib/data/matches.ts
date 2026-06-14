@@ -102,8 +102,13 @@ function toMatch(
   const autoFinished = autoR?.status === "FINISHED";
   const autoLive =
     autoR?.status === "IN_PLAY" || autoR?.status === "PAUSED";
-  const status: MatchStatus =
-    ef.status === "finished" || finished || autoFinished
+  // 重要: football-data.org が IN_PLAY / PAUSED と返している間は
+  // たとえキックオフから 110 分が経過していても (延長 / 中断 / ロスタイム)
+  // 必ず 'live' として扱う。time-based の 'finished' 推定で「もう終わったはず」と
+  // 早合点して result 通知が誤発火するバグを防ぐ。
+  const status: MatchStatus = autoLive
+    ? "live"
+    : ef.status === "finished" || autoFinished || finished
       ? "finished"
       : autoLive
         ? "live"
