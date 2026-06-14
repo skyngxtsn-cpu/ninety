@@ -141,8 +141,11 @@ async function processOffsetType(
     goal: 0, // goal は offset 系では処理しない (processGoals 担当)
     halftime: 30 * 60 * 1000,
     "halftime-end": 25 * 60 * 1000, // 後半開始は 25 分以内なら catch-up
-    fulltime: 60 * 60 * 1000,
-    result: 12 * 60 * 60 * 1000, // 結果は丸 1 日以内なら出す価値あり
+    fulltime: 45 * 60 * 1000, // 試合終了から 45 分以内なら catch-up
+    // result は試合終了から 2 時間以内 (= kickoff + 115min から 2h) なら catch-up。
+    // 12 時間にしていたところ、cron / deploy の遅延で寝起きに古い結果通知が
+    // 届くバグが発生したため短縮。それ以上遅れた場合はユーザー自身がアプリで確認。
+    result: 2 * 60 * 60 * 1000,
     tournament: 24 * 60 * 60 * 1000,
     digest: 0,
   };
