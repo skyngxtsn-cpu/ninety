@@ -87,7 +87,10 @@ function toMatch(
     : aug.meaning;
 
   const kickoffMs = new Date(ef.kickoffJST).getTime();
-  const finished = kickoffMs + 110 * 60 * 1000 < nowRef.getTime(); // 試合後110分
+  // 時間ベースの finished 推定。autoR が無い時の保険として使う。
+  // 規定 90 + HT 15 + 延長 30 + ロスタイム余裕 15 = 150 分。
+  // この値を超えても autoR が IN_PLAY を返している限り autoLive 優先で live のまま。
+  const finished = kickoffMs + 150 * 60 * 1000 < nowRef.getTime();
 
   const matchId = `${ef.date}-${ef.team1Id}-${ef.team2Id}`;
 
@@ -416,12 +419,18 @@ export async function getHomeHeroState(
 
 /** 試合がいま LIVE 中か？（キックオフから 110 分以内） */
 export function isLiveMatch(match: Match, now: Date): boolean {
+  // 優先: 上流データ (football-data.org → autoLive) が live と言ってる時はそれを信じる。
+  // 延長戦・ロスタイム中も live のまま維持できる。
+  if (match.status === "live") return true;
+  if (match.status === "finished") return false;
+  // fallback: 時間ベース（autoR が無い時の保険）。実用上の上限を 150 分に拡張
+  // (90 + 15HT + 30ET + 15 ロスタイム余裕 = 150min)
   const kickMs = new Date(match.kickoffJST).getTime();
   const nowMs = now.getTime();
-  return nowMs >= kickMs && nowMs <= kickMs + 110 * 60 * 1000;
+  return nowMs >= kickMs && nowMs <= kickMs + 150 * 60 * 1000;
 }
 
-/** 試合のキックオフ後経過分（0〜110）。終わってる試合は null */
+/** 試合のキックオフ後経過分（0〜150）。終わってる試合は null */
 export function liveMinute(match: Match, now: Date): number | null {
   if (!isLiveMatch(match, now)) return null;
   const diffMin = Math.floor(
