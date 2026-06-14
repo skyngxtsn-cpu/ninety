@@ -85,7 +85,7 @@
   },
   "2026-06-14-aus-tur": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 0,
     "halfHome": 1,
@@ -93,6 +93,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-14T05:45:30.083Z"
+    "fetchedAt": "2026-06-14T06:05:31.250Z"
   }
 }
