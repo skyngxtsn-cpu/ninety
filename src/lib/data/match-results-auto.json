@@ -94,5 +94,17 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-14T06:05:31.250Z"
+  },
+  "2026-06-14-ger-cuw": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 0,
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-14T17:10:34.209Z"
   }
 }
