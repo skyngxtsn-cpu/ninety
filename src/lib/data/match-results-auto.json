@@ -100,11 +100,11 @@
     "status": "PAUSED",
     "home": 3,
     "away": 1,
-    "halfHome": 0,
-    "halfAway": 0,
+    "halfHome": 3,
+    "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-14T18:00:42.555Z"
+    "fetchedAt": "2026-06-14T18:05:27.768Z"
   }
 }
