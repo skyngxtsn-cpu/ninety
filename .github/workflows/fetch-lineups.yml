@@ -39,6 +39,12 @@ jobs:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
           LINEUP_FROM: ${{ inputs.from }}
           LINEUP_TO: ${{ inputs.to }}
+          # 変更検知時に Redis 直書き込み + push-tick 即時起動するために必要。
+          # 未設定なら JSON コミットのみで従来通り Vercel デプロイ経由になる。
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+          TICK_SECRET: ${{ secrets.TICK_SECRET }}
+          SITE_URL: "https://ninety-sand.vercel.app"
         run: node scripts/fetch-lineups.mjs
 
       - name: Commit and push if changed

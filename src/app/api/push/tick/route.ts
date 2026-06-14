@@ -29,7 +29,7 @@ import lineupAutoRaw from "../../../../lib/data/lineup-overrides-auto.json";
 import matchResultsAutoRaw from "../../../../lib/data/match-results-auto.json";
 
 type AutoLineupEntry = { fetchedAt?: string };
-const lineupAuto = lineupAutoRaw as Record<string, AutoLineupEntry>;
+const lineupAutoStatic = lineupAutoRaw as Record<string, AutoLineupEntry>;
 
 type AutoGoal = {
   minute: number | null;
@@ -47,7 +47,43 @@ type AutoResult = {
   halfAway?: number | null;
   goals?: AutoGoal[];
 };
-const matchResultsAuto = matchResultsAutoRaw as Record<string, AutoResult>;
+const matchResultsAutoStatic = matchResultsAutoRaw as Record<string, AutoResult>;
+
+/**
+ * 結果データを Redis から取得。fetch-lineups がリアルタイムに書き込んだ
+ * 最新値を使うことで、Vercel デプロイ完了を待たずに通知配信できる。
+ * Redis に無い / 失敗時はビルド時 JSON にフォールバック。
+ */
+async function loadAutoResults(): Promise<Record<string, AutoResult>> {
+  try {
+    const raw = await redis.get<unknown>("match:results:auto");
+    if (raw && typeof raw === "object") {
+      return raw as Record<string, AutoResult>;
+    }
+    if (typeof raw === "string") {
+      return JSON.parse(raw) as Record<string, AutoResult>;
+    }
+  } catch (e) {
+    console.warn(`[loadAutoResults] redis failed, fallback to static JSON: ${(e as Error).message}`);
+  }
+  return matchResultsAutoStatic;
+}
+
+/** スタメン (lineup-overrides) を Redis から取得。フォールバック同上 */
+async function loadAutoLineups(): Promise<Record<string, AutoLineupEntry>> {
+  try {
+    const raw = await redis.get<unknown>("match:lineups:auto");
+    if (raw && typeof raw === "object") {
+      return raw as Record<string, AutoLineupEntry>;
+    }
+    if (typeof raw === "string") {
+      return JSON.parse(raw) as Record<string, AutoLineupEntry>;
+    }
+  } catch (e) {
+    console.warn(`[loadAutoLineups] redis failed, fallback to static JSON: ${(e as Error).message}`);
+  }
+  return lineupAutoStatic;
+}
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -76,7 +112,12 @@ export async function POST(req: Request) {
   webpush.setVapidDetails(subject, publicKey, privateKey);
 
   const now = new Date();
-  const [matches, teams] = await Promise.all([getAllMatches(), getAllTeams()]);
+  const [matches, teams, autoResults, autoLineups] = await Promise.all([
+    getAllMatches(),
+    getAllTeams(),
+    loadAutoResults(),
+    loadAutoLineups(),
+  ]);
   const teamById = new Map(teams.map((t) => [t.id, t]));
 
   // 1. 試合関連の通知タイプ（オフセット定義済み）を処理
@@ -92,7 +133,13 @@ export async function POST(req: Request) {
   ];
   const results: Record<string, unknown> = {};
   for (const type of offsetTypes) {
-    results[type] = await processOffsetType(type, matches, teamById, now);
+    results[type] = await processOffsetType(
+      type,
+      matches,
+      teamById,
+      now,
+      autoResults,
+    );
   }
 
   // 2. 1日の終わりダイジェスト：今日の最終試合終了から30分後 ±2.5分
@@ -103,10 +150,10 @@ export async function POST(req: Request) {
   results["tournament"] = await processTournament(teamById, matchById, now);
 
   // 4. スタメン発表通知（lineup-overrides-auto.json の fetchedAt から検知）
-  results["lineup"] = await processLineup(matches, teamById, now);
+  results["lineup"] = await processLineup(matches, teamById, now, autoLineups);
 
   // 5. ⚽ 得点通知（match-results-auto.json の goals 配列の差分検知）
-  results["goal"] = await processGoals(matches, teamById, now);
+  results["goal"] = await processGoals(matches, teamById, now, autoResults);
 
   return NextResponse.json({
     ok: true,
@@ -123,6 +170,7 @@ async function processOffsetType(
   matches: Match[],
   teamById: Map<string, Team>,
   now: Date,
+  autoResults: Record<string, AutoResult>,
 ): Promise<{ candidates: number; pushed: number; failed: number; skipped: number }> {
   const offset = OFFSET_MINUTES[type];
   if (offset === null) return { candidates: 0, pushed: 0, failed: 0, skipped: 0 };
@@ -200,7 +248,7 @@ async function processOffsetType(
     // ハーフタイム / 後半開始: スコア取れているなら spoiler OFF ユーザーには別 payload
     let spoilerOffPayload: NotificationPayload | null = null;
     if (type === "halftime") {
-      const r = matchResultsAuto[m.id];
+      const r = autoResults[m.id];
       if (
         r &&
         typeof r.halfHome === "number" &&
@@ -219,7 +267,7 @@ async function processOffsetType(
       // football-data.org の home/away は最新のフルスコアなので、
       // 後半まだ始まったばかりなら ≒ 前半終了時のスコア。
       // halfHome/halfAway があればそれを優先（必ず前半終了時のスコア）
-      const r = matchResultsAuto[m.id];
+      const r = autoResults[m.id];
       if (
         r &&
         typeof r.halfHome === "number" &&
@@ -552,6 +600,7 @@ async function processLineup(
   matches: Match[],
   teamById: Map<string, Team>,
   now: Date,
+  lineupAuto: Record<string, AutoLineupEntry>,
 ): Promise<{ pushed: number; skipped: number }> {
   const nowMs = now.getTime();
   const windowMs = 15 * 60 * 1000;
@@ -627,6 +676,7 @@ async function processGoals(
   matches: Match[],
   teamById: Map<string, Team>,
   now: Date,
+  matchResultsAuto: Record<string, AutoResult>,
 ): Promise<{ candidates: number; pushed: number; failed: number; skipped: number }> {
   let candidates = 0;
   let pushed = 0;

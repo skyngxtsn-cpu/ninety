@@ -346,6 +346,7 @@ async function main() {
 
   let updated = 0;
   let skipped = 0;
+  let resultsChanged = 0; // 結果 JSON が変わった件数（push-tick 即時起動判定用）
   for (const m of matches) {
     const key = makeMatchKey(m);
     if (!key) {
@@ -424,6 +425,7 @@ async function main() {
             ...next,
             fetchedAt: new Date().toISOString(),
           };
+          resultsChanged += 1;
         }
         // 変化なし → 既存エントリそのままで上書きしない（fetchedAt も維持）
       }
@@ -467,6 +469,61 @@ async function main() {
   console.log(
     `\nDone: updated=${updated}, skipped=${skipped}, total lineups=${Object.keys(existing).length}, total results=${Object.keys(existingResults).length}`,
   );
+
+  // === Redis 直接書き込み ===
+  // Vercel デプロイ完了を待たずに push-tick が即読めるように、
+  // Upstash Redis に直接 results JSON を保存する。
+  // データ駆動の通知 (goal / result / halftime score) の遅延を激減させる。
+  const hasAnyChange = updated > 0 || resultsChanged > 0;
+  const redisUrl = process.env.KV_REST_API_URL;
+  const redisToken = process.env.KV_REST_API_TOKEN;
+  if (redisUrl && redisToken && hasAnyChange) {
+    try {
+      // results
+      const res1 = await fetch(`${redisUrl}/set/match:results:auto`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${redisToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(existingResults),
+      });
+      console.log(`Redis results SET: ${res1.status}`);
+      // lineups
+      const res2 = await fetch(`${redisUrl}/set/match:lineups:auto`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${redisToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(existing),
+      });
+      console.log(`Redis lineups SET: ${res2.status}`);
+    } catch (err) {
+      console.error(`✗ Redis SET threw: ${err.message}`);
+    }
+  } else if (hasAnyChange) {
+    console.log("(Redis env vars not set, skipping Redis write)");
+  }
+
+  // === push-tick 即時起動 ===
+  // 変更があった場合のみ、Vercel の /api/push/tick を直接叩いて
+  // cron 待ちなく通知を配信。これで「変更検知 → 通知配信」が秒単位に。
+  const siteUrl = (process.env.SITE_URL || "https://ninety-sand.vercel.app").replace(/\/+$/, "");
+  const tickSecret = process.env.TICK_SECRET;
+  if (tickSecret && hasAnyChange) {
+    try {
+      const res = await fetch(`${siteUrl}/api/push/tick`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${tickSecret}` },
+      });
+      console.log(`✓ push-tick triggered: ${res.status}`);
+    } catch (err) {
+      console.error(`✗ push-tick threw: ${err.message}`);
+    }
+  } else if (!hasAnyChange) {
+    console.log("(no change, skipping push-tick trigger)");
+  }
 }
 
 main().catch((e) => {
