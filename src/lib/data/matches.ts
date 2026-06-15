@@ -213,15 +213,53 @@ function toMatch(
             return r;
           })()
         : undefined,
-    events:
-      autoR?.goals || autoR?.bookings || autoR?.substitutions
-        ? {
-            goals: autoR.goals ?? [],
-            bookings: autoR.bookings ?? [],
-            substitutions: autoR.substitutions ?? [],
-          }
-        : undefined,
+    events: (() => {
+      // 主データソース: football-data.org の auto JSON (goals/bookings/subs)
+      // ただし無料枠だと goals が空配列で返ってくるため、OpenFootball の
+      // goals1/goals2 で補完する（数時間ラグあり）。
+      const fdGoals = autoR?.goals ?? [];
+      const ofGoalsHome = (ef.goals1 ?? []).map((g) => ({
+        minute: parseMinute(g.minute),
+        injuryTime: parseInjuryTime(g.minute),
+        type: "REGULAR",
+        team: ef.team1Id,
+        scorer: g.name,
+        assist: null,
+      }));
+      const ofGoalsAway = (ef.goals2 ?? []).map((g) => ({
+        minute: parseMinute(g.minute),
+        injuryTime: parseInjuryTime(g.minute),
+        type: "REGULAR",
+        team: ef.team2Id,
+        scorer: g.name,
+        assist: null,
+      }));
+      // FD が取れていればそれを優先、無ければ OF
+      const goals = fdGoals.length > 0
+        ? fdGoals
+        : [...ofGoalsHome, ...ofGoalsAway];
+      const bookings = autoR?.bookings ?? [];
+      const substitutions = autoR?.substitutions ?? [];
+      if (goals.length === 0 && bookings.length === 0 && substitutions.length === 0) {
+        return undefined;
+      }
+      return { goals, bookings, substitutions };
+    })(),
   };
+}
+
+/** OF goals.minute ("51" / "45+2" / "90+5") → minute 数値 */
+function parseMinute(s: string): number | null {
+  if (!s) return null;
+  const m = s.match(/^(\d+)/);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+/** OF goals.minute からロスタイム分のみ抽出 ("90+5" → 5) */
+function parseInjuryTime(s: string): number | null {
+  if (!s) return null;
+  const m = s.match(/\+(\d+)/);
+  return m ? parseInt(m[1], 10) : null;
 }
 
 export async function getAllMatches(): Promise<Match[]> {

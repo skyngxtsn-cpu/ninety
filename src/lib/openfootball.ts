@@ -20,6 +20,18 @@ export type OFMatch = {
   ground: string;
   score1?: number;
   score2?: number;
+  /** 試合終了済みなら入る。"ft":[2,2],"ht":[0,0] 形式 */
+  score?: {
+    ft?: [number, number];
+    ht?: [number, number];
+  };
+  /** team1 (ホーム) 側の得点者。"minute" は文字列 "51" / "45+2" / "90+5"。
+   *  football-data.org 無料枠で goals が取れないため OF を主データソースに。
+   *  ただし数時間〜半日の更新ラグあり。
+   */
+  goals1?: { name: string; minute: string }[];
+  /** team2 (アウェイ) 側の得点者。形式は goals1 と同じ */
+  goals2?: { name: string; minute: string }[];
 };
 
 export type OFTeam = {
