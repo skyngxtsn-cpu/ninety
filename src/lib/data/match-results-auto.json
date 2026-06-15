@@ -235,7 +235,7 @@
   },
   "2026-06-15-ksa-uru": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -249,6 +249,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-15T23:05:26.448Z"
+    "fetchedAt": "2026-06-15T23:20:29.300Z"
   }
 }
