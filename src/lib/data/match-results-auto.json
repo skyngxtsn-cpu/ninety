@@ -196,5 +196,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-15T14:45:35.068Z"
+  },
+  "2026-06-15-esp-cpv": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-15T16:10:32.711Z"
   }
 }
