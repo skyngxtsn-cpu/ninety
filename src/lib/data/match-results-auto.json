@@ -163,7 +163,7 @@
   },
   "2026-06-14-civ-ecu": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -177,24 +177,24 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-15T02:35:26.244Z"
+    "fetchedAt": "2026-06-15T14:45:34.901Z"
   },
   "2026-06-15-swe-tun": {
     "source": "auto",
-    "status": "IN_PLAY",
-    "home": 1,
-    "away": 0,
+    "status": "FINISHED",
+    "home": 5,
+    "away": 1,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
     "winner": "HOME_TEAM",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 2,
+    "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-15T02:15:27.350Z"
+    "fetchedAt": "2026-06-15T14:45:35.068Z"
   }
 }
