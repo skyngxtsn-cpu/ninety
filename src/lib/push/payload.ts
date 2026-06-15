@@ -419,23 +419,15 @@ export function buildResultPayload(
         ? flag(away)
         : null;
 
-  // 得点者リスト（取れていれば本文に追加）
-  const scorers = formatScorers(
-    match.events?.goals,
-    match.homeTeamId,
-    match.awayTeamId,
-  );
-  const scorersLine = scorers ? `\n${scorers}` : "";
-
   let body: string;
   if (winnerSide === "draw") {
-    body = `両者譲らず、痛み分け。${scorersLine}`;
+    body = `両者譲らず、痛み分け。\n試合の流れはアプリで。`;
   } else if (duration === "PENALTY_SHOOTOUT") {
-    body = `${winnerFlag} ${winnerName} が PK 戦を制して勝利！${scorersLine}`;
+    body = `${winnerFlag} ${winnerName} が PK 戦を制して勝利！\n試合の流れはアプリで。`;
   } else if (duration === "EXTRA_TIME") {
-    body = `${winnerFlag} ${winnerName} が延長戦で勝利！${scorersLine}`;
+    body = `${winnerFlag} ${winnerName} が延長戦で勝利！\n試合の流れと得点者はアプリで。`;
   } else {
-    body = `${winnerFlag} ${winnerName} の勝利！${scorersLine}`;
+    body = `${winnerFlag} ${winnerName} の勝利！\n試合の流れと得点者はアプリで。`;
   }
   return {
     title,
