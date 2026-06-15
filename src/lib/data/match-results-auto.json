@@ -163,20 +163,20 @@
   },
   "2026-06-14-civ-ecu": {
     "source": "auto",
-    "status": "IN_PLAY",
-    "home": null,
-    "away": null,
+    "status": "FINISHED",
+    "home": 1,
+    "away": 0,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": null,
-    "halfHome": null,
-    "halfAway": null,
+    "winner": "HOME_TEAM",
+    "halfHome": 0,
+    "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-15T00:20:27.067Z"
+    "fetchedAt": "2026-06-15T01:15:26.716Z"
   }
 }
