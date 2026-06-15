@@ -199,7 +199,7 @@
   },
   "2026-06-15-esp-cpv": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -213,6 +213,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-15T16:55:26.677Z"
+    "fetchedAt": "2026-06-15T17:15:39.984Z"
   }
 }
