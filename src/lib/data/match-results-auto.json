@@ -217,7 +217,7 @@
   },
   "2026-06-15-bel-egy": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -231,6 +231,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-15T20:00:43.037Z"
+    "fetchedAt": "2026-06-15T20:15:27.507Z"
   }
 }
