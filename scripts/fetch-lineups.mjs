@@ -41,18 +41,42 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function fdRequest(path, _retried = false) {
-  const res = await fetch(`${BASE}${path}`, {
-    headers: { "X-Auth-Token": apiKey },
-  });
-  if (res.status === 429 && !_retried) {
+async function fdRequest(path, _retryCount = 0) {
+  let res;
+  try {
+    res = await fetch(`${BASE}${path}`, {
+      headers: { "X-Auth-Token": apiKey },
+    });
+  } catch (err) {
+    // 一過性のネットワークエラー (DNS / 接続切れ / Connection reset 等) を
+    // 最大 3 回まで指数バックオフでリトライ。
+    if (_retryCount < 3) {
+      const waitSec = (_retryCount + 1) * 2; // 2s, 4s, 6s
+      console.log(
+        `    🌐 network error: ${err.message}, retry ${_retryCount + 1}/3 in ${waitSec}s`,
+      );
+      await sleep(waitSec * 1000);
+      return fdRequest(path, _retryCount + 1);
+    }
+    throw err;
+  }
+  if (res.status === 429 && _retryCount === 0) {
     // Wait the time the API tells us, plus 2s buffer, then retry once
     const t = await res.text();
     const match = /Wait (\d+) seconds/.exec(t);
     const waitSec = match ? Number(match[1]) + 2 : 62;
     console.log(`    ⏳ rate limit, sleeping ${waitSec}s before retry`);
     await sleep(waitSec * 1000);
-    return fdRequest(path, true);
+    return fdRequest(path, 1);
+  }
+  if (res.status >= 500 && _retryCount < 2) {
+    // サーバーエラーも 2 回までリトライ
+    const waitSec = (_retryCount + 1) * 3;
+    console.log(
+      `    ⚠️ server ${res.status}, retry ${_retryCount + 1}/2 in ${waitSec}s`,
+    );
+    await sleep(waitSec * 1000);
+    return fdRequest(path, _retryCount + 1);
   }
   if (!res.ok) {
     const t = await res.text();
