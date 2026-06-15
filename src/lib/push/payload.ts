@@ -322,6 +322,53 @@ export function buildHalftimeEndScorePayload(
   };
 }
 
+/**
+ * 得点者リストを「33' 三笘・67' 久保 / 89' Verstappen」形式に整形。
+ * - ホームチーム → アウェイチームの順で / 区切り
+ * - 各チーム内は分昇順
+ * - オウンゴールは "(OG)" 補足
+ * - PK は "(PK)" 補足
+ *
+ * goals が空 (football-data.org 無料枠で取れない場合や試合中) → 空文字
+ */
+function formatScorers(
+  goals: NonNullable<Match["events"]>["goals"] | undefined,
+  homeTeamId: string,
+  awayTeamId: string,
+): string {
+  if (!goals || goals.length === 0) return "";
+  const fmt = (g: NonNullable<Match["events"]>["goals"][number]) => {
+    const min =
+      g.minute !== null
+        ? g.injuryTime
+          ? `${g.minute}+${g.injuryTime}'`
+          : `${g.minute}'`
+        : "";
+    const suffix =
+      g.type === "OWN" ? " (OG)" : g.type === "PENALTY" ? " (PK)" : "";
+    const name = (g.scorer || "").trim();
+    if (!name) return ""; // 得点者名が取れていないものはスキップ
+    return `${min} ${name}${suffix}`.trim();
+  };
+  const sorted = [...goals].sort(
+    (a, b) =>
+      (a.minute ?? 999) - (b.minute ?? 999) ||
+      (a.injuryTime ?? 0) - (b.injuryTime ?? 0),
+  );
+  // オウンゴールは「相手側に得点が入る」が、見出しのチーム所属判定では
+  // g.team はゴールを入れた本人のチーム ID（OG なら自陣に入れた側）。
+  // ここではシンプルに「自軍枠の得点」として home/away を分ける。
+  const homeGoals = sorted.filter((g) => g.team === homeTeamId).map(fmt).filter(Boolean);
+  const awayGoals = sorted.filter((g) => g.team === awayTeamId).map(fmt).filter(Boolean);
+  if (homeGoals.length === 0 && awayGoals.length === 0) return "";
+  const homeLine = homeGoals.join("・");
+  const awayLine = awayGoals.join("・");
+  if (homeGoals.length && awayGoals.length) {
+    return `⚽ ${homeLine} / ${awayLine}`;
+  }
+  return `⚽ ${homeLine || awayLine}`;
+}
+
 export function buildResultPayload(
   match: Match,
   home: Team | undefined,
@@ -372,15 +419,23 @@ export function buildResultPayload(
         ? flag(away)
         : null;
 
+  // 得点者リスト（取れていれば本文に追加）
+  const scorers = formatScorers(
+    match.events?.goals,
+    match.homeTeamId,
+    match.awayTeamId,
+  );
+  const scorersLine = scorers ? `\n${scorers}` : "";
+
   let body: string;
   if (winnerSide === "draw") {
-    body = `両者譲らず、痛み分け。\n試合の流れはアプリで。`;
+    body = `両者譲らず、痛み分け。${scorersLine}`;
   } else if (duration === "PENALTY_SHOOTOUT") {
-    body = `${winnerFlag} ${winnerName} が PK 戦を制して勝利！\n試合の流れはアプリで。`;
+    body = `${winnerFlag} ${winnerName} が PK 戦を制して勝利！${scorersLine}`;
   } else if (duration === "EXTRA_TIME") {
-    body = `${winnerFlag} ${winnerName} が延長戦で勝利！\n試合の流れと得点者はアプリで。`;
+    body = `${winnerFlag} ${winnerName} が延長戦で勝利！${scorersLine}`;
   } else {
-    body = `${winnerFlag} ${winnerName} の勝利！\n試合の流れと得点者はアプリで。`;
+    body = `${winnerFlag} ${winnerName} の勝利！${scorersLine}`;
   }
   return {
     title,
