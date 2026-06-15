@@ -266,19 +266,24 @@ async function processOffsetType(
     // ハーフタイム / 後半開始: スコア取れているなら spoiler OFF ユーザーには別 payload
     let spoilerOffPayload: NotificationPayload | null = null;
     if (type === "halftime") {
+      // 前半終了時のスコア取得。優先: halfHome/halfAway (football-data.org が
+      // PAUSED に切り替えた時に確定)。fallback: home/away (前半終了直後なら
+      // 累計スコア=前半スコアなので使える)。
       const r = autoResults[m.id];
-      if (
-        r &&
-        typeof r.halfHome === "number" &&
-        typeof r.halfAway === "number"
-      ) {
-        spoilerOffPayload = buildHalftimeScorePayload(
-          m,
-          home,
-          away,
-          r.halfHome,
-          r.halfAway,
-        );
+      const hh =
+        typeof r?.halfHome === "number"
+          ? r.halfHome
+          : typeof r?.home === "number"
+            ? r.home
+            : null;
+      const ha =
+        typeof r?.halfAway === "number"
+          ? r.halfAway
+          : typeof r?.away === "number"
+            ? r.away
+            : null;
+      if (r && typeof hh === "number" && typeof ha === "number") {
+        spoilerOffPayload = buildHalftimeScorePayload(m, home, away, hh, ha);
       }
     } else if (type === "halftime-end") {
       // 後半開始時はその時点での現在スコアを表示。
