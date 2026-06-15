@@ -163,7 +163,7 @@
   },
   "2026-06-14-civ-ecu": {
     "source": "auto",
-    "status": "FINISHED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -177,7 +177,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-15T02:10:27.352Z"
+    "fetchedAt": "2026-06-15T02:20:28.341Z"
   },
   "2026-06-15-swe-tun": {
     "source": "auto",
