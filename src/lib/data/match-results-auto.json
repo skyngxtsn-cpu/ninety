@@ -253,7 +253,7 @@
   },
   "2026-06-16-irn-nzl": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 1,
     "away": 1,
     "extraHome": null,
@@ -262,11 +262,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "DRAW",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 1,
+    "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-16T01:50:29.077Z"
+    "fetchedAt": "2026-06-16T02:03:46.981Z"
   }
 }
