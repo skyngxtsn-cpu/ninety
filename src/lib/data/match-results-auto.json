@@ -253,7 +253,7 @@
   },
   "2026-06-16-irn-nzl": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 1,
     "extraHome": null,
@@ -267,6 +267,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-16T02:03:46.981Z"
+    "fetchedAt": "2026-06-16T02:20:24.015Z"
   }
 }
