@@ -290,19 +290,19 @@
   "2026-06-16-irq-nor": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
+    "home": 1,
     "away": 1,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "AWAY_TEAM",
+    "winner": "DRAW",
     "halfHome": null,
     "halfAway": null,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-16T22:40:34.252Z"
+    "fetchedAt": "2026-06-16T22:50:30.610Z"
   }
 }
