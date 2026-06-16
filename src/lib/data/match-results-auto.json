@@ -271,7 +271,7 @@
   },
   "2026-06-16-fra-sen": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 3,
     "away": 1,
     "extraHome": null,
@@ -285,6 +285,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-16T21:10:32.376Z"
+    "fetchedAt": "2026-06-16T21:15:29.563Z"
   }
 }
