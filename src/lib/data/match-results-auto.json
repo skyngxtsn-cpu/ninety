@@ -289,9 +289,9 @@
   },
   "2026-06-16-irq-nor": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
-    "away": 3,
+    "away": 4,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
@@ -303,6 +303,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-16T23:50:37.669Z"
+    "fetchedAt": "2026-06-17T00:10:28.725Z"
   }
 }
