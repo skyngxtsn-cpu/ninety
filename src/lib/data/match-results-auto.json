@@ -326,7 +326,7 @@
   "2026-06-17-aut-jor": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 2,
+    "home": 3,
     "away": 1,
     "extraHome": null,
     "extraAway": null,
@@ -339,6 +339,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-17T05:40:35.504Z"
+    "fetchedAt": "2026-06-17T05:50:25.660Z"
   }
 }
