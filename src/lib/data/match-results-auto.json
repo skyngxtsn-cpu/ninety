@@ -308,7 +308,7 @@
   "2026-06-17-arg-alg": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 1,
+    "home": 2,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -321,6 +321,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-17T02:20:25.102Z"
+    "fetchedAt": "2026-06-17T02:35:24.275Z"
   }
 }
