@@ -361,7 +361,7 @@
   },
   "2026-06-17-eng-cro": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 2,
     "away": 2,
     "extraHome": null,
@@ -370,11 +370,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "DRAW",
-    "halfHome": 0,
-    "halfAway": 0,
+    "halfHome": 2,
+    "halfAway": 2,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-17T20:55:30.918Z"
+    "fetchedAt": "2026-06-17T21:00:46.409Z"
   }
 }
