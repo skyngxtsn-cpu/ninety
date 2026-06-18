@@ -452,7 +452,7 @@
   "2026-06-18-can-qat": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 1,
+    "home": 2,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -465,6 +465,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-18T22:25:22.474Z"
+    "fetchedAt": "2026-06-18T22:40:28.179Z"
   }
 }
