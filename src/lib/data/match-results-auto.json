@@ -451,7 +451,7 @@
   },
   "2026-06-18-can-qat": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 3,
     "away": 0,
     "extraHome": null,
@@ -465,6 +465,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-18T23:00:42.121Z"
+    "fetchedAt": "2026-06-18T23:15:30.277Z"
   }
 }
