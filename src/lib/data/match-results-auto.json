@@ -412,5 +412,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-18T04:15:28.922Z"
+  },
+  "2026-06-18-cze-rsa": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-18T16:10:32.451Z"
   }
 }
