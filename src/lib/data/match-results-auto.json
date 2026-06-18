@@ -379,7 +379,7 @@
   },
   "2026-06-17-gha-pan": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -393,7 +393,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-18T03:55:22.281Z"
+    "fetchedAt": "2026-06-18T04:00:55.973Z"
   },
   "2026-06-18-uzb-col": {
     "source": "auto",
