@@ -451,8 +451,8 @@
   },
   "2026-06-18-can-qat": {
     "source": "auto",
-    "status": "IN_PLAY",
-    "home": 2,
+    "status": "PAUSED",
+    "home": 3,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -460,11 +460,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "HOME_TEAM",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 3,
+    "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-18T22:40:28.179Z"
+    "fetchedAt": "2026-06-18T23:00:42.121Z"
   }
 }
