@@ -397,7 +397,7 @@
   },
   "2026-06-18-uzb-col": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 3,
     "extraHome": null,
@@ -411,6 +411,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-18T04:10:24.105Z"
+    "fetchedAt": "2026-06-18T04:15:28.922Z"
   }
 }
