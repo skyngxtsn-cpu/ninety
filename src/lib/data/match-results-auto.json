@@ -415,7 +415,7 @@
   },
   "2026-06-18-cze-rsa": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -429,6 +429,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-18T17:00:49.387Z"
+    "fetchedAt": "2026-06-18T17:15:33.372Z"
   }
 }
