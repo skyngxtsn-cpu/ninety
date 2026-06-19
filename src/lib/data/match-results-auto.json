@@ -469,7 +469,7 @@
   },
   "2026-06-19-mex-kor": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -483,6 +483,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-19T02:17:47.891Z"
+    "fetchedAt": "2026-06-19T03:05:21.709Z"
   }
 }
