@@ -502,5 +502,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-19T21:15:25.353Z"
+  },
+  "2026-06-19-sco-mar": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 1,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "AWAY_TEAM",
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-19T22:10:26.733Z"
   }
 }
