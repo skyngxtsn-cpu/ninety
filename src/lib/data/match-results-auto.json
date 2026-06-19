@@ -487,7 +487,7 @@
   },
   "2026-06-19-usa-aus": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 0,
     "extraHome": null,
@@ -501,6 +501,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-19T20:20:25.697Z"
+    "fetchedAt": "2026-06-19T21:15:25.353Z"
   }
 }
