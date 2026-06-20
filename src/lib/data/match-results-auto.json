@@ -559,7 +559,7 @@
   },
   "2026-06-20-ned-swe": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 2,
     "away": 0,
     "extraHome": null,
@@ -568,11 +568,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "HOME_TEAM",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 2,
+    "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-20T17:25:24.313Z"
+    "fetchedAt": "2026-06-20T18:00:42.736Z"
   }
 }
