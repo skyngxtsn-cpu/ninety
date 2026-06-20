@@ -541,7 +541,7 @@
   },
   "2026-06-20-tur-par": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -555,6 +555,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-20T04:05:28.185Z"
+    "fetchedAt": "2026-06-20T04:20:24.699Z"
   }
 }
