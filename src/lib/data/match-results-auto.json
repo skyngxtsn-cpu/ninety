@@ -505,7 +505,7 @@
   },
   "2026-06-19-sco-mar": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -519,6 +519,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-19T23:15:28.098Z"
+    "fetchedAt": "2026-06-20T00:15:28.411Z"
   }
 }
