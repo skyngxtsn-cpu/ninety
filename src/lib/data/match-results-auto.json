@@ -523,7 +523,7 @@
   },
   "2026-06-20-bra-hai": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 3,
     "away": 0,
     "extraHome": null,
@@ -537,6 +537,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-20T01:30:30.391Z"
+    "fetchedAt": "2026-06-20T01:50:23.840Z"
   }
 }
