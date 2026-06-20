@@ -559,8 +559,8 @@
   },
   "2026-06-20-ned-swe": {
     "source": "auto",
-    "status": "PAUSED",
-    "home": 2,
+    "status": "IN_PLAY",
+    "home": 3,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -573,6 +573,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-20T18:00:42.736Z"
+    "fetchedAt": "2026-06-20T18:15:29.069Z"
   }
 }
