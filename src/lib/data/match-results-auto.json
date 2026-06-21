@@ -615,7 +615,7 @@
     "source": "auto",
     "status": "IN_PLAY",
     "home": 0,
-    "away": 3,
+    "away": 4,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
@@ -627,6 +627,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-21T05:40:27.567Z"
+    "fetchedAt": "2026-06-21T05:55:22.147Z"
   }
 }
