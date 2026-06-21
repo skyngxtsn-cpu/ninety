@@ -667,7 +667,7 @@
   },
   "2026-06-21-uru-cpv": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 2,
     "away": 1,
     "extraHome": null,
@@ -681,6 +681,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-21T23:00:43.182Z"
+    "fetchedAt": "2026-06-21T23:20:24.326Z"
   }
 }
