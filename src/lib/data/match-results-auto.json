@@ -595,7 +595,7 @@
   },
   "2026-06-21-ecu-cuw": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -609,6 +609,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-21T01:55:26.999Z"
+    "fetchedAt": "2026-06-21T02:05:24.346Z"
   }
 }
