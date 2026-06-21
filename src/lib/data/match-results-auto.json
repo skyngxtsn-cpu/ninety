@@ -649,7 +649,7 @@
   },
   "2026-06-21-bel-irn": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -663,6 +663,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-21T20:00:42.064Z"
+    "fetchedAt": "2026-06-21T20:20:24.912Z"
   }
 }
