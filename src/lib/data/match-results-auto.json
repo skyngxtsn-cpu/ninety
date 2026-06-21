@@ -631,8 +631,8 @@
   },
   "2026-06-21-esp-ksa": {
     "source": "auto",
-    "status": "PAUSED",
-    "home": 3,
+    "status": "IN_PLAY",
+    "home": 4,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -645,6 +645,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-21T17:00:39.460Z"
+    "fetchedAt": "2026-06-21T17:20:28.182Z"
   }
 }
