@@ -632,7 +632,7 @@
   "2026-06-21-esp-ksa": {
     "source": "auto",
     "status": "FINISHED",
-    "home": 5,
+    "home": 4,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -645,7 +645,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-21T18:10:26.231Z"
+    "fetchedAt": "2026-06-21T20:40:24.387Z"
   },
   "2026-06-21-bel-irn": {
     "source": "auto",
