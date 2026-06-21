@@ -613,7 +613,7 @@
   },
   "2026-06-21-tun-jpn": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 2,
     "extraHome": null,
@@ -627,6 +627,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-21T05:00:39.183Z"
+    "fetchedAt": "2026-06-21T05:15:28.590Z"
   }
 }
