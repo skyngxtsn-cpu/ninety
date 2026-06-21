@@ -668,19 +668,19 @@
   "2026-06-21-uru-cpv": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
+    "home": 1,
     "away": 1,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "AWAY_TEAM",
+    "winner": "DRAW",
     "halfHome": null,
     "halfAway": null,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-21T22:30:31.725Z"
+    "fetchedAt": "2026-06-21T22:55:20.557Z"
   }
 }
