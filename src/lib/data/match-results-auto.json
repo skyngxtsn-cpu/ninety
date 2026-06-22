@@ -703,7 +703,7 @@
   },
   "2026-06-22-arg-aut": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 0,
     "extraHome": null,
@@ -717,6 +717,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-22T19:05:33.980Z"
+    "fetchedAt": "2026-06-22T19:10:34.056Z"
   }
 }
