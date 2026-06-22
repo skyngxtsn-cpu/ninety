@@ -219,11 +219,18 @@ async function processOffsetType(
   //              「もう終わったはず」と誤発火するバグを防ぐ。
   //  - halftime / halftime-end / kickoff: 試合が始まってから (live or finished)
   //  - pre-X: 試合前にだけ配信 (scheduled)
+  const nowMs = now.getTime();
   const filtered = candidates.filter((m) => {
     if (type === "result") return m.status === "finished" && m.result;
     if (type === "fulltime") return m.status === "finished";
     if (type === "halftime" || type === "halftime-end" || type === "kickoff") {
-      return m.status === "live" || m.status === "finished";
+      // 1. 通常: status が live / finished の時
+      if (m.status === "live" || m.status === "finished") return true;
+      // 2. fallback: キックオフ時刻を過ぎていれば status === scheduled でも発火
+      //    （football-data.org が IN_PLAY に切り替わるのを待たない）
+      //    これにより 'TIMED のまま発火時刻に到達して通知が 5 分遅れる' バグを防ぐ
+      const kickMs = new Date(m.kickoffJST).getTime();
+      return nowMs >= kickMs;
     }
     if (type === "pre-3h" || type === "pre-1h" || type === "pre-15m") {
       return m.status === "scheduled";
