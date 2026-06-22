@@ -703,7 +703,7 @@
   },
   "2026-06-22-arg-aut": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -712,11 +712,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "HOME_TEAM",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 1,
+    "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-22T17:45:32.775Z"
+    "fetchedAt": "2026-06-22T18:00:44.945Z"
   }
 }
