@@ -685,7 +685,7 @@
   },
   "2026-06-22-nzl-egy": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 3,
     "extraHome": null,
@@ -699,6 +699,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-22T02:50:29.983Z"
+    "fetchedAt": "2026-06-22T03:10:25.418Z"
   }
 }
