@@ -739,7 +739,7 @@
   },
   "2026-06-23-nor-sen": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 3,
     "away": 1,
     "extraHome": null,
@@ -753,6 +753,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-23T01:25:24.063Z"
+    "fetchedAt": "2026-06-23T01:30:34.142Z"
   }
 }
