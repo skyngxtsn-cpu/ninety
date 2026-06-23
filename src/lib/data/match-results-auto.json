@@ -775,7 +775,7 @@
   },
   "2026-06-23-por-uzb": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 3,
     "away": 0,
     "extraHome": null,
@@ -789,6 +789,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-23T18:00:50.909Z"
+    "fetchedAt": "2026-06-23T18:20:29.945Z"
   }
 }
