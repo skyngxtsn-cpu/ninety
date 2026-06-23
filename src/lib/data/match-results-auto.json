@@ -757,7 +757,7 @@
   },
   "2026-06-23-jor-alg": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 2,
     "extraHome": null,
@@ -771,6 +771,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-23T04:55:24.011Z"
+    "fetchedAt": "2026-06-23T05:10:26.191Z"
   }
 }
