@@ -790,5 +790,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-23T19:05:27.868Z"
+  },
+  "2026-06-23-eng-gha": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": 0,
+    "halfAway": 0,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-23T21:00:46.175Z"
   }
 }
