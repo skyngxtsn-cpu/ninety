@@ -721,7 +721,7 @@
   },
   "2026-06-22-fra-irq": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 3,
     "away": 0,
     "extraHome": null,
@@ -735,11 +735,11 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-23T00:30:36.650Z"
+    "fetchedAt": "2026-06-23T01:00:41.757Z"
   },
   "2026-06-23-nor-sen": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -748,11 +748,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "HOME_TEAM",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 1,
+    "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-23T00:50:26.098Z"
+    "fetchedAt": "2026-06-23T01:00:41.919Z"
   }
 }
