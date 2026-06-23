@@ -808,5 +808,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-23T22:10:24.910Z"
+  },
+  "2026-06-23-pan-cro": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": 0,
+    "halfAway": 0,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-23T23:55:21.747Z"
   }
 }
