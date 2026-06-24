@@ -826,5 +826,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-24T01:00:45.867Z"
+  },
+  "2026-06-24-col-cod": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": 0,
+    "halfAway": 0,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-24T03:00:45.245Z"
   }
 }
