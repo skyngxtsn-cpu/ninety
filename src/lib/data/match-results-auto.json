@@ -865,7 +865,7 @@
   },
   "2026-06-24-bih-qat": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 2,
     "away": 1,
     "extraHome": null,
@@ -874,11 +874,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "HOME_TEAM",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 2,
+    "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-24T19:50:26.524Z"
+    "fetchedAt": "2026-06-24T20:00:40.701Z"
   }
 }
