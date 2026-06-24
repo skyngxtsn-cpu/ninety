@@ -880,5 +880,41 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-24T21:05:27.543Z"
+  },
+  "2026-06-24-mar-hai": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 2,
+    "away": 2,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": 2,
+    "halfAway": 2,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-24T23:00:43.767Z"
+  },
+  "2026-06-24-sco-bra": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 2,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "AWAY_TEAM",
+    "halfHome": 0,
+    "halfAway": 2,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-24T23:00:43.933Z"
   }
 }
