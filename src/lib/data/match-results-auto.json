@@ -883,7 +883,7 @@
   },
   "2026-06-24-mar-hai": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 2,
     "away": 2,
     "extraHome": null,
@@ -897,7 +897,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-24T23:00:43.767Z"
+    "fetchedAt": "2026-06-24T23:15:25.995Z"
   },
   "2026-06-24-sco-bra": {
     "source": "auto",
