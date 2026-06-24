@@ -901,7 +901,7 @@
   },
   "2026-06-24-sco-bra": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 2,
     "extraHome": null,
@@ -915,6 +915,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-24T23:00:43.933Z"
+    "fetchedAt": "2026-06-24T23:20:15.260Z"
   }
 }
