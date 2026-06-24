@@ -847,7 +847,7 @@
   },
   "2026-06-24-sui-can": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 1,
     "extraHome": null,
@@ -861,11 +861,11 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-24T20:45:29.488Z"
+    "fetchedAt": "2026-06-24T21:05:27.422Z"
   },
   "2026-06-24-bih-qat": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 3,
     "away": 1,
     "extraHome": null,
@@ -879,6 +879,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-24T20:50:52.083Z"
+    "fetchedAt": "2026-06-24T21:05:27.543Z"
   }
 }
