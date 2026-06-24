@@ -884,20 +884,20 @@
   "2026-06-24-mar-hai": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 2,
+    "home": 3,
     "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "DRAW",
+    "winner": "HOME_TEAM",
     "halfHome": 2,
     "halfAway": 2,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-24T23:15:25.995Z"
+    "fetchedAt": "2026-06-24T23:50:32.922Z"
   },
   "2026-06-24-sco-bra": {
     "source": "auto",
