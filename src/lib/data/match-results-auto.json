@@ -849,7 +849,7 @@
     "source": "auto",
     "status": "IN_PLAY",
     "home": 2,
-    "away": 0,
+    "away": 1,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
@@ -861,7 +861,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-24T20:25:23.855Z"
+    "fetchedAt": "2026-06-24T20:45:29.488Z"
   },
   "2026-06-24-bih-qat": {
     "source": "auto",
