@@ -883,7 +883,7 @@
   },
   "2026-06-24-mar-hai": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 4,
     "away": 2,
     "extraHome": null,
@@ -897,11 +897,11 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T00:00:41.869Z"
+    "fetchedAt": "2026-06-25T00:10:27.358Z"
   },
   "2026-06-24-sco-bra": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "FINISHED",
     "home": 0,
     "away": 3,
     "extraHome": null,
@@ -915,6 +915,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-24T23:45:27.748Z"
+    "fetchedAt": "2026-06-25T00:10:27.546Z"
   }
 }
