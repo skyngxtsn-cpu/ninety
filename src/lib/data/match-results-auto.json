@@ -955,7 +955,7 @@
   },
   "2026-06-25-ecu-ger": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 1,
     "extraHome": null,
@@ -969,11 +969,11 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T21:45:24.988Z"
+    "fetchedAt": "2026-06-25T22:05:25.013Z"
   },
   "2026-06-25-cuw-civ": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 0,
     "away": 2,
     "extraHome": null,
@@ -987,6 +987,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T21:35:23.971Z"
+    "fetchedAt": "2026-06-25T22:05:25.196Z"
   }
 }
