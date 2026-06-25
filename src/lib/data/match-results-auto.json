@@ -919,7 +919,7 @@
   },
   "2026-06-25-cze-mex": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 0,
     "away": 3,
     "extraHome": null,
@@ -933,11 +933,11 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T03:00:38.719Z"
+    "fetchedAt": "2026-06-25T03:05:21.133Z"
   },
   "2026-06-25-rsa-kor": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -951,6 +951,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T02:30:31.783Z"
+    "fetchedAt": "2026-06-25T03:05:21.235Z"
   }
 }
