@@ -970,5 +970,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-25T20:55:25.927Z"
+  },
+  "2026-06-25-cuw-civ": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 1,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "AWAY_TEAM",
+    "halfHome": 0,
+    "halfAway": 1,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-25T21:00:41.752Z"
   }
 }
