@@ -921,7 +921,7 @@
     "source": "auto",
     "status": "IN_PLAY",
     "home": 0,
-    "away": 2,
+    "away": 3,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
@@ -933,7 +933,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T02:30:31.665Z"
+    "fetchedAt": "2026-06-25T03:00:38.719Z"
   },
   "2026-06-25-rsa-kor": {
     "source": "auto",
