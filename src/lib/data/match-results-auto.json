@@ -952,5 +952,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-25T03:05:21.235Z"
+  },
+  "2026-06-25-ecu-ger": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 1,
+    "away": 1,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": 1,
+    "halfAway": 1,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-25T20:55:25.927Z"
   }
 }
