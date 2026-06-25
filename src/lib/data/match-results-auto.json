@@ -956,20 +956,20 @@
   "2026-06-25-ecu-ger": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 1,
+    "home": 2,
     "away": 1,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "DRAW",
+    "winner": "HOME_TEAM",
     "halfHome": 1,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T21:15:25.273Z"
+    "fetchedAt": "2026-06-25T21:45:24.988Z"
   },
   "2026-06-25-cuw-civ": {
     "source": "auto",
