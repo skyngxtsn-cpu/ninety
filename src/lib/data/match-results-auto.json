@@ -991,7 +991,7 @@
   },
   "2026-06-25-jpn-swe": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1005,11 +1005,11 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T23:56:21.884Z"
+    "fetchedAt": "2026-06-26T00:15:27.794Z"
   },
   "2026-06-25-tun-ned": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 2,
     "extraHome": null,
@@ -1023,6 +1023,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-25T23:55:21.256Z"
+    "fetchedAt": "2026-06-26T00:15:27.677Z"
   }
 }
