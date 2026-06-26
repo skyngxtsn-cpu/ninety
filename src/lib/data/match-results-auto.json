@@ -1060,5 +1060,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-26T04:05:23.299Z"
+  },
+  "2026-06-26-nor-fra": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 1,
+    "away": 3,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "AWAY_TEAM",
+    "halfHome": 1,
+    "halfAway": 3,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-26T20:00:37.526Z"
   }
 }
