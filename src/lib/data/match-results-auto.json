@@ -1078,5 +1078,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-26T20:00:37.526Z"
+  },
+  "2026-06-26-sen-irq": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 1,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "HOME_TEAM",
+    "halfHome": 1,
+    "halfAway": 0,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-26T20:05:23.086Z"
   }
 }
