@@ -1027,7 +1027,7 @@
   },
   "2026-06-26-tur-usa": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 2,
     "away": 1,
     "extraHome": null,
@@ -1041,7 +1041,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-26T03:00:40.623Z"
+    "fetchedAt": "2026-06-26T03:15:24.658Z"
   },
   "2026-06-26-par-aus": {
     "source": "auto",
