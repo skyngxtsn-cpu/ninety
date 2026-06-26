@@ -1029,23 +1029,23 @@
     "source": "auto",
     "status": "IN_PLAY",
     "home": 2,
-    "away": 1,
+    "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "HOME_TEAM",
+    "winner": "DRAW",
     "halfHome": 2,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-26T03:15:24.658Z"
+    "fetchedAt": "2026-06-26T03:20:27.248Z"
   },
   "2026-06-26-par-aus": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1059,6 +1059,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-26T03:00:40.769Z"
+    "fetchedAt": "2026-06-26T03:20:27.414Z"
   }
 }
