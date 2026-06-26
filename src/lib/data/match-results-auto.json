@@ -1063,7 +1063,7 @@
   },
   "2026-06-26-nor-fra": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 3,
     "extraHome": null,
@@ -1077,7 +1077,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-26T20:00:37.526Z"
+    "fetchedAt": "2026-06-26T20:20:26.414Z"
   },
   "2026-06-26-sen-irq": {
     "source": "auto",
