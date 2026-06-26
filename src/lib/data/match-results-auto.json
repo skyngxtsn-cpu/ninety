@@ -1010,19 +1010,19 @@
   "2026-06-25-tun-ned": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
+    "home": 2,
     "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "AWAY_TEAM",
+    "winner": "DRAW",
     "halfHome": 0,
     "halfAway": 2,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-26T00:15:27.677Z"
+    "fetchedAt": "2026-06-26T00:20:24.970Z"
   }
 }
