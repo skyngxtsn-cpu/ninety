@@ -1028,20 +1028,20 @@
   "2026-06-26-tur-usa": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
+    "home": 1,
     "away": 1,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "AWAY_TEAM",
+    "winner": "DRAW",
     "halfHome": null,
     "halfAway": null,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-26T02:10:22.815Z"
+    "fetchedAt": "2026-06-26T02:20:24.548Z"
   },
   "2026-06-26-par-aus": {
     "source": "auto",
