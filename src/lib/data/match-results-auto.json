@@ -1081,7 +1081,7 @@
   },
   "2026-06-26-sen-irq": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 5,
     "away": 0,
     "extraHome": null,
@@ -1095,6 +1095,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-26T20:56:58.398Z"
+    "fetchedAt": "2026-06-26T21:15:28.225Z"
   }
 }
