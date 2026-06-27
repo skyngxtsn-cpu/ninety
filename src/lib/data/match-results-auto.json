@@ -1117,7 +1117,7 @@
   },
   "2026-06-27-cpv-ksa": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1131,6 +1131,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T01:00:39.053Z"
+    "fetchedAt": "2026-06-27T01:20:25.399Z"
   }
 }
