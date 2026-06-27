@@ -1154,8 +1154,8 @@
   "2026-06-27-nzl-bel": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
-    "away": 3,
+    "home": 1,
+    "away": 4,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
@@ -1167,6 +1167,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T04:35:23.125Z"
+    "fetchedAt": "2026-06-27T04:55:25.792Z"
   }
 }
