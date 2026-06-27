@@ -1099,7 +1099,7 @@
   },
   "2026-06-27-uru-esp": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -1113,7 +1113,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T01:00:38.938Z"
+    "fetchedAt": "2026-06-27T01:24:05.243Z"
   },
   "2026-06-27-cpv-ksa": {
     "source": "auto",
