@@ -1135,7 +1135,7 @@
   },
   "2026-06-27-egy-irn": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 1,
     "away": 1,
     "extraHome": null,
@@ -1144,11 +1144,29 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "DRAW",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 1,
+    "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T03:25:23.006Z"
+    "fetchedAt": "2026-06-27T04:00:39.303Z"
+  },
+  "2026-06-27-nzl-bel": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 1,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "AWAY_TEAM",
+    "halfHome": 0,
+    "halfAway": 1,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-27T04:00:39.122Z"
   }
 }
