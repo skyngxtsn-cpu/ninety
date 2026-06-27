@@ -1137,19 +1137,19 @@
     "source": "auto",
     "status": "FINISHED",
     "home": 1,
-    "away": 1,
+    "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "DRAW",
+    "winner": "AWAY_TEAM",
     "halfHome": 1,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T19:10:25.051Z"
+    "fetchedAt": "2026-06-27T19:40:27.836Z"
   },
   "2026-06-27-nzl-bel": {
     "source": "auto",
