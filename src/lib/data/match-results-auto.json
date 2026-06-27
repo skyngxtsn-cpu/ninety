@@ -1096,5 +1096,41 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-06-26T21:15:28.225Z"
+  },
+  "2026-06-27-uru-esp": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 1,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "AWAY_TEAM",
+    "halfHome": 0,
+    "halfAway": 1,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-27T01:00:38.938Z"
+  },
+  "2026-06-27-cpv-ksa": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": 0,
+    "halfAway": 0,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-06-27T01:00:39.053Z"
   }
 }
