@@ -1171,7 +1171,7 @@
   },
   "2026-06-27-pan-eng": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1185,11 +1185,11 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T21:55:24.032Z"
+    "fetchedAt": "2026-06-27T22:15:28.309Z"
   },
   "2026-06-27-cro-gha": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -1203,6 +1203,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T21:55:24.177Z"
+    "fetchedAt": "2026-06-27T22:15:28.420Z"
   }
 }
