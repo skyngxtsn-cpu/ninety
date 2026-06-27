@@ -1137,19 +1137,19 @@
     "source": "auto",
     "status": "FINISHED",
     "home": 1,
-    "away": 1,
+    "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "DRAW",
+    "winner": "AWAY_TEAM",
     "halfHome": 1,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T22:10:23.182Z"
+    "fetchedAt": "2026-06-27T22:35:20.913Z"
   },
   "2026-06-27-nzl-bel": {
     "source": "auto",
@@ -1173,7 +1173,7 @@
     "source": "auto",
     "status": "IN_PLAY",
     "home": 0,
-    "away": 1,
+    "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
@@ -1185,7 +1185,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T22:30:35.693Z"
+    "fetchedAt": "2026-06-27T22:35:21.097Z"
   },
   "2026-06-27-cro-gha": {
     "source": "auto",
