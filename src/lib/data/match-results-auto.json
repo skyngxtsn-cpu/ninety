@@ -1171,7 +1171,7 @@
   },
   "2026-06-27-pan-eng": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 0,
     "away": 2,
     "extraHome": null,
@@ -1185,7 +1185,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T22:35:21.097Z"
+    "fetchedAt": "2026-06-27T23:05:20.423Z"
   },
   "2026-06-27-cro-gha": {
     "source": "auto",
