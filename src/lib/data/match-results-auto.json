@@ -1135,7 +1135,7 @@
   },
   "2026-06-27-egy-irn": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 2,
     "extraHome": null,
@@ -1149,7 +1149,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-27T05:05:27.494Z"
+    "fetchedAt": "2026-06-27T05:10:24.987Z"
   },
   "2026-06-27-nzl-bel": {
     "source": "auto",
