@@ -1262,19 +1262,19 @@
   "2026-06-28-alg-aut": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 1,
+    "home": 2,
     "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "AWAY_TEAM",
+    "winner": "DRAW",
     "halfHome": 1,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-28T03:25:21.448Z"
+    "fetchedAt": "2026-06-28T03:30:31.853Z"
   }
 }
