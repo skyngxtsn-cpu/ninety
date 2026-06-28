@@ -1279,7 +1279,7 @@
   },
   "2026-06-28-rsa-can": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1293,6 +1293,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-28T20:16:24.693Z"
+    "fetchedAt": "2026-06-28T20:36:22.336Z"
   }
 }
