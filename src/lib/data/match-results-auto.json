@@ -1225,7 +1225,7 @@
   },
   "2026-06-27-cod-uzb": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -1239,6 +1239,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-28T00:30:39.846Z"
+    "fetchedAt": "2026-06-28T00:50:32.616Z"
   }
 }
