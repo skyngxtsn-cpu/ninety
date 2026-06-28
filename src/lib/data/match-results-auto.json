@@ -1243,7 +1243,7 @@
   },
   "2026-06-28-jor-arg": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 2,
     "extraHome": null,
@@ -1257,11 +1257,11 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-28T03:00:41.370Z"
+    "fetchedAt": "2026-06-28T03:15:29.310Z"
   },
   "2026-06-28-alg-aut": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 1,
     "extraHome": null,
@@ -1275,6 +1275,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-28T03:00:41.499Z"
+    "fetchedAt": "2026-06-28T03:15:29.415Z"
   }
 }
