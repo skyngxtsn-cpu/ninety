@@ -1207,7 +1207,7 @@
   },
   "2026-06-27-col-por": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1221,7 +1221,7 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-28T00:25:20.655Z"
+    "fetchedAt": "2026-06-28T00:45:26.809Z"
   },
   "2026-06-27-cod-uzb": {
     "source": "auto",
