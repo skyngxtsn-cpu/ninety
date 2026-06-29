@@ -1316,19 +1316,19 @@
   "2026-06-29-ger-par": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 1,
+    "home": 2,
     "away": 1,
-    "extraHome": 0,
+    "extraHome": 1,
     "extraAway": 0,
     "penHome": null,
     "penAway": null,
-    "duration": "EXTRA_TIME",
-    "winner": "DRAW",
+    "duration": "REGULAR",
+    "winner": "HOME_TEAM",
     "halfHome": 0,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-29T22:45:29.466Z"
+    "fetchedAt": "2026-06-29T22:55:22.075Z"
   }
 }
