@@ -1297,7 +1297,7 @@
   },
   "2026-06-29-bra-jpn": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 1,
     "extraHome": null,
@@ -1311,6 +1311,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-29T19:05:23.959Z"
+    "fetchedAt": "2026-06-29T19:10:27.422Z"
   }
 }
