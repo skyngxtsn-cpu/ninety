@@ -1315,7 +1315,7 @@
   },
   "2026-06-29-ger-par": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -1329,6 +1329,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-29T21:30:31.015Z"
+    "fetchedAt": "2026-06-29T21:45:24.651Z"
   }
 }
