@@ -1370,7 +1370,7 @@
   "2026-06-30-fra-swe": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 1,
+    "home": 2,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -1383,6 +1383,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-30T22:15:29.289Z"
+    "fetchedAt": "2026-06-30T22:20:30.534Z"
   }
 }
