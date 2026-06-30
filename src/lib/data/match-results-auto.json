@@ -1333,20 +1333,20 @@
   },
   "2026-06-30-ned-mar": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 1,
-    "extraHome": null,
-    "extraAway": null,
+    "extraHome": 0,
+    "extraAway": 0,
     "penHome": null,
     "penAway": null,
-    "duration": "REGULAR",
+    "duration": "EXTRA_TIME",
     "winner": "DRAW",
     "halfHome": 0,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-30T03:05:23.806Z"
+    "fetchedAt": "2026-06-30T03:15:26.332Z"
   }
 }
