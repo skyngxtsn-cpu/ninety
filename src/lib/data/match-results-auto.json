@@ -1369,7 +1369,7 @@
   },
   "2026-06-30-fra-swe": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -1383,6 +1383,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-30T22:10:24.342Z"
+    "fetchedAt": "2026-06-30T22:15:29.289Z"
   }
 }
