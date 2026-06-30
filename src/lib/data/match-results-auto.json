@@ -1334,12 +1334,12 @@
   "2026-06-30-ned-mar": {
     "source": "auto",
     "status": "FINISHED",
-    "home": 4,
-    "away": 2,
+    "home": 3,
+    "away": 4,
     "extraHome": 0,
     "extraAway": 0,
-    "penHome": 1,
-    "penAway": 1,
+    "penHome": 2,
+    "penAway": 2,
     "duration": "PENALTY_SHOOTOUT",
     "winner": null,
     "halfHome": 0,
@@ -1347,6 +1347,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-30T03:55:23.962Z"
+    "fetchedAt": "2026-06-30T04:00:38.953Z"
   }
 }
