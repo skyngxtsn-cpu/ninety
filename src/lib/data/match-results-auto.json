@@ -1333,7 +1333,7 @@
   },
   "2026-06-30-ned-mar": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1347,6 +1347,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-30T02:00:37.507Z"
+    "fetchedAt": "2026-06-30T02:15:24.195Z"
   }
 }
