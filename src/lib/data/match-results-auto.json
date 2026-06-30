@@ -1334,7 +1334,7 @@
   "2026-06-30-ned-mar": {
     "source": "auto",
     "status": "FINISHED",
-    "home": 3,
+    "home": 4,
     "away": 4,
     "extraHome": 0,
     "extraAway": 0,
@@ -1347,6 +1347,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-30T05:30:33.454Z"
+    "fetchedAt": "2026-06-30T05:40:30.384Z"
   }
 }
