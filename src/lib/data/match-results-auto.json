@@ -1351,7 +1351,7 @@
   },
   "2026-06-30-civ-nor": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 1,
     "away": 2,
     "extraHome": null,
@@ -1365,6 +1365,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-30T18:55:25.090Z"
+    "fetchedAt": "2026-06-30T19:05:23.791Z"
   }
 }
