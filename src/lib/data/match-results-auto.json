@@ -1370,19 +1370,19 @@
   "2026-06-30-fra-swe": {
     "source": "auto",
     "status": "PAUSED",
-    "home": 1,
+    "home": 0,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "HOME_TEAM",
-    "halfHome": 1,
+    "winner": "DRAW",
+    "halfHome": 0,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-06-30T21:55:18.719Z"
+    "fetchedAt": "2026-06-30T22:00:40.987Z"
   }
 }
