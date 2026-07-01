@@ -1405,7 +1405,7 @@
   },
   "2026-07-01-eng-cod": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -1419,6 +1419,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-01T17:00:43.179Z"
+    "fetchedAt": "2026-07-01T17:20:28.479Z"
   }
 }
