@@ -1387,20 +1387,20 @@
   },
   "2026-07-01-mex-ecu": {
     "source": "auto",
-    "status": "IN_PLAY",
-    "home": 0,
+    "status": "PAUSED",
+    "home": 2,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "DRAW",
-    "halfHome": null,
-    "halfAway": null,
+    "winner": "HOME_TEAM",
+    "halfHome": 2,
+    "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-01T01:10:25.615Z"
+    "fetchedAt": "2026-07-01T03:00:42.826Z"
   }
 }
