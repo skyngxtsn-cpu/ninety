@@ -1430,13 +1430,13 @@
     "extraAway": 0,
     "penHome": null,
     "penAway": null,
-    "duration": "EXTRA_TIME",
+    "duration": "REGULAR",
     "winner": "HOME_TEAM",
     "halfHome": 0,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-01T23:10:27.410Z"
+    "fetchedAt": "2026-07-01T23:20:23.536Z"
   }
 }
