@@ -1402,5 +1402,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-07-01T04:10:29.239Z"
+  },
+  "2026-07-01-eng-cod": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 1,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "AWAY_TEAM",
+    "halfHome": 0,
+    "halfAway": 1,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-07-01T17:00:43.179Z"
   }
 }
