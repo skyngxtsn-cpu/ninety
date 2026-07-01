@@ -1424,19 +1424,19 @@
   "2026-07-01-bel-sen": {
     "source": "auto",
     "status": "PAUSED",
-    "home": 2,
+    "home": 3,
     "away": 2,
-    "extraHome": 0,
+    "extraHome": 1,
     "extraAway": 0,
     "penHome": null,
     "penAway": null,
-    "duration": "EXTRA_TIME",
-    "winner": "DRAW",
+    "duration": "REGULAR",
+    "winner": "HOME_TEAM",
     "halfHome": 0,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-01T22:30:34.001Z"
+    "fetchedAt": "2026-07-01T22:50:33.801Z"
   }
 }
