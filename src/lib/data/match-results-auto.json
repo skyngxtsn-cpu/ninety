@@ -1423,7 +1423,7 @@
   },
   "2026-07-01-bel-sen": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "FINISHED",
     "home": 3,
     "away": 2,
     "extraHome": 1,
@@ -1437,6 +1437,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-01T22:50:33.801Z"
+    "fetchedAt": "2026-07-01T23:00:39.992Z"
   }
 }
