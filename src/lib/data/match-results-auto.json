@@ -1387,7 +1387,7 @@
   },
   "2026-07-01-mex-ecu": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 0,
     "extraHome": null,
@@ -1401,6 +1401,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-01T03:15:26.022Z"
+    "fetchedAt": "2026-07-01T04:10:29.239Z"
   }
 }
