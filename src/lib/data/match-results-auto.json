@@ -1450,11 +1450,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "HOME_TEAM",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 0,
+    "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-02T00:50:27.620Z"
+    "fetchedAt": "2026-07-02T00:55:21.661Z"
   }
 }
