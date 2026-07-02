@@ -1456,5 +1456,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-07-02T02:15:27.779Z"
+  },
+  "2026-07-02-esp-aut": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 1,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "HOME_TEAM",
+    "halfHome": 1,
+    "halfAway": 0,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-07-02T19:55:21.961Z"
   }
 }
