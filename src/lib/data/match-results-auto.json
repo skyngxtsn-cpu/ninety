@@ -1441,7 +1441,7 @@
   },
   "2026-07-02-usa-bih": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -1450,11 +1450,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "HOME_TEAM",
-    "halfHome": 0,
+    "halfHome": 1,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-02T00:55:21.661Z"
+    "fetchedAt": "2026-07-02T01:05:22.916Z"
   }
 }
