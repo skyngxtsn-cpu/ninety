@@ -1441,7 +1441,7 @@
   },
   "2026-07-02-usa-bih": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 0,
     "extraHome": null,
@@ -1455,6 +1455,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-02T01:05:22.916Z"
+    "fetchedAt": "2026-07-02T01:20:30.495Z"
   }
 }
