@@ -1430,14 +1430,14 @@
     "extraAway": 0,
     "penHome": null,
     "penAway": null,
-    "duration": "EXTRA_TIME",
+    "duration": "REGULAR",
     "winner": "HOME_TEAM",
     "halfHome": 0,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-02T05:44:50.841Z"
+    "fetchedAt": "2026-07-02T05:45:25.478Z"
   },
   "2026-07-02-usa-bih": {
     "source": "auto",
