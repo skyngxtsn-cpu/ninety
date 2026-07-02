@@ -1460,7 +1460,7 @@
   "2026-07-02-esp-aut": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 1,
+    "home": 2,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -1473,6 +1473,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-02T20:15:32.248Z"
+    "fetchedAt": "2026-07-02T20:35:22.121Z"
   }
 }
