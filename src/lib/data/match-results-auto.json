@@ -1474,5 +1474,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-07-02T21:05:24.057Z"
+  },
+  "2026-07-02-por-cro": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-07-02T23:10:29.331Z"
   }
 }
