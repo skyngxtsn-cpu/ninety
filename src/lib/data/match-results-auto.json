@@ -1495,8 +1495,8 @@
   },
   "2026-07-03-sui-alg": {
     "source": "auto",
-    "status": "PAUSED",
-    "home": 1,
+    "status": "IN_PLAY",
+    "home": 2,
     "away": 0,
     "extraHome": null,
     "extraAway": null,
@@ -1509,6 +1509,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-03T04:00:46.054Z"
+    "fetchedAt": "2026-07-03T04:15:24.190Z"
   }
 }
