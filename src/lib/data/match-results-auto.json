@@ -1513,7 +1513,7 @@
   },
   "2026-07-03-aus-egy": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 1,
     "away": 1,
     "extraHome": null,
@@ -1527,6 +1527,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-03T19:25:24.378Z"
+    "fetchedAt": "2026-07-03T20:05:27.636Z"
   }
 }
