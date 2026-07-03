@@ -1513,20 +1513,20 @@
   },
   "2026-07-03-aus-egy": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 1,
-    "extraHome": null,
-    "extraAway": null,
+    "extraHome": 0,
+    "extraAway": 0,
     "penHome": null,
     "penAway": null,
-    "duration": "REGULAR",
+    "duration": "EXTRA_TIME",
     "winner": "DRAW",
     "halfHome": 0,
     "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-03T20:05:27.636Z"
+    "fetchedAt": "2026-07-03T20:10:29.798Z"
   }
 }
