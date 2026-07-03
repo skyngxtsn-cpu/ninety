@@ -1495,7 +1495,7 @@
   },
   "2026-07-03-sui-alg": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 0,
     "extraHome": null,
@@ -1509,6 +1509,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-03T04:15:24.190Z"
+    "fetchedAt": "2026-07-03T05:05:19.904Z"
   }
 }
