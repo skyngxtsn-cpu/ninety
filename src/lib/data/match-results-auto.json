@@ -1477,7 +1477,7 @@
   },
   "2026-07-02-por-cro": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 2,
     "extraHome": null,
@@ -1491,6 +1491,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-03T01:10:27.057Z"
+    "fetchedAt": "2026-07-03T01:20:34.841Z"
   }
 }
