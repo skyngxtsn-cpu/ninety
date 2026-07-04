@@ -1582,5 +1582,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-07-04T19:10:39.383Z"
+  },
+  "2026-07-04-par-fra": {
+    "source": "auto",
+    "status": "PAUSED",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": 0,
+    "halfAway": 0,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-07-04T22:00:53.366Z"
   }
 }
