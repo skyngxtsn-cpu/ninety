@@ -1531,11 +1531,11 @@
   },
   "2026-07-03-arg-cpv": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 2,
     "away": 2,
     "extraHome": 1,
-    "extraAway": 0,
+    "extraAway": 1,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
@@ -1545,6 +1545,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-04T00:25:20.362Z"
+    "fetchedAt": "2026-07-04T00:30:38.618Z"
   }
 }
