@@ -1533,18 +1533,18 @@
     "source": "auto",
     "status": "IN_PLAY",
     "home": 2,
-    "away": 1,
+    "away": 2,
     "extraHome": 1,
     "extraAway": 0,
     "penHome": null,
     "penAway": null,
-    "duration": "EXTRA_TIME",
-    "winner": "HOME_TEAM",
+    "duration": "REGULAR",
+    "winner": "DRAW",
     "halfHome": 1,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-04T00:15:26.176Z"
+    "fetchedAt": "2026-07-04T00:25:20.362Z"
   }
 }
