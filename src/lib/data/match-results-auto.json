@@ -1549,7 +1549,7 @@
   },
   "2026-07-04-col-gha": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 2,
     "away": 0,
     "extraHome": null,
@@ -1563,6 +1563,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-04T03:00:40.310Z"
+    "fetchedAt": "2026-07-04T03:40:34.714Z"
   }
 }
