@@ -1531,7 +1531,7 @@
   },
   "2026-07-03-arg-cpv": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "FINISHED",
     "home": 3,
     "away": 2,
     "extraHome": 2,
@@ -1545,6 +1545,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-04T00:40:27.899Z"
+    "fetchedAt": "2026-07-04T00:55:23.631Z"
   }
 }
