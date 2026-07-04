@@ -1585,7 +1585,7 @@
   },
   "2026-07-04-par-fra": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -1599,6 +1599,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-04T22:40:39.005Z"
+    "fetchedAt": "2026-07-04T23:10:40.075Z"
   }
 }
