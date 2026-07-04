@@ -1532,19 +1532,19 @@
   "2026-07-03-arg-cpv": {
     "source": "auto",
     "status": "PAUSED",
-    "home": 2,
+    "home": 3,
     "away": 2,
-    "extraHome": 1,
+    "extraHome": 2,
     "extraAway": 1,
     "penHome": null,
     "penAway": null,
-    "duration": "REGULAR",
-    "winner": "DRAW",
+    "duration": "EXTRA_TIME",
+    "winner": "HOME_TEAM",
     "halfHome": 1,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-04T00:30:38.618Z"
+    "fetchedAt": "2026-07-04T00:40:27.899Z"
   }
 }
