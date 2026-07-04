@@ -1567,7 +1567,7 @@
   },
   "2026-07-04-can-mar": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1581,6 +1581,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-04T18:00:59.783Z"
+    "fetchedAt": "2026-07-04T18:15:28.262Z"
   }
 }
