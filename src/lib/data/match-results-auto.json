@@ -1603,20 +1603,20 @@
   },
   "2026-07-05-bra-nor": {
     "source": "auto",
-    "status": "IN_PLAY",
-    "home": 0,
-    "away": 0,
+    "status": "FINISHED",
+    "home": 1,
+    "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
     "penAway": null,
     "duration": "REGULAR",
-    "winner": "DRAW",
+    "winner": "AWAY_TEAM",
     "halfHome": 0,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-05T21:12:46.797Z"
+    "fetchedAt": "2026-07-05T22:10:35.965Z"
   }
 }
