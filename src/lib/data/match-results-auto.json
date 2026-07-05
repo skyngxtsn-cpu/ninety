@@ -1603,7 +1603,7 @@
   },
   "2026-07-05-bra-nor": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1617,6 +1617,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-05T21:00:55.330Z"
+    "fetchedAt": "2026-07-05T21:12:46.797Z"
   }
 }
