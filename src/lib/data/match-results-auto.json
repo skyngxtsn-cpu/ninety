@@ -1639,7 +1639,7 @@
   },
   "2026-07-06-por-esp": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 0,
     "away": 1,
     "extraHome": null,
@@ -1653,6 +1653,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-06T21:01:00.508Z"
+    "fetchedAt": "2026-07-06T21:10:43.938Z"
   }
 }
