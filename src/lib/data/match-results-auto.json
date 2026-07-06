@@ -1618,5 +1618,23 @@
     "bookings": [],
     "substitutions": [],
     "fetchedAt": "2026-07-05T22:10:35.965Z"
+  },
+  "2026-07-06-mex-eng": {
+    "source": "auto",
+    "status": "IN_PLAY",
+    "home": 0,
+    "away": 0,
+    "extraHome": null,
+    "extraAway": null,
+    "penHome": null,
+    "penAway": null,
+    "duration": "REGULAR",
+    "winner": "DRAW",
+    "halfHome": null,
+    "halfAway": null,
+    "goals": [],
+    "bookings": [],
+    "substitutions": [],
+    "fetchedAt": "2026-07-06T01:10:47.905Z"
   }
 }
