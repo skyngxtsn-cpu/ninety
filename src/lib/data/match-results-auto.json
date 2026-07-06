@@ -1622,8 +1622,8 @@
   "2026-07-06-mex-eng": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
-    "away": 1,
+    "home": 1,
+    "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
@@ -1635,6 +1635,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-06T01:45:26.262Z"
+    "fetchedAt": "2026-07-06T01:50:39.898Z"
   }
 }
