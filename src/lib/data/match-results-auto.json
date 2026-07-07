@@ -1693,7 +1693,7 @@
   },
   "2026-07-07-sui-col": {
     "source": "auto",
-    "status": "FINISHED",
+    "status": "PAUSED",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1707,6 +1707,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-07T22:05:24.244Z"
+    "fetchedAt": "2026-07-07T22:25:27.567Z"
   }
 }
