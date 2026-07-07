@@ -1676,7 +1676,7 @@
   "2026-07-07-arg-egy": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
+    "home": 1,
     "away": 2,
     "extraHome": null,
     "extraAway": null,
@@ -1689,6 +1689,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-07T17:30:56.792Z"
+    "fetchedAt": "2026-07-07T17:50:43.050Z"
   }
 }
