@@ -1658,8 +1658,8 @@
   "2026-07-07-usa-bel": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 0,
-    "away": 1,
+    "home": 1,
+    "away": 2,
     "extraHome": null,
     "extraAway": null,
     "penHome": null,
@@ -1671,6 +1671,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-07T00:15:24.896Z"
+    "fetchedAt": "2026-07-07T00:40:39.578Z"
   }
 }
