@@ -1693,20 +1693,20 @@
   },
   "2026-07-07-sui-col": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
-    "extraHome": null,
-    "extraAway": null,
+    "extraHome": 0,
+    "extraAway": 0,
     "penHome": null,
     "penAway": null,
-    "duration": "REGULAR",
+    "duration": "EXTRA_TIME",
     "winner": "DRAW",
     "halfHome": 0,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-07T22:25:27.567Z"
+    "fetchedAt": "2026-07-07T22:30:52.423Z"
   }
 }
