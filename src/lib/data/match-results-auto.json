@@ -1657,7 +1657,7 @@
   },
   "2026-07-07-usa-bel": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 2,
     "extraHome": null,
@@ -1671,6 +1671,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-07T01:00:55.419Z"
+    "fetchedAt": "2026-07-07T01:20:39.207Z"
   }
 }
