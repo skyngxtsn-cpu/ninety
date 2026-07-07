@@ -1694,12 +1694,12 @@
   "2026-07-07-sui-col": {
     "source": "auto",
     "status": "FINISHED",
-    "home": 1,
-    "away": 1,
+    "home": 4,
+    "away": 3,
     "extraHome": 0,
     "extraAway": 0,
-    "penHome": 1,
-    "penAway": 1,
+    "penHome": 2,
+    "penAway": 2,
     "duration": "PENALTY_SHOOTOUT",
     "winner": null,
     "halfHome": 0,
@@ -1707,6 +1707,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-07T22:50:43.248Z"
+    "fetchedAt": "2026-07-07T22:55:26.473Z"
   }
 }
