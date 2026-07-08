@@ -1698,15 +1698,15 @@
     "away": 3,
     "extraHome": 0,
     "extraAway": 0,
-    "penHome": 3,
+    "penHome": 4,
     "penAway": 3,
     "duration": "PENALTY_SHOOTOUT",
-    "winner": null,
+    "winner": "HOME_TEAM",
     "halfHome": 0,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-07T23:01:01.039Z"
+    "fetchedAt": "2026-07-08T06:10:45.691Z"
   }
 }
