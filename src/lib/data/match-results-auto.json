@@ -1711,7 +1711,7 @@
   },
   "2026-07-09-fra-mar": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1725,6 +1725,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-09T21:00:58.868Z"
+    "fetchedAt": "2026-07-09T21:20:42.975Z"
   }
 }
