@@ -1729,7 +1729,7 @@
   },
   "2026-07-10-esp-bel": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 1,
     "extraHome": null,
@@ -1743,6 +1743,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-10T20:00:55.024Z"
+    "fetchedAt": "2026-07-10T20:15:27.866Z"
   }
 }
