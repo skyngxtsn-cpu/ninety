@@ -1747,7 +1747,7 @@
   },
   "2026-07-11-nor-eng": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 1,
     "away": 1,
     "extraHome": null,
@@ -1756,11 +1756,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "DRAW",
-    "halfHome": 0,
-    "halfAway": 0,
+    "halfHome": 1,
+    "halfAway": 1,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-11T21:55:18.916Z"
+    "fetchedAt": "2026-07-11T21:59:44.329Z"
   }
 }
