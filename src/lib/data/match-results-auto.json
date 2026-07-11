@@ -1747,7 +1747,7 @@
   },
   "2026-07-11-nor-eng": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 1,
     "extraHome": null,
@@ -1761,6 +1761,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-11T21:59:44.329Z"
+    "fetchedAt": "2026-07-11T22:20:47.531Z"
   }
 }
