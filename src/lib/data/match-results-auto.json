@@ -1765,7 +1765,7 @@
   },
   "2026-07-12-arg-sui": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 1,
     "away": 1,
     "extraHome": 0,
@@ -1779,6 +1779,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-12T03:15:27.616Z"
+    "fetchedAt": "2026-07-12T03:35:26.756Z"
   }
 }
