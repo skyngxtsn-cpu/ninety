@@ -1783,7 +1783,7 @@
   },
   "2026-07-14-fra-esp": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "FINISHED",
     "home": 0,
     "away": 2,
     "extraHome": null,
@@ -1797,6 +1797,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-14T20:25:21.819Z"
+    "fetchedAt": "2026-07-14T21:05:23.377Z"
   }
 }
