@@ -1801,7 +1801,7 @@
   },
   "2026-07-15-eng-arg": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1815,6 +1815,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-15T20:01:01.368Z"
+    "fetchedAt": "2026-07-15T20:15:24.117Z"
   }
 }
