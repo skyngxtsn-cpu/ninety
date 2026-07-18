@@ -1819,8 +1819,8 @@
   },
   "2026-07-18-fra-eng": {
     "source": "auto",
-    "status": "PAUSED",
-    "home": 0,
+    "status": "IN_PLAY",
+    "home": 1,
     "away": 4,
     "extraHome": null,
     "extraAway": null,
@@ -1833,6 +1833,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-18T22:00:36.340Z"
+    "fetchedAt": "2026-07-18T22:20:26.226Z"
   }
 }
