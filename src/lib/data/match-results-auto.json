@@ -1820,7 +1820,7 @@
   "2026-07-18-fra-eng": {
     "source": "auto",
     "status": "IN_PLAY",
-    "home": 3,
+    "home": 4,
     "away": 5,
     "extraHome": null,
     "extraAway": null,
@@ -1833,6 +1833,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-18T23:00:45.801Z"
+    "fetchedAt": "2026-07-18T23:06:57.616Z"
   }
 }
