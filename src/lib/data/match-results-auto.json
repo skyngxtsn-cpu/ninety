@@ -1819,7 +1819,7 @@
   },
   "2026-07-18-fra-eng": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 0,
     "away": 4,
     "extraHome": null,
@@ -1829,10 +1829,10 @@
     "duration": "REGULAR",
     "winner": "AWAY_TEAM",
     "halfHome": 0,
-    "halfAway": 0,
+    "halfAway": 4,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-18T21:55:29.291Z"
+    "fetchedAt": "2026-07-18T22:00:36.340Z"
   }
 }
