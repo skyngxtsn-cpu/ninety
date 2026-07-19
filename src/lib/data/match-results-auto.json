@@ -1837,20 +1837,20 @@
   },
   "2026-07-19-esp-arg": {
     "source": "auto",
-    "status": "PAUSED",
-    "home": 0,
+    "status": "FINISHED",
+    "home": 1,
     "away": 0,
-    "extraHome": 0,
+    "extraHome": 1,
     "extraAway": 0,
     "penHome": null,
     "penAway": null,
     "duration": "EXTRA_TIME",
-    "winner": "DRAW",
+    "winner": "HOME_TEAM",
     "halfHome": 0,
     "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-19T21:45:24.797Z"
+    "fetchedAt": "2026-07-19T22:10:26.922Z"
   }
 }
