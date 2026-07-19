@@ -1837,7 +1837,7 @@
   },
   "2026-07-19-esp-arg": {
     "source": "auto",
-    "status": "IN_PLAY",
+    "status": "PAUSED",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1846,11 +1846,11 @@
     "penAway": null,
     "duration": "REGULAR",
     "winner": "DRAW",
-    "halfHome": null,
-    "halfAway": null,
+    "halfHome": 0,
+    "halfAway": 0,
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-19T19:10:26.457Z"
+    "fetchedAt": "2026-07-19T20:05:24.253Z"
   }
 }
