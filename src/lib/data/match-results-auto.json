@@ -1837,7 +1837,7 @@
   },
   "2026-07-19-esp-arg": {
     "source": "auto",
-    "status": "PAUSED",
+    "status": "IN_PLAY",
     "home": 0,
     "away": 0,
     "extraHome": null,
@@ -1851,6 +1851,6 @@
     "goals": [],
     "bookings": [],
     "substitutions": [],
-    "fetchedAt": "2026-07-19T21:24:01.571Z"
+    "fetchedAt": "2026-07-19T21:30:35.931Z"
   }
 }
